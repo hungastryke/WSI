@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://regression.williams-sonoma.com/" />
+<title>ws_com_registry_delete</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ws_com_registry_delete</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>4000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=li.ifLoggedOut.ifIdentified &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login.email</td>
+	<td>bstewart@pointmarc.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login.password</td>
+	<td>Password1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#btn-sign-in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=li.ifManyRegistries &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.even &gt; div.registry-info &gt; div.delete.reg-link &gt; a.overlayTrigger.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#confirmDelete</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

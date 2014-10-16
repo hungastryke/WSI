@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://regression.williams-sonoma.com/" />
+<title>ws_com_registry_creation</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ws_com_registry_creation</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>4000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=li.ifLoggedOut.ifIdentified &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login.email</td>
+	<td>bstewart@pointmarc.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login.password</td>
+	<td>Password1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#btn-sign-in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#registry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=registryBean.registryName</td>
+	<td>WELLISNTTHISNICE</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=registryBean.eventMonth</td>
+	<td>label=January</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=registryBean.eventDay</td>
+	<td>label=9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=registryBean.eventYear</td>
+	<td>label=2015</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=registryBean.registrantAddress.firstName</td>
+	<td>Brandon</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=registryBean.registrantAddress.lastName</td>
+	<td>Stewart</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#includeCoRegistrant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=ul.coreg-include.radio-checkbox &gt; li &gt; label.optional</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#useEcomAccountAddress</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=fbMainContainer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#fbMinimizeButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=registryBean.eventType</td>
+	<td>Ring Ceremony</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#includeCoRegistrant</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=registryBean.registrantAddress.dayPhone</td>
+	<td>4255558855</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn-primary-registry</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

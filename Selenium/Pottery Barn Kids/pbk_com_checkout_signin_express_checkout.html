@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://regression.potterybarnkids.com/" />
+<title>pbk_com_checkout_signin_express_checkout</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">pbk_com_checkout_signin_express_checkout</td></tr>
+</thead><tbody>
+<tr>
+	<td>setSpeed</td>
+	<td>4000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Changing Tables</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=span.product-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input.btn_addtobasket</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#btn-express-checkout &gt; a.button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#login-email</td>
+	<td>bstewart@pointmarc.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=#login-password</td>
+	<td>Password1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#btn-sign-in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=creditCard.payType</td>
+	<td>label=Visa</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=creditCard.cardNumber</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=creditCard.cardNumber</td>
+	<td>4397078180000001</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=creditCard.cardExpMonth</td>
+	<td>label=12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=creditCard.cardExpYear</td>
+	<td>label=2015</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=creditCard.cardVerificationNumber</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=creditCard.cardVerificationNumber</td>
+	<td>325</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#placeOrderButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>deleteAllVisibleCookies</td>
+	<td></td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

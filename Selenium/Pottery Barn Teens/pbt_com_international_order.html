@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://regression.pbteen.com" />
+<title>pbt_com_international_order</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">pbt_com_international_order</td></tr>
+</thead><tbody>
+<tr>
+	<td>setSpeed</td>
+	<td>4000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=img.intl-flag</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a.CA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#intlSetCountryDialogSubmit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'Sheet Sets')])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='subCatListContainer']/ul/li[9]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Full</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a[title=&quot;Western Conference, Blue&quot;] &gt; img.swatchThumb</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input.btn_addtobasket</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#anchor-btn-checkout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.rollover.checkoutButtonIntl</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=birthdate.ageValidationBirthmonth</td>
+	<td>label=October</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=birthdate.ageValidationBirthday</td>
+	<td>label=12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=birthdate.ageValidationBirthyear</td>
+	<td>label=1985</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#btn-continue</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=formId:fld_SHIPPING_ADDRESS__FIRST_NAME_id</td>
+	<td>brandon</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=formId:fld_SHIPPING_ADDRESS__LAST_NAME_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=formId:fld_SHIPPING_ADDRESS__LAST_NAME_id</td>
+	<td>stewart</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=formId:fld_SHIPPING_ADDRESS__ADDRESS1_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=formId:fld_SHIPPING_ADDRESS__ADDRESS1_id</td>
+	<td>11911 Ne 1st St</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=formId:fld_SHIPPING_ADDRESS__CITY_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=formId:fld_SHIPPING_ADDRESS__CITY_id</td>
+	<td>Calgary</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=formId:fld_SHIPPING_ADDRESS__POSTAL_CODE_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=formId:fld_SHIPPING_ADDRESS__POSTAL_CODE_id</td>
+	<td>T1X 0L3</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=formId:fld_SHIPPING_ADDRESS__PHONE_PRIMARY_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=formId:fld_SHIPPING_ADDRESS__PHONE_PRIMARY_id</td>
+	<td>4255558855</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=formId:fld_SHIPPING_ADDRESS__EMAIL_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=formId:fld_SHIPPING_ADDRESS__EMAIL_id</td>
+	<td>bstewart@pointmarc.com</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>formId:fld_PAYMENT_INFORMATION__PAYMENT_METHOD_id:0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=formId:fld_PAYMENT_INFORMATION__CARD_NUMBER_id</td>
+	<td>4397078180002445</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>formId:fld_PAYMENT_INFORMATION__EXPIRATION_MONTH_id</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=formId:fld_PAYMENT_INFORMATION__SECURITY_CODE_id</td>
+	<td>111</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=formId:submitBtnId</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

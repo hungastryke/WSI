@@ -600,9 +600,11 @@ pmc.pageViewSearchPage = function() {
 			pmc.setSearchReturnedResultsByPageType();
 		}
 	}
+	/*
 	if (digitalData.page.attributes.viewAll == true) {
 		pmc.prop20 = "view all";
 	}
+	*/
 	if (digitalData.page.attributes.searchResultsType == "CQSnull") {
 		pmc.eVar9 = 'search:cqs search';
 		pmc.prop10 = "0";
@@ -1746,6 +1748,7 @@ pmc.pageView = function() {
 			
 		}
 		
+		/*
 		if (typeof digitalData.page.attributes.pageNumber != "undefined") {
 			pmc.prop20 = digitalData.page.attributes.pageNumber + "";
 		}
@@ -1754,11 +1757,12 @@ pmc.pageView = function() {
 				pmc.prop20 = "view all";
 			}
 		}
+		*/
 		
 		if (pmc.pageViewKnownPathnames() == true) {
 			return;
 		}
-		
+		/*
 		try {
 			if (pmc.urlVariables.cm_em != undefined) {
 				pmc.eVar43 = pmc.urlVariables.cm_em;
@@ -1767,7 +1771,7 @@ pmc.pageView = function() {
 		} catch (e) {
 			;
 		}
-				
+		*/	
 		try {
 			if (digitalData.page && digitalData.page.pageCategory != undefined) {
 				

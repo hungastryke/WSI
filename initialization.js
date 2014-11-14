@@ -1743,7 +1743,7 @@ pmc.pageView = function() {
 				}
 			}
 			
-			if (typeof pmc.eVar41 != "undefined") {
+			//if (typeof pmc.eVar41 != "undefined") {
 				    /*
 					if (pmc.eVar41.match(/CUSTOMER SERVICE:CATALOG REQUEST THANKYOU/gi)) {
 						pmc.event30 = "event30";
@@ -1751,10 +1751,12 @@ pmc.pageView = function() {
 					if (pmc.eVar41.match(/CUSTOMER SERVICE:CATALOG REQUEST:THANKYOU/gi)) {
 						pmc.event30 = "event30";
 					}*/
+					/*
 					if (pmc.eVar41.match(/MONOGRAM OPTIONS/gi)) {
 						pmc.personalizationStart(digitalData.page.attributes.groupId);
 					}
-				}
+					*/
+			//	}
 			
 		}
 		

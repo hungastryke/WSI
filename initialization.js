@@ -2412,6 +2412,13 @@ pmc.registerCallbacks = function() {
 				b.data.name.indexOf("Personalized Content") > -1 ) {
 
 				if ( b.data.data.programStatus !== "INELIGIBLE" ) {
+					utag_data["pmc_event71"] = "event71";
+					if ( b.data.data.programStatus === "TEST" && 
+							utag_data["pmc_eVar71"] !== "TEST" ) {
+						utag_data["pmc_eVar71"] = "TEST";
+					} else if ( utag_data["pmc_eVar71"] === undefined ) {
+						utag_data["pmc_eVar71"] = "CONTROL";
+					}
 					var placementDetails=[b.data.data.programStatus,
 							      b.data.data.campaign.substring(0, 48),
 							      b.data.data.placement.substring(0, 49),
@@ -2422,9 +2429,6 @@ pmc.registerCallbacks = function() {
 						utag_data["pmc_list1"] = utag_data["pmc_list1"] + ";" + placementDetails.join("|");
 					}
 				}
-
-				utag_data["pmc_event71"] = "event71";
-				utag_data["pmc_eVar71"] = "TEST/CONTROL";
 			}
 		}
 	}, true)	

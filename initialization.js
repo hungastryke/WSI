@@ -1959,12 +1959,13 @@ pmc.personalizationStartCallback = function(a, b, c) {
 	});
 };
 
+/*
 pmc.personalizationStart = function(groupID) {
 	pmc.event49 = "event49";
 	pmc.productString  = ";" + groupID;
 	return;
 };
-
+*/
 
 pmc.altImageClick = function(a, b, c) {
 		var groupID = c.product.productID.prodID;

@@ -241,12 +241,8 @@ pmc.setBasePageName = function () {
 
 }
 
-pmc.cartReview = function() {
-	pmc.pageName = pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "shopping cart";
-	//pmc.eVar9 = "shop";
+pmc.cartReviewProductString = function() {
 	pmc.order = pmc.newOrder();
-	pmc.scView = "scView";
-	
 	if (digitalData) {
 		if (typeof digitalData.x_cart != "undefined") {
 			if (digitalData.x_cart.orders) {
@@ -338,11 +334,20 @@ pmc.cartReview = function() {
 	}
 
 	if (pmc.order.orderItems.length > 0) {
-		pmc.productString = pmc.getProductString(pmc.order.orderItems);
+		return pmc.getProductString(pmc.order.orderItems);
+	} else {
+		return "";
 	}
+}
 
+/*
+pmc.cartReview = function() {
+	pmc.pageName = pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "shopping cart";	
+	pmc.scView = "scView";
+	pmc.productString = pmc.cartReviewProductString();
 	return;
 };
+*/
 
 pmc.purchase = function() {
 
@@ -1192,11 +1197,13 @@ pmc.pageViewKnownPathnames = function() {
 		return true;
 	}
 
+	/*
 	if (document.location.pathname.match("/shoppingcart/") != null && digitalData.page.pageCategory.primaryCategory != "Monogram Options" && digitalData.page.pageCategory.primaryCategory != "registry" && digitalData.page.pageCategory.primaryCategory != "style and quantity") {
 		pmc.setBasePageName();
 		pmc.cartReview();
 		return true;
 	}
+	*/
 	
 	return false;
 };
@@ -1690,6 +1697,7 @@ pmc.pageView = function() {
 		
 		if (digitalData.page && digitalData.page.attributes != undefined) {
 			
+			/*
 			if (digitalData.x_user) {
 				if(digitalData.x_user.profile != undefined) {
 					if(digitalData.x_user.profile.profileEmail != undefined) {
@@ -1700,6 +1708,7 @@ pmc.pageView = function() {
 					}
 				}
 			}
+			*/
 			
 			if(typeof digitalData.page.attributes.cmPageId != "undefined") {
 				pmc.eVar41 = digitalData.page.attributes.cmPageId;
@@ -1712,10 +1721,10 @@ pmc.pageView = function() {
 					pmc.prop7 = "D=v42";
 				}
 			}
-			if (typeof digitalData.page.attributes.emailAddress != "undefined") {
-				pmc.eVar43 = digitalData.page.attributes.emailAddress;
-				pmc.event53 = "event53";
-			}
+			//if (typeof digitalData.page.attributes.emailAddress != "undefined") {
+			//	pmc.eVar43 = digitalData.page.attributes.emailAddress;
+			//	pmc.event53 = "event53";
+			//}
 			
 			if (digitalData.page.attributes.mobile == true) {
 				pmc.prop18 = pmc.eVar18 = "mobile site";
@@ -1734,17 +1743,20 @@ pmc.pageView = function() {
 				}
 			}
 			
-			if (typeof pmc.eVar41 != "undefined") {
+			//if (typeof pmc.eVar41 != "undefined") {
+				    /*
 					if (pmc.eVar41.match(/CUSTOMER SERVICE:CATALOG REQUEST THANKYOU/gi)) {
 						pmc.event30 = "event30";
 					}
 					if (pmc.eVar41.match(/CUSTOMER SERVICE:CATALOG REQUEST:THANKYOU/gi)) {
 						pmc.event30 = "event30";
-					}
+					}*/
+					/*
 					if (pmc.eVar41.match(/MONOGRAM OPTIONS/gi)) {
 						pmc.personalizationStart(digitalData.page.attributes.groupId);
 					}
-				}
+					*/
+			//	}
 			
 		}
 		
@@ -1947,12 +1959,13 @@ pmc.personalizationStartCallback = function(a, b, c) {
 	});
 };
 
+/*
 pmc.personalizationStart = function(groupID) {
 	pmc.event49 = "event49";
 	pmc.productString  = ";" + groupID;
 	return;
 };
-
+*/
 
 pmc.altImageClick = function(a, b, c) {
 		var groupID = c.product.productID.prodID;

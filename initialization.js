@@ -491,11 +491,12 @@ pmc.pageViewAccountPage = function() {
 	pmc.setBasePageName();
 };
 
+/*
 pmc.pageViewHomePage = function() {
 	pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = pmc.pageName = "home page";
 	return;
 };
-
+*/
 
 	pmc.setSearchReturnedResultsByPageType = function() {
 		if (pmc.eVar41.match(/PRODUCT SEARCH RESULTS/gi) != null) {
@@ -528,6 +529,24 @@ pmc.pageViewHomePage = function() {
 		}
 	};
 
+pmc.setSearchResultType = function() {
+	if(digitalData.page.attributes.searchResultsType) {
+		var searchResultsType = digitalData.page.attributes.searchResultsType.toLowerCase()
+		if(searchResultsType === "partialmatch") {
+			return "partial-match";
+		} else if(searchResultsType === "spellcorrected") {
+			return "spell-corrected";
+		} else if(searchResultsType === "typeahead") {
+			return "type-ahead";
+		} else if(searchResultsType === "didyoumean") {
+			return "did-you-mean";
+		} else {
+			return digitalData.page.attributes.searchResultsType.toLowerCase();
+		}
+	} else {
+		return "unknown"
+	}
+}
 
 pmc.pageViewSearchPage = function() {
 	pmc.pageName = "search:results";
@@ -535,18 +554,7 @@ pmc.pageViewSearchPage = function() {
 	pmc.event33 = "event33";
 	pmc.eVar9 = "search:search results";
 	
-	if(digitalData.page.attributes.searchResultsType) {
-		pmc.eVar51 = pmc.prop22 = digitalData.page.attributes.searchResultsType.toLowerCase();
-		if(pmc.eVar51 === "partialmatch") {
-			pmc.eVar51 = pmc.prop22 = "partial-match";
-		} else if(pmc.eVar51 === "spellcorrected") {
-			pmc.eVar51 = pmc.prop22 = "spell-corrected";
-		} else if(pmc.eVar51 === "typeahead") {
-			pmc.eVar51 = pmc.prop22 = "type-ahead";
-		} else if(pmc.eVar51 === "didyoumean") {
-			pmc.eVar51 = pmc.prop22 = "did-you-mean";
-		}
-	}
+	pmc.eVar51 = pmc.prop22 = pmc.setSearchResultType();
 
 	if (digitalData.page.attributes.searchResultsType == "NULL") {
 		if(digitalData.page.attributes.searchTerm != undefined) {
@@ -622,13 +630,14 @@ pmc.pageViewSearchPage = function() {
 	return;
 };
 
+/*
 pmc.pageViewStyleQuantityPage = function() {
 	pmc.pageName = pmc.prop1 = "product detail:style and quantity";
 	pmc.prop2 = "product detail";
 	pmc.prop3 = "product detail";
 	pmc.prop4 = "product detail";
 	pmc.prop5 = "product detail"; 
-};
+};*/
 
 pmc.pageViewProductDetailsPage = function() {
  
@@ -1807,10 +1816,10 @@ pmc.pageView = function() {
 					pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "search";
 					pmc.pageViewSearchPage();
 					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "home") {
+				} /*else if (digitalData.page.pageCategory.primaryCategory == "home") {
 					pmc.pageViewHomePage();
 					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "customer-service") {
+				}*/ else if (digitalData.page.pageCategory.primaryCategory == "customer-service") {
 					pmc.pageViewCustomerServicePage();
 					return;
 				} else if (digitalData.page.pageCategory.primaryCategory == "registry") {
@@ -1870,16 +1879,16 @@ pmc.pageView = function() {
 						pmc.pageName = "cbcc:cc landing";
 					}
 					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "Monogram Options") {
+				} /* else if (digitalData.page.pageCategory.primaryCategory == "Monogram Options") {
 					pmc.pageName = "product: monogram options";
 					pmc.pageType = pmc.prop1 = "monogram options";
 					pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "product";
 					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "style and quantity") {
+				}*/ /*else if (digitalData.page.pageCategory.primaryCategory == "style and quantity") {
 					pmc.pageType = "style and quantity";
 					pmc.pageViewStyleQuantityPage();
 					return;
-				} else {
+				}*/ else {
 					try {
 						pmc.setBasePageName();
 					} catch(e) {
@@ -2426,13 +2435,6 @@ pmc.registerCallbacks = function() {
 				b.data.name.indexOf("Personalized Content") > -1 ) {
 
 				if ( b.data.data.programStatus !== "INELIGIBLE" ) {
-					utag_data["pmc_event71"] = "event71";
-					if ( b.data.data.programStatus === "TEST" && 
-							utag_data["pmc_eVar71"] !== "TEST" ) {
-						utag_data["pmc_eVar71"] = "TEST";
-					} else if ( utag_data["pmc_eVar71"] === undefined ) {
-						utag_data["pmc_eVar71"] = "CONTROL";
-					}
 					var placementDetails=[b.data.data.programStatus,
 							      b.data.data.campaign.substring(0, 48),
 							      b.data.data.placement.substring(0, 49),
@@ -2443,6 +2445,9 @@ pmc.registerCallbacks = function() {
 						utag_data["pmc_list1"] = utag_data["pmc_list1"] + ";" + placementDetails.join("|");
 					}
 				}
+
+				utag_data["pmc_event71"] = "event71";
+				utag_data["pmc_eVar71"] = "TEST/CONTROL";
 			}
 		}
 	}, true)	

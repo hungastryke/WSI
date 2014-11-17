@@ -1869,7 +1869,7 @@ pmc.pageView = function() {
 					pmc.pageType = "shopping";
 					pmc.pageViewShoppingPage();
 					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "cbcc") {
+				} /* else if (digitalData.page.pageCategory.primaryCategory == "cbcc") {
 					pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "cbcc";
 					pmc.pageName = pmc.removeHTML(digitalData.page.pageName).toLowerCase();
 					if (pmc.pageName.match(/ic communication error/gi)) {
@@ -1879,7 +1879,7 @@ pmc.pageView = function() {
 						pmc.pageName = "cbcc:cc landing";
 					}
 					return;
-				} /* else if (digitalData.page.pageCategory.primaryCategory == "Monogram Options") {
+				} */ /* else if (digitalData.page.pageCategory.primaryCategory == "Monogram Options") {
 					pmc.pageName = "product: monogram options";
 					pmc.pageType = pmc.prop1 = "monogram options";
 					pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "product";

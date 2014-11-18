@@ -1555,11 +1555,13 @@ pmc.pageViewCheckoutPage = function() {
 	}
 };
 
+/*
 pmc.pageViewShoppingPage = function () {
 	pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "shopping";
 	pmc.pageName = pmc.removeHTML(digitalData.page.pageName).toLowerCase();
 	pmc.eVar9 = "bloomreach";
 };
+*/
 
 pmc.pageViewRegistryPage = function() {
 
@@ -1865,11 +1867,11 @@ pmc.pageView = function() {
 				} else if (digitalData.page.pageCategory.primaryCategory == "gift") {
 					pmc.pageViewGiftPage();
 					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "shopping") {
+				} /* else if (digitalData.page.pageCategory.primaryCategory == "shopping") {
 					pmc.pageType = "shopping";
 					pmc.pageViewShoppingPage();
 					return;
-				} /* else if (digitalData.page.pageCategory.primaryCategory == "cbcc") {
+				}*/ /* else if (digitalData.page.pageCategory.primaryCategory == "cbcc") {
 					pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "cbcc";
 					pmc.pageName = pmc.removeHTML(digitalData.page.pageName).toLowerCase();
 					if (pmc.pageName.match(/ic communication error/gi)) {

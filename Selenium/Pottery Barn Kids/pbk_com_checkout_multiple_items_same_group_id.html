@@ -42,8 +42,23 @@
 	<td>1</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>css=section.persistent-section &gt; section.subset-section &gt; div.product-subset &gt; div.subset-skus &gt; div.subset-selection &gt; div.subset-pricing &gt; div.subset-qty &gt; input.qty</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@value=''])[4]</td>
+	<td>1</td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>css=input.btn_addtobasket</td>
+	<td>css=section.persistent-section &gt; section.subset-section &gt; div.product-subset &gt; div.subset-skus &gt; div.subset-selection &gt; div.subset-attributes &gt; ul.visual-attributes.textual-att &gt; li.attributeValue &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//section[@id='subset-container']/section/div[2]/div/fieldset/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -62,14 +77,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>css=input[name=&quot;continue&quot;]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>id=shipTo.address.fullName</td>
-	<td>Brandon stewart</td>
+	<td>Test Test</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=shipTo.address.addrLine1</td>
-	<td>11911 NE 1st St</td>
+	<td>11911 NE 1st st </td>
 </tr>
 <tr>
 	<td>type</td>
@@ -84,17 +104,12 @@
 <tr>
 	<td>type</td>
 	<td>id=shipTo.address.zip</td>
-	<td>98003</td>
+	<td>98005</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>id=shipTo.address.dayPhone</td>
 	<td>4255558855</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=shipping.shipTo.billingAddressUpdate</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -109,11 +124,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>css=input[name=&quot;continue&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#Rush</td>
 	<td></td>
 </tr>
 <tr>
@@ -144,7 +154,7 @@
 <tr>
 	<td>select</td>
 	<td>id=creditCard.cardExpYear</td>
-	<td>label=2015</td>
+	<td>label=2017</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -171,7 +181,6 @@
 	<td>css=#placeOrderButton</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

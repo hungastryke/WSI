@@ -23,11 +23,6 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=img[alt=&quot;Pottery Barn Kids&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
 	<td>link=Rugs &amp; Windows</td>
 	<td></td>
 </tr>
@@ -43,12 +38,12 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=44 x 63&quot;</td>
+	<td>link=8x10'</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=input.btn_addtobasket</td>
+	<td>//div[@id='main-content']/div[7]/div[2]/div[2]/section/div/div/fieldset/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -72,13 +67,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Full/Queen</td>
+	<td>clickAndWait</td>
+	<td>css=span.product-name</td>
 	<td></td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>css=input.qty</td>
+	<td>1</td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>css=input.btn_addtobasket</td>
+	<td>//section[@id='subset-container']/div/div/fieldset/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -369,7 +369,7 @@
 <tr>
 	<td>select</td>
 	<td>id=creditCard.cardExpYear</td>
-	<td>label=2013</td>
+	<td>label=2017</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -394,11 +394,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>id=placeOrderButton</td>
-	<td></td>
-</tr>
-<tr>
-	<td>deleteAllVisibleCookies</td>
-	<td></td>
 	<td></td>
 </tr>
 </tbody></table>

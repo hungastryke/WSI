@@ -28,7 +28,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>xpath=(//a[contains(text(),'Bedding')])[19]</td>
+	<td>css=span.product-name</td>
 	<td></td>
 </tr>
 <tr>
@@ -37,8 +37,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>css=span.product-name</td>
+	<td>click</td>
+	<td>css=a[title=&quot; Gray &quot;] &gt; img.swatchThumb</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=ul.visual-attributes.textual-att &gt; li.attributeValue &gt; a</td>
 	<td></td>
 </tr>
 <tr>
@@ -63,7 +68,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=input.btn_addtobasket</td>
+	<td>//div[@id='main-content']/div[7]/div[2]/div/section/div/div/fieldset/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -78,7 +83,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[contains(@src,'http://qark-images.pkimgs.com/pkimgs/qark/images/dp/wcm/201324/0004/img48j.jpg')]</td>
+	<td>css=span.product-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=li.attributeValue &gt; a</td>
 	<td></td>
 </tr>
 <tr>
@@ -93,12 +103,12 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Horse</td>
+	<td>css=a.active</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=input.btn_addtobasket</td>
+	<td>//div[@id='main-content']/div[7]/div[2]/div/section/div/div/fieldset/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -219,7 +229,7 @@
 <tr>
 	<td>select</td>
 	<td>id=creditCard.cardExpYear</td>
-	<td>label=2013</td>
+	<td>label=2017</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -266,7 +276,6 @@
 	<td>id=placeOrderButton</td>
 	<td></td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

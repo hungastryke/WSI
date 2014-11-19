@@ -28,17 +28,22 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//img[contains(@src,'http://qark-images.ptimgs.com/ptimgs/qark/images/dp/wcm/201319/0049/img21j.jpg')]</td>
+	<td>css=span.product-name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=img.swatchThumb</td>
+	<td>css=section.persistent-section &gt; section.subset-section &gt; div.product-subset &gt; div.subset-skus &gt; div.subset-selection &gt; div.subset-attributes &gt; ul.visual-attributes.textual-att &gt; li.attributeValue &gt; a.active</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=input.btn_addtobasket</td>
+	<td>link=Spiraloft</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//section[@id='subset-container']/div/div/fieldset/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -58,22 +63,12 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Antique WhIte</td>
+	<td>css=img.swatchThumb</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=input.qty</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>css=input.qty</td>
-	<td>1</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=input.btn_addtobasket</td>
+	<td>//section[@id='subset-container']/div/div/fieldset/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -93,12 +88,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Pink Magenta</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=input.btn_addtobasket</td>
+	<td>//div[@id='main-content']/div[3]/div[2]/div[2]/section/div/div/fieldset/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -124,6 +114,26 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>css=input.rollover.checkoutButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=birthdate.ageValidationBirthmonth</td>
+	<td>label=June</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=birthdate.ageValidationBirthday</td>
+	<td>label=8</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=birthdate.ageValidationBirthyear</td>
+	<td>label=1980</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#btn-continue-checkout</td>
 	<td></td>
 </tr>
 <tr>
@@ -224,7 +234,7 @@
 <tr>
 	<td>select</td>
 	<td>id=creditCard.cardExpYear</td>
-	<td>label=2013</td>
+	<td>label=2017</td>
 </tr>
 <tr>
 	<td>click</td>

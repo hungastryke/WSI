@@ -53,7 +53,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>css=input.btn_addtobasket</td>
+	<td>//div[@id='main-content']/div[6]/div[2]/div/section/div/div/fieldset/button</td>
 	<td></td>
 </tr>
 <tr>
@@ -67,93 +67,98 @@
 	<td></td>
 </tr>
 <tr>
+	<td>selectFrame</td>
+	<td>envoy</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__FIRST_NAME_id</td>
+	<td>css=input[name=&quot;given-name&quot;]</td>
 	<td>brandon</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__LAST_NAME_id</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__LAST_NAME_id</td>
+	<td>css=input[name=&quot;family-name&quot;]</td>
 	<td>stewart</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__ADDRESS1_id</td>
-	<td></td>
+	<td>type</td>
+	<td>css=input[name=&quot;address-line1&quot;]</td>
+	<td>11911 NE 1st st</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__ADDRESS1_id</td>
-	<td>11911 Ne 1st St</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__CITY_id</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__CITY_id</td>
+	<td>css=input[name=&quot;city&quot;]</td>
 	<td>Calgary</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>css=select[name=&quot;province&quot;]</td>
+	<td>label=Alberta</td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__POSTAL_CODE_id</td>
+	<td>css=select[name=&quot;province&quot;] &gt; option[value=&quot;0&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__POSTAL_CODE_id</td>
+	<td>css=input[name=&quot;postalCode&quot;]</td>
 	<td>T1X 0L3</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__PHONE_PRIMARY_id</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__PHONE_PRIMARY_id</td>
+	<td>css=input[name=&quot;tel&quot;]</td>
 	<td>4255558855</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__EMAIL_id</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__EMAIL_id</td>
+	<td>css=input[name=&quot;email&quot;]</td>
 	<td>bstewart@pointmarc.com</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>formId:fld_PAYMENT_INFORMATION__PAYMENT_METHOD_id:0</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>id=formId:fld_PAYMENT_INFORMATION__CARD_NUMBER_id</td>
-	<td>4397078180002445</td>
+	<td>css=#cc-num</td>
+	<td>4111111111111111</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>formId:fld_PAYMENT_INFORMATION__EXPIRATION_MONTH_id</td>
-	<td>12</td>
+	<td>css=#cc-exp-month</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#cc-exp-month &gt; option[value=&quot;9&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#cc-exp-month</td>
+	<td>label=12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#cc-exp-year</td>
+	<td>label=2017</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=formId:fld_PAYMENT_INFORMATION__SECURITY_CODE_id</td>
+	<td>css=#cc-sec-num</td>
 	<td>111</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>id=formId:submitBtnId</td>
+	<td>click</td>
+	<td>css=#borderfreeEmails</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#optin-borderfree &gt; label.ng-binding</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#submit-order-btn</td>
 	<td></td>
 </tr>
 <tr>

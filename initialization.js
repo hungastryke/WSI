@@ -2452,12 +2452,12 @@ pmc.registerCallbacks = function() {
 				utag_data["pmc_eVar71"] = "TEST/CONTROL";
 			}
 		}
-	}, true)	
+	}, true);
 };
 
 try {
 	window.utag_cfg_ovrd = {
-	  noview : true,
+	  noview : true
 	};
 	pmc.registerCallbacks();
 	pmc.pageView();

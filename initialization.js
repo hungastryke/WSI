@@ -2432,39 +2432,37 @@ pmc.registerCallbacks = function() {
 					});
 				}
 		    }
-			if (b.name === "addComponent" && 
-				b.data && b.data.data && b.data.name && 
-				b.data.name.indexOf("Personalized Content") > -1 ) {
-
-				if ( b.data.data.programStatus !== "INELIGIBLE" ) {
-					var placementDetails=[b.data.data.programStatus,
-							      b.data.data.campaign.substring(0, 48),
-							      b.data.data.placement.substring(0, 49),
-							      b.data.data.productId.substring(0, 99)];
-					if ( typeof utag_data["pmc_list1"] === "undefined" ) {
-						utag_data["pmc_list1"] = placementDetails.join("|");
-					} else {
-						utag_data["pmc_list1"] = utag_data["pmc_list1"] + ";" + placementDetails.join("|");
-					}
-				}
-
-				utag_data["pmc_event71"] = "event71";
-				utag_data["pmc_eVar71"] = "TEST/CONTROL";
-			}
+		    if (b.name === "personalizedResponse" && b.data && 
+		    		b.data.placements && b.data.placements.length > 0 ) {
+	    		var placements = b.data.placements,
+	    			placement,
+	    			programStatus,
+	    			placementDetails,
+	    			count;
+	    		for (count = 0; count < placements.length; count++) {
+	    			placement = placements[count];
+	    			programStatus = placement.programStatus;
+	    			if ( programStatus !== "INELIGIBLE" ) {
+	    				placementDetails =[ placement.programStatus, 
+	    				                    placement.campaign.substring(0, 48), 
+	    				                    placement.placement.substring(0, 49) ];
+	    				if ( typeof utag_data["pmc_list1"] === "undefined" ) {
+	    					utag_data["pmc_list1"] = placementDetails.join("|");
+	    				} else {
+	    					utag_data["pmc_list1"] = utag_data["pmc_list1"] + ";" + placementDetails.join("|");
+	    				}
+	    			}
+	    		}
+	    		utag_data["pmc_event71"] = "event71";
+	    		utag_data["pmc_eVar71"] = "TEST/CONTROL";
+	    	}
 		}
 	}, true);
 };
 
 try {
-	window.utag_cfg_ovrd = {
-	  noview : true
-	};
 	pmc.registerCallbacks();
 	pmc.pageView();
-        setTimeout( function(){ 
-	  utag.view(utag_data);
-	}, 500);
-	
 } catch(e) {
 	;
 }

@@ -557,6 +557,7 @@ pmc.pageViewSearchPage = function() {
 	pmc.eVar51 = pmc.prop22 = pmc.setSearchResultType();
 
 	if (digitalData.page.attributes.searchResultsType == "NULL") {
+		/*
 		if(digitalData.page.attributes.searchTerm != undefined) {
 			pmc.prop9 = pmc.eVar27 = digitalData.page.attributes.searchTerm.toLowerCase();
 		} else if (pmc.urlVariables.words != undefined && pmc.urlVariables.words != null && pmc.urlVariables.words != "") {
@@ -565,6 +566,7 @@ pmc.pageViewSearchPage = function() {
 		pmc.prop10 = "0";
 		pmc.prop11 = pmc.eVar29 = "no results";
 		pmc.event34 = "event34";
+		*/
 	} else if ((typeof digitalData.page.attributes.searchResultsNla != "undefined" && digitalData.page.attributes.searchResultsNla == true) || pmc.eVar42.indexOf("NLA") >= 0) {
 		//pmc.eVar9 = 'search:nla search'; #2356.
 		pmc.prop10 = "0";

@@ -549,9 +549,9 @@ pmc.setSearchResultType = function() {
 }
 
 pmc.pageViewSearchPage = function() {
-	pmc.pageName = "search:results";
+	//pmc.pageName = "search:results";
 	pmc.prop10 = "0";
-	pmc.event33 = "event33";
+	//pmc.event33 = "event33";
 	pmc.eVar9 = "search:search results";
 	
 	pmc.eVar51 = pmc.prop22 = pmc.setSearchResultType();
@@ -582,14 +582,14 @@ pmc.pageViewSearchPage = function() {
 		*/
 		return;
 	} else if (digitalData.page.attributes.searchResultsType == "cqs") {
-		pmc.eVar9 = 'search:cqs search';
+		//pmc.eVar9 = 'search:cqs search';
 		
-		if(digitalData.page.attributes.searchTerm != undefined) {
-			pmc.prop9 = pmc.eVar27 = digitalData.page.attributes.searchTerm.toLowerCase();
-		} else if (pmc.urlVariables.words != undefined && pmc.urlVariables.words != null && pmc.urlVariables.words != "") {
-			pmc.prop9 = pmc.eVar27 = pmc.urlVariables.words.toLowerCase();
-		}
-		pmc.prop10 = "0";
+		//if(digitalData.page.attributes.searchTerm != undefined) {
+		//	pmc.prop9 = pmc.eVar27 = digitalData.page.attributes.searchTerm.toLowerCase();
+		//} else if (pmc.urlVariables.words != undefined && pmc.urlVariables.words != null && pmc.urlVariables.words != "") {
+		//	pmc.prop9 = pmc.eVar27 = pmc.urlVariables.words.toLowerCase();
+		//}
+		//pmc.prop10 = "0";
 		return;
 	} else {
 		/*
@@ -624,12 +624,12 @@ pmc.pageViewSearchPage = function() {
 		pmc.prop20 = "view all";
 	}
 	*/
-	if (digitalData.page.attributes.searchResultsType == "CQSnull") {
-		pmc.eVar9 = 'search:cqs search';
-		pmc.prop10 = "0";
-		pmc.prop11 = pmc.eVar29 = "no results";
-		pmc.event34 = "event34";
-	}
+	//if (digitalData.page.attributes.searchResultsType == "CQSnull") {
+	//	pmc.eVar9 = 'search:cqs search';
+	//	pmc.prop10 = "0";
+	//	pmc.prop11 = pmc.eVar29 = "no results";
+	//	pmc.event34 = "event34";
+	//}
 	
 	pmc.setRefinements(); 
 	 

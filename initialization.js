@@ -373,7 +373,7 @@ pmc.purchase = function() {
 					var emailValue = digitalData.x_transaction.customer.email;
 					if (emailValue !== null && typeof (emailValue) !== "undefined") {
 						order.eVar43 = emailValue;
-						pmc.event53 = "event53";
+						utag_data["pmc_event53"] = "event53";
 					}
 
 					if (digitalData.x_transaction.orders[i].price.orderTotal) {
@@ -473,7 +473,7 @@ pmc.purchase = function() {
 		pmc.eVar5 = pmc.orders[0].eVar5;
 		pmc.eVar6 = pmc.orders[0].eVar6;
 		pmc.eVar34 = pmc.orders[0].eVar34;
-		pmc.eVar43 = pmc.orders[0].eVar43;
+		utag_data["pmc_eVar43"] = pmc.orders[0].eVar43;
 		pmc.event36 = pmc.orders[0].event36;
 
 		if (digitalData.page.attributes.expressCheckout === true) {
@@ -1672,7 +1672,7 @@ pmc.pageView = function() {
 					if(digitalData.x_user.profile != undefined) {
 						if(digitalData.x_user.profile.profileEmail != undefined) {
 							utag_data["pmc_eVar43"] = digitalData.x_user.profile.profileEmail;  
-							pmc.event53 = "event53";
+							utag_data["pmc_event53"] = "event53";
 						}
 					}
 				}

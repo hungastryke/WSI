@@ -497,7 +497,7 @@ pmc.pageViewHomePage = function() {
 	return;
 };
 */
-
+/*
 	pmc.setSearchReturnedResultsByPageType = function() {
 		if (pmc.eVar41.match(/PRODUCT SEARCH RESULTS/gi) != null) {
 			pmc.prop11 = pmc.eVar29 = "product";
@@ -528,7 +528,7 @@ pmc.pageViewHomePage = function() {
 			}
 		}
 	};
-
+*/
 pmc.setSearchResultType = function() {
 	if(digitalData.page.attributes.searchResultsType) {
 		var searchResultsType = digitalData.page.attributes.searchResultsType.toLowerCase()

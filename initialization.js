@@ -815,14 +815,14 @@ pmc.emailSignUp = function(a, b, c) {
 		}
 	}
 
-	pmc.eVar43 = ""; // clear in case page view variable is left over.
+	utag_data["pmc_eVar43"] = ""; // clear in case page view variable is left over.
 	if(typeof(c.page.attributes.emailAddress) != "undefined") {
-		pmc.eVar43 = c.page.attributes.emailAddress;
+		utag_data["pmc_eVar43"] = c.page.attributes.emailAddress;
 	}
 	utag.view({
 		pmc_event32 : "event32",
 		pmc_event53 : "event53",
-		pmc_eVar43 : pmc.eVar43,
+		pmc_eVar43 : utag_data["pmc_eVar43"],
 		pmc_pageName : "customer-service:email-signup-overlay",
 		pmc_prop1 : "customer-service",
 		pmc_prop2 : "customer-service",
@@ -1671,7 +1671,7 @@ pmc.pageView = function() {
 				if (digitalData.x_user) {
 					if(digitalData.x_user.profile != undefined) {
 						if(digitalData.x_user.profile.profileEmail != undefined) {
-							pmc.eVar43 = digitalData.x_user.profile.profileEmail;  
+							utag_data["pmc_eVar43"] = digitalData.x_user.profile.profileEmail;  
 							pmc.event53 = "event53";
 						}
 					}
@@ -1738,7 +1738,7 @@ pmc.pageView = function() {
 					pmc.pageViewRecipePage();
 					return;
 				} else if (digitalData.page.pageCategory.primaryCategory == "search") {
-					pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "search";
+					//pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "search";
 					pmc.pageViewSearchPage();
 					return;
 				} /*else if (digitalData.page.pageCategory.primaryCategory == "home") {

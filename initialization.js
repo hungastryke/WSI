@@ -110,7 +110,7 @@ pmc.getProductString = function(pArray) {
 	}
 	return completeString;
 };
-
+/*
 pmc.setRefinements = function() {
 	if(digitalData.page.attributes.refinements.types) {
 	    utag_data["pmc_eVar47"] = pmc.eVar47 = "search";
@@ -127,7 +127,7 @@ pmc.setRefinements = function() {
 	    utag_data["pmc_eVar40"] = pmc.eVar40 = pmc.eVar40.join("|").toLowerCase();
 	}
 };
-
+*/
 pmc.updateCategoryRefinements = function(c) {
 	//console.log(c);
 	if(digitalData.page.attributes.refinements.types) {
@@ -549,7 +549,7 @@ pmc.setSearchResultType = function() {
 }
 
 pmc.pageViewSearchPage = function() {
-	pmc.setRefinements(); 
+	//pmc.setRefinements(); 
 	return;
 };
 
@@ -1337,9 +1337,9 @@ pmc.pageViewBrowsePage = function() {
 			;
 		}
 		
-		if(digitalData.page.pageType == "category") {
-			pmc.setRefinements();
-		}
+		//if(digitalData.page.pageType == "category") {
+		//	pmc.setRefinements();
+		//}
 		 
 	}; 
 
@@ -1739,7 +1739,7 @@ pmc.pageView = function() {
 					return;
 				} else if (digitalData.page.pageCategory.primaryCategory == "search") {
 					//pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "search";
-					pmc.pageViewSearchPage();
+					//pmc.pageViewSearchPage();
 					return;
 				} /*else if (digitalData.page.pageCategory.primaryCategory == "home") {
 					pmc.pageViewHomePage();

@@ -1049,14 +1049,6 @@ pmc.pageViewKnownPathnames = function() {
 		pmc.purchase();
 		return true;
 	}
-
-	/*
-	if (document.location.pathname.match("/shoppingcart/") != null && digitalData.page.pageCategory.primaryCategory != "Monogram Options" && digitalData.page.pageCategory.primaryCategory != "registry" && digitalData.page.pageCategory.primaryCategory != "style and quantity") {
-		pmc.setBasePageName();
-		pmc.cartReview();
-		return true;
-	}
-	*/
 	
 	return false;
 };

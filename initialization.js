@@ -1035,15 +1035,8 @@ pmc.wishlistAdd = function(a, b, c) {
 
 pmc.pageViewRecipePage = function() {
 	pmc.setBasePageName();
-	
 	pmc.eVar9 = "recipe";
-	/*
-	if (pmc.eVar42 == "RECIPE" || (pmc.eVar42 == "M:RECIPE" && pmc.eVar41 != "MOBILE RECIPE HOME PAGE")) {
-		pmc.pageName = pmc.removeHTML(digitalData.page.pageName.toLowerCase()).replace("recipe: ", "recipe:");
-		pmc.event57 = "event57";
-		pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "recipe detail";
-	}
-	*/	
+
 	if(pmc.prop1 == "pages") {
 		pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "recipe";
 	}

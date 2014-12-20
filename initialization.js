@@ -110,24 +110,7 @@ pmc.getProductString = function(pArray) {
 	}
 	return completeString;
 };
-/*
-pmc.setRefinements = function() {
-	if(digitalData.page.attributes.refinements.types) {
-	    utag_data["pmc_eVar47"] = pmc.eVar47 = "search";
-	    utag_data["pmc_prop16"] = pmc.prop16 = (digitalData.page.attributes.refinements.types[0]).toLowerCase();    //last type
-	    utag_data["pmc_prop17"] = pmc.prop17 = (digitalData.page.attributes.refinements.types[0] + ":" + digitalData.page.attributes.refinements.values[0]).toLowerCase(); // last type:value
-	    pmc.eVar39 = []; // |-delimited list of types
-	    pmc.eVar40 = []; // |-delimited list of types:values
-	    
-	    for(var i=0; i < digitalData.page.attributes.refinements.types.length; i++) {
-	        pmc.eVar39.push(digitalData.page.attributes.refinements.types[i]);
-	        pmc.eVar40.push(digitalData.page.attributes.refinements.types[i] + ":" + digitalData.page.attributes.refinements.values[i]);
-	    }
-	    utag_data["pmc_eVar39"] = pmc.eVar39 = pmc.eVar39.join("|").toLowerCase();
-	    utag_data["pmc_eVar40"] = pmc.eVar40 = pmc.eVar40.join("|").toLowerCase();
-	}
-};
-*/
+
 pmc.updateCategoryRefinements = function(c) {
 	//console.log(c);
 	if(digitalData.page.attributes.refinements.types) {
@@ -340,15 +323,6 @@ pmc.cartReviewProductString = function() {
 	}
 }
 
-/*
-pmc.cartReview = function() {
-	pmc.pageName = pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "shopping cart";	
-	pmc.scView = "scView";
-	pmc.productString = pmc.cartReviewProductString();
-	return;
-};
-*/
-
 pmc.purchase = function() {
 
 	if (digitalData) {
@@ -491,44 +465,6 @@ pmc.pageViewAccountPage = function() {
 	pmc.setBasePageName();
 };
 
-/*
-pmc.pageViewHomePage = function() {
-	pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = pmc.pageName = "home page";
-	return;
-};
-*/
-/*
-	pmc.setSearchReturnedResultsByPageType = function() {
-		if (pmc.eVar41.match(/PRODUCT SEARCH RESULTS/gi) != null) {
-			pmc.prop11 = pmc.eVar29 = "product";
-
-			if (!isNaN(digitalData.page.attributes.searchResults.product)) {
-				pmc.prop10 = digitalData.page.attributes.searchResults.product;
-			}
-		}
-		if (pmc.eVar41.match(/RECIPE SEARCH RESULTS/gi) != null) {
-			pmc.prop11 = pmc.eVar29 = "recipe";
-
-			if (!isNaN(digitalData.page.attributes.searchResults.recipe)) {
-				pmc.prop10 = digitalData.page.attributes.searchResults.recipe;
-			}
-		}
-		if (pmc.eVar41.match(/VIDEO SEARCH RESULTS/gi) != null) {
-			pmc.prop11 = pmc.eVar29 = "video";
-
-			if (!isNaN(digitalData.page.attributes.searchResults.video)) {
-				pmc.prop10 = digitalData.page.attributes.searchResults.video;
-			}
-		}
-		if (pmc.eVar41.match(/ARTICLE SEARCH RESULTS/gi) != null) {
-			pmc.prop11 = pmc.eVar29 = "article";
-
-			if (!isNaN(digitalData.page.attributes.searchResults.article)) {
-				pmc.prop10 = digitalData.page.attributes.searchResults.article;
-			}
-		}
-	};
-*/
 pmc.setSearchResultType = function() {
 	if(digitalData.page.attributes.searchResultsType) {
 		var searchResultsType = digitalData.page.attributes.searchResultsType.toLowerCase()
@@ -552,15 +488,6 @@ pmc.pageViewSearchPage = function() {
 	//pmc.setRefinements(); 
 	return;
 };
-
-/*
-pmc.pageViewStyleQuantityPage = function() {
-	pmc.pageName = pmc.prop1 = "product detail:style and quantity";
-	pmc.prop2 = "product detail";
-	pmc.prop3 = "product detail";
-	pmc.prop4 = "product detail";
-	pmc.prop5 = "product detail"; 
-};*/
 
 pmc.pageViewProductDetailsPage = function() {
  
@@ -1478,14 +1405,6 @@ pmc.pageViewCheckoutPage = function() {
 	}
 };
 
-/*
-pmc.pageViewShoppingPage = function () {
-	pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "shopping";
-	pmc.pageName = pmc.removeHTML(digitalData.page.pageName).toLowerCase();
-	pmc.eVar9 = "bloomreach";
-};
-*/
-
 pmc.pageViewRegistryPage = function() {
 
 	pmc.setBasePageName();
@@ -1678,47 +1597,10 @@ pmc.pageView = function() {
 				}
 			}
 			
-			//if (typeof pmc.eVar41 != "undefined") {
-				    /*
-					if (pmc.eVar41.match(/CUSTOMER SERVICE:CATALOG REQUEST THANKYOU/gi)) {
-						pmc.event30 = "event30";
-					}
-					if (pmc.eVar41.match(/CUSTOMER SERVICE:CATALOG REQUEST:THANKYOU/gi)) {
-						pmc.event30 = "event30";
-					}*/
-					/*
-					if (pmc.eVar41.match(/MONOGRAM OPTIONS/gi)) {
-						pmc.personalizationStart(digitalData.page.attributes.groupId);
-					}
-					*/
-			//	}
-			
-		}
-		
-		/*
-		if (typeof digitalData.page.attributes.pageNumber != "undefined") {
-			pmc.prop20 = digitalData.page.attributes.pageNumber + "";
-		}
-		if (typeof digitalData.page.attributes.viewAll != "undefined") {
-			if (digitalData.page.attributes.viewAll == true) {
-				pmc.prop20 = "view all";
-			}
-		}
-		*/
-		
 		if (pmc.pageViewKnownPathnames() == true) {
 			return;
 		}
-		/*
-		try {
-			if (pmc.urlVariables.cm_em != undefined) {
-				pmc.eVar43 = pmc.urlVariables.cm_em;
-				pmc.event53 = "event53";
-			}
-		} catch (e) {
-			;
-		}
-		*/	
+
 		try {
 			if (digitalData.page && digitalData.page.pageCategory != undefined) {
 				
@@ -1790,30 +1672,7 @@ pmc.pageView = function() {
 				} else if (digitalData.page.pageCategory.primaryCategory == "gift") {
 					pmc.pageViewGiftPage();
 					return;
-				} /* else if (digitalData.page.pageCategory.primaryCategory == "shopping") {
-					pmc.pageType = "shopping";
-					pmc.pageViewShoppingPage();
-					return;
-				}*/ /* else if (digitalData.page.pageCategory.primaryCategory == "cbcc") {
-					pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "cbcc";
-					pmc.pageName = pmc.removeHTML(digitalData.page.pageName).toLowerCase();
-					if (pmc.pageName.match(/ic communication error/gi)) {
-						pmc.pageName = "cbcc:ccerror";
-					}
-					if (pmc.pageName.match(/credit card landing - ic/gi)) {
-						pmc.pageName = "cbcc:cc landing";
-					}
-					return;
-				} */ /* else if (digitalData.page.pageCategory.primaryCategory == "Monogram Options") {
-					pmc.pageName = "product: monogram options";
-					pmc.pageType = pmc.prop1 = "monogram options";
-					pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "product";
-					return;
-				}*/ /*else if (digitalData.page.pageCategory.primaryCategory == "style and quantity") {
-					pmc.pageType = "style and quantity";
-					pmc.pageViewStyleQuantityPage();
-					return;
-				}*/ else {
+				} else {
 					try {
 						pmc.setBasePageName();
 					} catch(e) {

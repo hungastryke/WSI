@@ -1099,14 +1099,6 @@ pmc.pageViewGiftPage = function() {
 	return; 
 };
 
-pmc.pageViewDesignStudioPage = function() {
-	pmc.setBasePageName();
-	pmc.eVar9 = "design studio";
-	return; 
-};
-
-
-
 pmc.getPageName = function() {
 	  if (typeof digitalData.page.pageCategory.categories != "undefined" && digitalData.page.pageCategory.categories.length > 0) {
 	    var _pname = [];
@@ -1164,6 +1156,9 @@ pmc.getPageName = function() {
 	    if(digitalData.page.pageCategory.primaryCategory == "stores") {
 		    utag_data["pmc_prop1"] = "stores";
 	    } 
+	    if(digitalData.page.pageCategory.primaryCategory == "design-studio") {
+		    utag_data["pmc_prop1"] = "design-studio";
+	    }
 	    
 	    utag_data["pmc_prop2"] = pmc.removeHTML(_siteSection);
 		utag_data["pmc_prop3"] = pmc.removeHTML(_superCategory);
@@ -1496,7 +1491,7 @@ pmc.pageView = function() {
 						pmc.pageViewInternationalCheckout();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "design-studio") {
-						pmc.pageViewDesignStudioPage();
+						//pmc.pageViewDesignStudioPage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "recommendations") {
 						pmc.pageViewRecommendationsPage();

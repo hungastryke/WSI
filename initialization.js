@@ -1,5 +1,4 @@
 pmc = {};
-_tealium_pixel_counter = 0;
 pmc.searchToJSON = function() {
 	try {
 		var rep = {
@@ -221,8 +220,7 @@ pmc.setBasePageName = function () {
 			(pth_!=undefined) ? (pmc.prop5 = pmc.prop5 + ":" + pth_) : pmc.prop5;
 		}
 	}
-
-}
+};
 
 pmc.cartReviewProductString = function() {
 	pmc.order = pmc.newOrder();
@@ -274,13 +272,7 @@ pmc.cartReviewProductString = function() {
 							}	
 							
 							if(item.quantity) {
-								/*
-								pmc.event11 = "event11";
-								orderItem.purchaseIncrementorEvents.push({
-									"eventName" : "event11",
-									"value" : item.quantity
-								});
-								*/
+
 								utag_data["pmc_event69"] = "event69";
 								orderItem.purchaseIncrementorEvents.push({
 									"eventName" : "event69",
@@ -290,13 +282,7 @@ pmc.cartReviewProductString = function() {
 													
 							orderItem.itemTotal = (parseInt(item.quantity) * pmc.roundValue(item.price.unitPrice, 2));
 							if(orderItem.itemTotal) {
-								/*
-								pmc.event12 = "event12";
-								orderItem.purchaseIncrementorEvents.push({
-									"eventName" : "event12",
-									"value" : pmc.roundValue(orderItem.itemTotal, 2)
-								});
-								*/
+
 								utag_data["pmc_event70"] = "event70";
 								orderItem.purchaseIncrementorEvents.push({
 									"eventName" : "event70",
@@ -321,7 +307,7 @@ pmc.cartReviewProductString = function() {
 	} else {
 		return "";
 	}
-}
+};
 
 pmc.purchase = function() {
 
@@ -482,7 +468,7 @@ pmc.setSearchResultType = function() {
 	} else {
 		return "unknown"
 	}
-}
+};
 
 pmc.pageViewSearchPage = function() {
 	//pmc.setRefinements(); 
@@ -765,209 +751,7 @@ pmc.emailSignUp = function(a, b, c) {
 	});
 };
 
-pmc.cartEvent = function(a, b, c) {
-	if (b.data.item) {
-		switch (b.data.item) {
-			case "updateCartAmount":
-				if(b.data.quantity < b.data.updatedQuantity) {
-					// cart add
-					var items = new Array();
-					var item = pmc.newOrderItem();
-				
-					item.itemNumber = b.data.SKU
-						
-					item.purchaseIncrementorEvents.push({
-						"eventName" : "event11",
-						"value" : (b.data.updatedQuantity - b.data.quantity)
-					});
-					
-					item.description = pmc.removeHTML(b.data.groupId);
-						 
-					item.itemTotal = (parseInt(b.data.updatedQuantity - b.data.quantity) * pmc.roundValue((b.data.unitPrice + b.data.unitSurcharge), 2));
-					
-					item.purchaseIncrementorEvents.push({
-						"eventName" : "event12",
-						"value" : pmc.roundValue(item.itemTotal, 2)
-					});
-					
-					item.purchaseMerchandisingEvars.push({
-						"evarName" : "eVar33",
-						"value" : item.itemNumber
-					});
-			
-					items.push(item);
-				}
-				if(b.data.updatedQuantity == 0 || (b.data.quantity > b.data.updatedQuantity)) {
-					// cart removal
-					var items = new Array();
-					var item = pmc.newOrderItem();
-				
-					item.itemNumber = b.data.SKU
-					item.description = pmc.removeHTML(b.data.groupId);
-					
-					item.purchaseMerchandisingEvars.push({
-						"evarName" : "eVar33",
-						"value" : item.itemNumber
-					});
-			
-					items.push(item);
-				}
-				break;
-			case "addFromSaveForLater":
-				//
-				break;
-			case "removeFromSaveForLater":
-				//
-				break;
-			case "saveForLater":
-				//
-				break;
-			case "removeFromCart":
-				//
-				break;
-			default:
-				;
-		}
-	}
-};
 
-pmc.cartAdd = function(a, b, c) {
-	//console.log(b.data.items && b.data.items.item);
-	//console.log(b.data.items);
-	//console.log(b.data.items.item);
-	//console.log(b.data.items.item.length);
-	if (b.data.items && b.data.items.item) {
-		var items = new Array();
-		//console.log(b.data.items.item.length);
-		for (var i = 0; i < b.data.items.item.length; i++) {
-			var item = pmc.newOrderItem();
-
-			//b.items.item[i].catalog
-			item.itemNumber = b.data.items.item[i].sku;
-			//item.price = b.data.items.item[i].price;
-			//item.quantity = b.data.items.item[i].quantity;
-			item.purchaseIncrementorEvents.push({
-				"eventName" : "event11",
-				"value" : b.data.items.item[i].quantity
-			});
-			item.purchaseIncrementorEvents.push({
-				"eventName" : "event69",
-				"value" : b.data.items.item[i].quantity
-			});
-			item.description = pmc.removeHTML(b.data.items.item[i].groupId);
-			//b.items.item[i].membership
-			item.itemTotal = (parseInt(b.data.items.item[i].quantity) * pmc.roundValue(b.data.items.item[i].price, 2));
-			item.purchaseIncrementorEvents.push({
-				"eventName" : "event12",
-				"value" : pmc.roundValue(item.itemTotal, 2)
-			});
-			item.purchaseIncrementorEvents.push({
-				"eventName" : "event70",
-				"value" : pmc.roundValue(item.itemTotal, 2)
-			});
-			item.purchaseMerchandisingEvars.push({
-				"evarName" : "eVar33",
-				"value" : item.itemNumber
-			});
-
-			items.push(item);
-			
-			var pmc_monogrammed = false;  
-			if(b.data.items.item[i].monogram != undefined) {
-				if(b.data.items.item[i].monogram.monogramSeq != undefined) {
-					for (var j = 0; j < b.data.items.item[i].monogram.monogramSeq.length; j++) {
-						if(b.data.items.item[i].monogram.monogramSeq[j].monogramDetails != "No") {
-							pmc_monogrammed = true;  
-						}
-					}
-				}
-			}
-		}
-
-		//console.log(items);
-		//console.log(pmc_monogrammed);
-
-		if (a.x_cart) {
-			if (a.x_cart.attributes.itemCount == 0 || b.data.items.item.length == c.x_cart.attributes.itemCount) {
-				if(pmc_monogrammed == false) {
-					utag.link({
-						pmc_scAdd : "scAdd",
-						pmc_event11 : "event11",
-						pmc_event12 : "event12",
-						pmc_event69 : "event69",
-						pmc_event70 : "event70",
-						pmc_scOpen : "scOpen",
-						pmc_products : pmc.getProductString(items),
-						pmc_eVar18 : pmc.eVar18,
-						pmc_prop18 : pmc.prop18
-					});
-				} else {
-					utag.link({
-						pmc_event50 : "event50",
-						pmc_scAdd : "scAdd",
-						pmc_event11 : "event11",
-						pmc_event12 : "event12",
-						pmc_event69 : "event69",
-						pmc_event70 : "event70",
-						pmc_scOpen : "scOpen",
-						pmc_products : pmc.getProductString(items),
-						pmc_eVar18 : pmc.eVar18,
-						pmc_prop18 : pmc.prop18
-					});
-				}
-			} else {
-				if(pmc_monogrammed == false) {
-					utag.link({
-						pmc_scAdd : "scAdd",
-						pmc_event11 : "event11",
-						pmc_event12 : "event12",
-						pmc_event69 : "event69",
-						pmc_event70 : "event70",
-						pmc_products : pmc.getProductString(items),
-						pmc_eVar18 : pmc.eVar18,
-						pmc_prop18 : pmc.prop18
-					});
-				} else {
-					utag.link({
-						pmc_event50 : "event50",
-						pmc_scAdd : "scAdd",
-						pmc_event11 : "event11",
-						pmc_event12 : "event12",
-						pmc_event69 : "event69",
-						pmc_event70 : "event70",
-						pmc_products : pmc.getProductString(items),
-						pmc_eVar18 : pmc.eVar18,
-						pmc_prop18 : pmc.prop18
-					});
-				}
-			}
-		} else {
-			if(pmc_monogrammed == false) {
-				utag.link({
-					pmc_scAdd : "scAdd",
-					pmc_event11 : "event11",
-					pmc_event12 : "event12",
-					pmc_event69 : "event69",
-					pmc_event70 : "event70",
-					pmc_products : pmc.getProductString(items),
-					pmc_eVar18 : pmc.eVar18,
-					pmc_prop18 : pmc.prop18
-				});
-			} else {
-				utag.link({
-					pmc_scAdd : "scAdd",
-					pmc_event11 : "event11",
-					pmc_event12 : "event12",
-					pmc_event69 : "event69",
-					pmc_event70 : "event70",
-					pmc_products : pmc.getProductString(items),
-					pmc_eVar18 : pmc.eVar18,
-					pmc_prop18 : pmc.prop18
-				});
-			}
-		}
-	}
-};
 
 pmc.registryAdd = function(a, b, c) {
 
@@ -1052,209 +836,6 @@ pmc.pageViewKnownPathnames = function() {
 	
 	return false;
 };
-
-pmc.pageViewBrowsePage = function() {
-	
-		function indexOf_(arr, val) {
-			for (var i = 0; i < arr.length; i++) {
-				if (arr[i] === val) {
-					return i;
-				}
-			}
-			return -1;
-		}
-	
-		function parseUri(str) {
-			var o = parseUri.options, m = o.parser[o.strictMode ? "strict" : "loose"].exec(str), uri = {}, i = 14;
-	
-			while (i--)
-			uri[o.key[i]] = m[i] || "";
-	
-			uri[o.q.name] = {};
-			uri[o.key[12]].replace(o.q.parser, function($0, $1, $2) {
-				if ($1)
-					uri[o.q.name][$1] = $2;
-			});
-	
-			return uri;
-		};
-	
-		parseUri.options = {
-			strictMode : false,
-			key : ["source", "protocol", "authority", "userInfo", "user", "password", "host", "port", "relative", "path", "directory", "file", "query", "anchor"],
-			q : {
-				name : "queryKey",
-				parser : /(?:^|&)([^&=]*)=?([^&]*)/g
-			},
-			parser : {
-				strict : /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
-				loose : /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
-			}
-		};
-		
-		function removeA(arr) {
-			var what, a = arguments, L = a.length, ax;
-			while (L > 1 && arr.length) {
-				what = a[--L];
-				while (( ax = indexOf_(arr, what)) !== -1) {
-					arr.splice(ax, 1);
-				}
-			}
-			return arr;
-		}
-
-		/*
-		if (digitalData.x_state.giftGiver == true) {
-			pmc.eVar9 = "registry:registry list gift giver";
-		}
-		if (digitalData.x_state.registrant == true) {
-			pmc.eVar9 = "registry:registry list registrant";
-		}
-		if (digitalData.x_state.completionUser == true) {
-			pmc.eVar9 = "registry:completion program registrant";
-		}
-		*/
-
-		if (parseUri(window.location.href).host.match(/potterybarnkids.com/i) != null) {
-			;
-		} else {
-			if (digitalData.page.pageCategory.categories != undefined) {
-				if (digitalData.page.pageCategory.categories.length == 0) {
-					;
-				} else if (digitalData.page.pageCategory.categories.length == 1) {
-					pmc.eVar1 = pmc.eVar2 = pmc.eVar3 = pmc.removeHTML(digitalData.page.pageCategory.categories[0]);
-					pmc.prop1 = "supercategory";
-					pmc.prop2 = pmc.removeHTML(digitalData.page.pageCategory.primaryCategory);
-					pmc.prop3 = pmc.prop4 = pmc.prop5 = pmc.removeHTML(digitalData.page.pageCategory.primaryCategory + ":" + digitalData.page.pageCategory.categories[0]);
-					pmc.pageName = pmc.prop5;
-				} else if (digitalData.page.pageCategory.categories.length == 2) {
-					pmc.eVar1 = pmc.removeHTML(digitalData.page.pageCategory.categories[0]);
-					pmc.eVar2 = pmc.eVar3 = pmc.removeHTML(digitalData.page.pageCategory.categories[0] + ":" + digitalData.page.pageCategory.categories[1]);
-					pmc.prop1 = "category";
-					pmc.prop2 = pmc.removeHTML(digitalData.page.pageCategory.primaryCategory);
-					pmc.prop3 = pmc.removeHTML(digitalData.page.pageCategory.primaryCategory + ":" + digitalData.page.pageCategory.categories[0]);
-					pmc.prop4 = pmc.prop5 = pmc.removeHTML(digitalData.page.pageCategory.primaryCategory + ":" + digitalData.page.pageCategory.categories.join(":"));
-					pmc.pageName = pmc.prop5;
-				} else if (digitalData.page.pageCategory.categories.length >= 3) {
-					pmc.eVar1 = pmc.removeHTML(digitalData.page.pageCategory.categories[0]);
-					pmc.eVar2 = pmc.removeHTML(digitalData.page.pageCategory.categories[0] + ":" + digitalData.page.pageCategory.categories[1]);
-					pmc.eVar3 = pmc.removeHTML(digitalData.page.pageCategory.categories[0] + ":" + digitalData.page.pageCategory.categories[1] + ":" + digitalData.page.pageCategory.categories[2]);
-					pmc.prop1 = "subcategory";
-					pmc.prop2 = pmc.removeHTML(digitalData.page.pageCategory.primaryCategory);
-					pmc.prop3 = pmc.removeHTML(digitalData.page.pageCategory.primaryCategory + ":" + digitalData.page.pageCategory.categories[0]);
-					pmc.prop4 = pmc.removeHTML(digitalData.page.pageCategory.primaryCategory + ":" + digitalData.page.pageCategory.categories[0] + ":" + digitalData.page.pageCategory.categories[1]);
-					pmc.prop5 = pmc.removeHTML(digitalData.page.pageCategory.primaryCategory + ":" + digitalData.page.pageCategory.categories.join(":"));
-					pmc.pageName = pmc.prop5;
-				}
-			} else {
-				try {
-					if (pmc.prop18 == "mobile site") {
-						pmc.pageName = digitalData.page.pageName.toLowerCase();
-						pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = digitalData.page.pageType;
-					}
-				} catch(e) {
-					;
-				}
-			}
-		}
-		
-		try {
-			/* west elm PFM specific taxonomy */
-			//if (parseUri(window.location.href).host.match(/westelm.com/i) != null) {
-			//	if(parseUri(document.location.href).directory.split("/").indexOf("design-lab") > -1) {
-			//		pmc.eVar9 = "shop";
-			//	}
-			//}
-			/* end west elm PFM taxonomy */
-			// update: this is handled in a Tealium Set Data Values extension.
-
-			/* pb kids specific taxonomy */
-			if (parseUri(window.location.href).host.match(/potterybarnkids.com/i) != null) {
-				
-				//console.log(removeA(removeA(removeA(parseUri(document.location.href).directory.split("/"), ""), "/"), "m"));
-				if (removeA(removeA(removeA(parseUri(document.location.href).directory.split("/"), ""), "/"), "m").length == 0) {
-					pmc.pageName = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = parseUri(document.location.href).file.split(".")[0].toLowerCase();
-				} else {
-					pmc.pageName = removeA(removeA(removeA(parseUri(document.location.href).directory.split("/"), ""), "/"), "m").join(":");
-					if (parseUri(document.location.href).file != undefined) {
-						if (parseUri(document.location.href).file.length > 0) {
-							if (indexOf_(removeA(removeA(removeA(parseUri(document.location.href).directory.toLowerCase().split("/"), ""), "/"), "m"),"baby") > -1 || indexOf_(removeA(removeA(removeA(parseUri(document.location.href).directory.toLowerCase().split("/"), ""), "/"), "m"),"kids") > -1) {
-								pmc.pageName = removeA(removeA(removeA(parseUri(document.location.href).directory.split("/"), ""), "/"), "m").join(":") + ":" + parseUri(document.location.href).file.split(".")[0].toLowerCase();
-							} else {
-								pmc.pageName = removeA(removeA(removeA(parseUri(document.location.href).directory.split("/"), ""), "/"), "m").splice(1,0,"all").join(":") + parseUri(document.location.href).file.split(".")[0].toLowerCase();
-							}
-						} else {
-							//console.log("*********");
-							//console.log("********* " + removeA(removeA(parseUri(document.location.href).directory.toLowerCase().split("/"), ""), "/"));
-							if (indexOf_(removeA(removeA(removeA(parseUri(document.location.href).directory.toLowerCase().split("/"), ""), "/"), "m"),"baby") > -1 || indexOf_(removeA(removeA(removeA(parseUri(document.location.href).directory.toLowerCase().split("/"), ""), "/"), "m"),"kids") > -1) {
-								pmc.pageName = removeA(removeA(removeA(parseUri(document.location.href).directory.split("/"), ""), "/"), "m").join(":");// + ":" + parseUri(document.location.href).file.split(".")[0]).toLowerCase();
-							} else {
-								// http://integration2.potterybarnkids.com/shop/sleepover/?cm_type=lnav
-								var p_ = (removeA(removeA(removeA(parseUri(document.location.href).directory.split("/"), ""), "/"), "m"));
-								p_.splice(indexOf_(p_,"shop")+1,0,["all"])
-								pmc.pageName = p_.join(":").toLowerCase(); 
-							}
-						}
-					}
-
-					var pth = removeA(removeA(removeA(parseUri(document.location.href).directory.split("/"), ""), "/"), "m");
-
-					pmc.prop1 = "supercategory"
-					pmc.prop2 = "shop"
-
-					if (indexOf_(removeA(removeA(removeA(parseUri(document.location.href).directory.toLowerCase().split("/"), ""), "/"), "m"),"baby") > -1 || indexOf_(removeA(removeA(removeA(parseUri(document.location.href).directory.toLowerCase().split("/"), ""), "/"), "m"),"kids") > -1) {
-						//console.log("baby/kids");
-						pmc.prop3 = pmc.prop4 = pmc.prop5 = pth.shift();
-						
-						if (removeA(removeA(removeA(parseUri(document.location.href).directory.split("/"), ""), "/"), "m").length >= 2) {
-							var pth_ = pth.shift();
-
-							(pth_ != undefined) ? (pmc.prop3 = (pmc.prop3 + ":" + pth_)) : pmc.prop3;
-							(pth_ != undefined) ? (pmc.prop4 = (pmc.prop4 + ":" + pth_)) : pmc.prop4;
-							(pth_ != undefined) ? (pmc.prop5 = (pmc.prop5 + ":" + pth_)) : pmc.prop5;
-						}
-						if (removeA(removeA(removeA(parseUri(document.location.href).directory.split("/"), ""), "/"), "m").length >= 3) {
-							var pth_ = pth.shift();
-							pmc.prop1 = "category";
-							(pth_ != undefined) ? (pmc.prop4 = (pmc.prop4 + ":" + pth_)) : pmc.prop4;
-							(pth_ != undefined) ? (pmc.prop5 = (pmc.prop5 + ":" + pth_)) : pmc.prop5;
-						}
-						if (removeA(removeA(removeA(parseUri(document.location.href).directory.split("/"), ""), "/"), "m").length >= 4) {
-							var pth_ = pth.shift();
-							pmc.prop1 = "subcategory";
-							(pth_ != undefined) ? (pmc.prop5 = (pmc.prop5 + ":" + pth_)) : pmc.prop5;
-						}
-					} else {
-						//console.log("all");
-						pmc.prop3 = pmc.prop4 = pmc.prop5 = pth.shift() + ":all";
-
-						if (removeA(removeA(removeA(parseUri(document.location.href).directory.split("/"), ""), "/"), "m").length >= 2) {
-							var pth_ = pth.shift();
-							pmc.prop1 = "category";
-							//(pth_ != undefined) ? (pmc.prop3 += ":" + pth_) : pmc.prop3;
-							(pth_ != undefined) ? (pmc.prop4 = (pmc.prop4 + ":" + pth_)) : pmc.prop4;
-							(pth_ != undefined) ? (pmc.prop5 = (pmc.prop5 + ":" + pth_)) : pmc.prop5;
-						}
-						if (removeA(removeA(removeA(parseUri(document.location.href).directory.split("/"), ""), "/"), "m").length >= 3) {
-							var pth_ = pth.shift();
-							pmc.prop1 = "subcategory";
-							//(pth_ != undefined) ? (pmc.prop4 += ":" + pth_) : pmc.prop4;
-							(pth_ != undefined) ? (pmc.prop5 = (pmc.prop5 + ":" + pth_)) : pmc.prop5;
-						}
-					}
-				}
-			}
-			/* end pb kids specific taxonomy */
-		} catch(e) {
-			;
-		}
-		
-		//if(digitalData.page.pageType == "category") {
-		//	pmc.setRefinements();
-		//}
-		 
-	}; 
-
 
 pmc.pageViewCheckoutPage = function() {
 
@@ -1524,154 +1105,407 @@ pmc.pageViewDesignStudioPage = function() {
 	return; 
 };
 
-pmc.pageView = function() {
+pmc.getPageNameShopPage = function() {
+	  if (typeof digitalData.page.pageCategory.categories != "undefined" && digitalData.page.pageCategory.categories.length > 0) {
+	    var _pname = [];
+	    var _ptype = "";
+	    var _siteSection = "";
+	    var _superCategory = "";
+	    var _category = "";
+	    var _subCategory = "";
+	    var _eVar1 = "";
+	    var _eVar2 = "";
+	    var _eVar3 = "";
+	    
+	    for(var i=1;typeof utag_data["_pathname" + i.toString()] != "undefined";i++) {
+	      if(utag_data["_pathname" + i.toString()] != "m" && utag_data["_pathname" + i.toString()] != "" ) {
+	        _pname.push(utag_data["_pathname" + i.toString()])
+	      }
+	    }
+	    
+	    if(typeof window.location.hostname.match(/potterybarnkids.com/i) != "undefined" 
+	       && window.location.hostname.match(/potterybarnkids.com/i) != null 
+	       && window.location.hostname.match(/potterybarnkids.com/i).length > 0) {
+	        if(typeof _pname[1] != "undefined" && (_pname[1] == "baby" || _pname[1] == "kids")) {
+	          ;
+	        } else {
+	          _pname.splice(1,0,":all");
+	        }
+	    }
 	
-	// debug mode
-	this.setDebugMode();
-	this.debugStatus("BEGIN pageView()");
-    //console.log(digitalData);
-	if (typeof digitalData != "undefined") {
-		
-		pmc.urlVariables = pmc.searchToJSON();
-		
-		if (digitalData.page && digitalData.page.attributes != undefined) {
+	    var _ptype = "supercategory";
+	    _siteSection = _pname[0];
+	    _superCategory = _category = _subCategory = _pname[0] + ":" + _pname[1];
+	    _eVar1 = _eVar2 = _eVar3 =_pname[1];
+	    
+	    if(_pname.length >= 3) {
+	      _ptype = "category";
+	      _siteSection = _pname[0];
+	      _superCategory = _pname[0] + ":" + _pname[1];
+	      _category = _subCategory = _pname[0] + ":" + _pname[1] + ":" + _pname[2];
+	      _eVar2 = _eVar3 = _pname[1] + ":" + _pname[2];
+	    }
+	    if(_pname.length >= 4) {
+	      _ptype = "subcategory";
+	      _siteSection = _pname[0];
+	      _superCategory = _pname[0] + ":" + _pname[1];
+	      _category = _pname[0] + ":" + _pname[1] + ":" + _pname[2];
+	      _subCategory = _pname[0] + ":" + _pname[1] + ":" + _pname[2] + ":" + _pname[3];
+	      _eVar2 = _pname[1] + ":" + _pname[2];
+	      _eVar3 = _pname[1] + ":" + _pname[2] + ":" + _pname[3];
+	    }
+	    utag_data["pmc_prop1"] = pmc.removeHTML(_ptype);
+	    utag_data["pmc_prop2"] = pmc.removeHTML(_siteSection);
+	    utag_data["pmc_prop3"] = pmc.removeHTML(_superCategory);
+	    utag_data["pmc_prop4"] = pmc.removeHTML(_category);
+	    utag_data["pmc_prop5"] = pmc.removeHTML(_subCategory);
+	    utag_data["pmc_eVar1"] = pmc.removeHTML(_eVar1);
+	    utag_data["pmc_eVar2"] = pmc.removeHTML(_eVar2);
+	    utag_data["pmc_eVar3"] = pmc.removeHTML(_eVar3);
+	    return _pname.join(":"); 
+	  } else {
+	      try {
+	        if (pmc.prop18 == "mobile site") {
+	            utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = digitalData.page.pageType;
+							return digitalData.page.pageName.toLowerCase();
+						}
+					} catch(e) {
+						;
+					}
+	  }
+	 return "unknown";
+};
+ 
+pmc.cartAdd = function(a, b, c) {
+	//console.log(b.data.items && b.data.items.item);
+	//console.log(b.data.items);
+	//console.log(b.data.items.item);
+	//console.log(b.data.items.item.length);
+	if (b.data.items && b.data.items.item) {
+		var items = new Array();
+		//console.log(b.data.items.item.length);
+		for (var i = 0; i < b.data.items.item.length; i++) {
+			var item = pmc.newOrderItem();
+
+			//b.items.item[i].catalog
+			item.itemNumber = b.data.items.item[i].sku;
+			//item.price = b.data.items.item[i].price;
+			//item.quantity = b.data.items.item[i].quantity;
+			item.purchaseIncrementorEvents.push({
+				"eventName" : "event11",
+				"value" : b.data.items.item[i].quantity
+			});
+			item.purchaseIncrementorEvents.push({
+				"eventName" : "event69",
+				"value" : b.data.items.item[i].quantity
+			});
+			item.description = pmc.removeHTML(b.data.items.item[i].groupId);
+			//b.items.item[i].membership
+			item.itemTotal = (parseInt(b.data.items.item[i].quantity) * pmc.roundValue(b.data.items.item[i].price, 2));
+			item.purchaseIncrementorEvents.push({
+				"eventName" : "event12",
+				"value" : pmc.roundValue(item.itemTotal, 2)
+			});
+			item.purchaseIncrementorEvents.push({
+				"eventName" : "event70",
+				"value" : pmc.roundValue(item.itemTotal, 2)
+			});
+			item.purchaseMerchandisingEvars.push({
+				"evarName" : "eVar33",
+				"value" : item.itemNumber
+			});
+
+			items.push(item);
 			
-			/*
-			if (digitalData.x_user) {
-				if(digitalData.x_user.profile != undefined) {
-					if(digitalData.x_user.profile.profileEmail != undefined) {
-						pmc.eVar43 = digitalData.x_user.profile.profileEmail;  
-						pmc.eVar48 = "authenticated";
-						pmc.event51 = "event51";
-						pmc.event53 = "event53";
+			var pmc_monogrammed = false;  
+			if(b.data.items.item[i].monogram != undefined) {
+				if(b.data.items.item[i].monogram.monogramSeq != undefined) {
+					for (var j = 0; j < b.data.items.item[i].monogram.monogramSeq.length; j++) {
+						if(b.data.items.item[i].monogram.monogramSeq[j].monogramDetails != "No") {
+							pmc_monogrammed = true;  
+						}
 					}
 				}
 			}
-			*/
+		}
+
+		//console.log(items);
+		//console.log(pmc_monogrammed);
+
+		if (a.x_cart) {
+			if (a.x_cart.attributes.itemCount == 0 || b.data.items.item.length == c.x_cart.attributes.itemCount) {
+				if(pmc_monogrammed == false) {
+					utag.link({
+						pmc_scAdd : "scAdd",
+						pmc_event11 : "event11",
+						pmc_event12 : "event12",
+						pmc_event69 : "event69",
+						pmc_event70 : "event70",
+						pmc_scOpen : "scOpen",
+						pmc_products : pmc.getProductString(items),
+						pmc_eVar18 : pmc.eVar18,
+						pmc_prop18 : pmc.prop18
+					});
+				} else {
+					utag.link({
+						pmc_event50 : "event50",
+						pmc_scAdd : "scAdd",
+						pmc_event11 : "event11",
+						pmc_event12 : "event12",
+						pmc_event69 : "event69",
+						pmc_event70 : "event70",
+						pmc_scOpen : "scOpen",
+						pmc_products : pmc.getProductString(items),
+						pmc_eVar18 : pmc.eVar18,
+						pmc_prop18 : pmc.prop18
+					});
+				}
+			} else {
+				if(pmc_monogrammed == false) {
+					utag.link({
+						pmc_scAdd : "scAdd",
+						pmc_event11 : "event11",
+						pmc_event12 : "event12",
+						pmc_event69 : "event69",
+						pmc_event70 : "event70",
+						pmc_products : pmc.getProductString(items),
+						pmc_eVar18 : pmc.eVar18,
+						pmc_prop18 : pmc.prop18
+					});
+				} else {
+					utag.link({
+						pmc_event50 : "event50",
+						pmc_scAdd : "scAdd",
+						pmc_event11 : "event11",
+						pmc_event12 : "event12",
+						pmc_event69 : "event69",
+						pmc_event70 : "event70",
+						pmc_products : pmc.getProductString(items),
+						pmc_eVar18 : pmc.eVar18,
+						pmc_prop18 : pmc.prop18
+					});
+				}
+			}
+		} else {
+			if(pmc_monogrammed == false) {
+				utag.link({
+					pmc_scAdd : "scAdd",
+					pmc_event11 : "event11",
+					pmc_event12 : "event12",
+					pmc_event69 : "event69",
+					pmc_event70 : "event70",
+					pmc_products : pmc.getProductString(items),
+					pmc_eVar18 : pmc.eVar18,
+					pmc_prop18 : pmc.prop18
+				});
+			} else {
+				utag.link({
+					pmc_scAdd : "scAdd",
+					pmc_event11 : "event11",
+					pmc_event12 : "event12",
+					pmc_event69 : "event69",
+					pmc_event70 : "event70",
+					pmc_products : pmc.getProductString(items),
+					pmc_eVar18 : pmc.eVar18,
+					pmc_prop18 : pmc.prop18
+				});
+			}
+		}
+	}
+};
+ 
+pmc.cartEvent = function(a, b, c) {
+	if (b.data.item) {
+		switch (b.data.item) {
+			case "updateCartAmount":
+				if(b.data.quantity < b.data.updatedQuantity) {
+					// cart add
+					var items = new Array();
+					var item = pmc.newOrderItem();
+				
+					item.itemNumber = b.data.SKU
+						
+					item.purchaseIncrementorEvents.push({
+						"eventName" : "event11",
+						"value" : (b.data.updatedQuantity - b.data.quantity)
+					});
+					
+					item.description = pmc.removeHTML(b.data.groupId);
+						 
+					item.itemTotal = (parseInt(b.data.updatedQuantity - b.data.quantity) * pmc.roundValue((b.data.unitPrice + b.data.unitSurcharge), 2));
+					
+					item.purchaseIncrementorEvents.push({
+						"eventName" : "event12",
+						"value" : pmc.roundValue(item.itemTotal, 2)
+					});
+					
+					item.purchaseMerchandisingEvars.push({
+						"evarName" : "eVar33",
+						"value" : item.itemNumber
+					});
 			
-			if(typeof digitalData.page.attributes.cmPageId != "undefined") {
+					items.push(item);
+				}
+				if(b.data.updatedQuantity == 0 || (b.data.quantity > b.data.updatedQuantity)) {
+					// cart removal
+					var items = new Array();
+					var item = pmc.newOrderItem();
+				
+					item.itemNumber = b.data.SKU
+					item.description = pmc.removeHTML(b.data.groupId);
+					
+					item.purchaseMerchandisingEvars.push({
+						"evarName" : "eVar33",
+						"value" : item.itemNumber
+					});
+			
+					items.push(item);
+				}
+				break;
+			case "addFromSaveForLater":
+				break;
+			case "removeFromSaveForLater":
+				break;
+			case "saveForLater":
+				break;
+			case "removeFromCart":
+				break;
+			default:
+				;
+		}
+	}
+};
+
+pmc.pageView = function() {
+
+	// debug mode
+	this.setDebugMode();
+	this.debugStatus("BEGIN pageView()");
+	//console.log(digitalData);
+	if ( typeof digitalData != "undefined") {
+
+		pmc.urlVariables = pmc.searchToJSON();
+
+		if (digitalData.page && digitalData.page.attributes != undefined) {
+
+			if ( typeof digitalData.page.attributes.cmPageId != "undefined") {
 				pmc.eVar41 = digitalData.page.attributes.cmPageId;
 				pmc.prop6 = "D=v41";
-				
+
 			}
-			if(typeof digitalData.page.attributes.cmCategoryId != "undefined") {
+			if ( typeof digitalData.page.attributes.cmCategoryId != "undefined") {
 				pmc.eVar42 = digitalData.page.attributes.cmCategoryId.split("||NOFACET")[0];
-				if(pmc.eVar42 != "") {
+				if (pmc.eVar42 != "") {
 					pmc.prop7 = "D=v42";
 				}
 			}
-			//if (typeof digitalData.page.attributes.emailAddress != "undefined") {
-			//	pmc.eVar43 = digitalData.page.attributes.emailAddress;
-			//	pmc.event53 = "event53";
-			//}
-			
+
 			if (digitalData.page.attributes.mobile == true) {
 				pmc.prop18 = pmc.eVar18 = "mobile site";
 			}
-			
+
 			if (digitalData.page.attributes.accountCreated == "true" || digitalData.page.attributes.accountCreated == true) {
 				pmc.event52 = "event52";
 				pmc.eVar48 = "authenticated";
 				if (digitalData.x_user) {
-					if(digitalData.x_user.profile != undefined) {
-						if(digitalData.x_user.profile.profileEmail != undefined) {
-							utag_data["pmc_eVar43"] = digitalData.x_user.profile.profileEmail;  
+					if (digitalData.x_user.profile != undefined) {
+						if (digitalData.x_user.profile.profileEmail != undefined) {
+							utag_data["pmc_eVar43"] = digitalData.x_user.profile.profileEmail;
 							utag_data["pmc_event53"] = "event53";
 						}
 					}
 				}
 			}
-			
-		if (pmc.pageViewKnownPathnames() == true) {
-			return;
-		}
 
-		try {
-			if (digitalData.page && digitalData.page.pageCategory != undefined) {
-				
-				pmc.prop1 = "unknown";
-				pmc.pageType = "unknown";
-		
-				if (digitalData.page.pageCategory.primaryCategory == "shop") {
-					pmc.pageType = digitalData.page.pageCategory.primaryCategory;
-					pmc.pageViewBrowsePage();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "products") {
-					pmc.pageType = "product detail";
-					pmc.pageViewProductDetailsPage();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "recipe") {
-					pmc.pageType = pmc.prop1 = "recipe";
-					pmc.pageViewRecipePage();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "search") {
-					//pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "search";
-					//pmc.pageViewSearchPage();
-					return;
-				} /*else if (digitalData.page.pageCategory.primaryCategory == "home") {
-					pmc.pageViewHomePage();
-					return;
-				}*/ else if (digitalData.page.pageCategory.primaryCategory == "customer-service") {
-					pmc.pageViewCustomerServicePage();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "registry") {
-					pmc.pageViewRegistryPage();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "wishlist") {
-					pmc.pageViewWishlistPage();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "checkout") {
-					pmc.pageViewCheckoutPage();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "shoppingcart") {
-					/*
-					 if (digitalData.page.pageName == "MONOGRAM OPTIONS") {
-					 pmc.pageType = pmc.prop1 = "product personalization";
-					 pmc.pageName = pmc.removeHTML(digitalData.page.pageName).toLowerCase();
-					 pmc.event49 = "event49";
-					 }
-					 */
-					return; 
-				} else if (digitalData.page.pageCategory.primaryCategory == "pages") {
-					pmc.pageViewCustomPage();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "room") {
-					pmc.pageViewRoomPage();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "account") {
-					pmc.pageType = "account";
-					pmc.pageViewAccountPage();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "stores") {
-					pmc.pageViewStorePage();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "internationalcheckout") {
-					pmc.pageViewInternationalCheckout();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "design-studio") {
-					pmc.pageViewDesignStudioPage();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "recommendations") {
-					pmc.pageViewRecommendationsPage();
-					return;
-				} else if (digitalData.page.pageCategory.primaryCategory == "gift") {
-					pmc.pageViewGiftPage();
-					return;
-				} else {
-					try {
-						pmc.setBasePageName();
-					} catch(e) {
-						pmc.pageName = "unknown";
-					}
-				}
-				
-				
+			if (pmc.pageViewKnownPathnames() == true) {
+				return;
 			}
-		} catch (e) {
-			;
+
+			try {
+				if (digitalData.page && digitalData.page.pageCategory != undefined) {
+
+					pmc.prop1 = "unknown";
+					pmc.pageType = "unknown";
+
+					if (digitalData.page.pageCategory.primaryCategory == "shop") {
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "products") {
+						pmc.pageType = "product detail";
+						pmc.pageViewProductDetailsPage();
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "recipe") {
+						pmc.pageType = pmc.prop1 = "recipe";
+						pmc.pageViewRecipePage();
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "search") {
+						//pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "search";
+						//pmc.pageViewSearchPage();
+						return;
+					}/* else if (digitalData.page.pageCategory.primaryCategory == "home") {
+					 pmc.pageViewHomePage();
+					 return;
+					 }*/ else if (digitalData.page.pageCategory.primaryCategory == "customer-service") {
+						pmc.pageViewCustomerServicePage();
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "registry") {
+						pmc.pageViewRegistryPage();
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "wishlist") {
+						pmc.pageViewWishlistPage();
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "checkout") {
+						pmc.pageViewCheckoutPage();
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "shoppingcart") {
+						/*
+						 if (digitalData.page.pageName == "MONOGRAM OPTIONS") {
+						 pmc.pageType = pmc.prop1 = "product personalization";
+						 pmc.pageName = pmc.removeHTML(digitalData.page.pageName).toLowerCase();
+						 pmc.event49 = "event49";
+						 }
+						 */
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "pages") {
+						pmc.pageViewCustomPage();
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "room") {
+						pmc.pageViewRoomPage();
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "account") {
+						pmc.pageType = "account";
+						pmc.pageViewAccountPage();
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "stores") {
+						pmc.pageViewStorePage();
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "internationalcheckout") {
+						pmc.pageViewInternationalCheckout();
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "design-studio") {
+						pmc.pageViewDesignStudioPage();
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "recommendations") {
+						pmc.pageViewRecommendationsPage();
+						return;
+					} else if (digitalData.page.pageCategory.primaryCategory == "gift") {
+						pmc.pageViewGiftPage();
+						return;
+					} else {
+						try {
+							pmc.setBasePageName();
+						} catch(e) {
+							pmc.pageName = "unknown";
+						}
+					}
+
+				}
+			} catch (e) {
+				;
+			}
 		}
 	}
-};
+}; 
+
 
 pmc.quickLook = function(a, b, c) {
 	var groupID = c.product.productID.prodID;

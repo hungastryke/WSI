@@ -1129,7 +1129,7 @@ pmc.getPageNameShopPage = function() {
 	        if(typeof _pname[1] != "undefined" && (_pname[1] == "baby" || _pname[1] == "kids")) {
 	          ;
 	        } else {
-	          _pname.splice(1,0,":all");
+	          _pname.splice(1,0,"all");
 	        }
 	    }
 	

@@ -1105,7 +1105,9 @@ pmc.pageViewDesignStudioPage = function() {
 	return; 
 };
 
-pmc.getPageNameShopPage = function() {
+
+
+pmc.getPageName = function() {
 	  if (typeof digitalData.page.pageCategory.categories != "undefined" && digitalData.page.pageCategory.categories.length > 0) {
 	    var _pname = [];
 	    var _ptype = "";
@@ -1123,16 +1125,18 @@ pmc.getPageNameShopPage = function() {
 	      }
 	    }
 	    
-	    if(typeof window.location.hostname.match(/potterybarnkids.com/i) != "undefined" 
-	       && window.location.hostname.match(/potterybarnkids.com/i) != null 
-	       && window.location.hostname.match(/potterybarnkids.com/i).length > 0) {
-	        if(typeof _pname[1] != "undefined" && (_pname[1] == "baby" || _pname[1] == "kids")) {
-	          ;
-	        } else {
-	          _pname.splice(1,0,"all");
-	        }
-	    }
-	
+	    if(digitalData.page.pageCategory.primaryCategory == "shop") {
+		    if(typeof window.location.hostname.match(/potterybarnkids.com/i) != "undefined" 
+		       && window.location.hostname.match(/potterybarnkids.com/i) != null 
+		       && window.location.hostname.match(/potterybarnkids.com/i).length > 0) {
+		        if(typeof _pname[1] != "undefined" && (_pname[1] == "baby" || _pname[1] == "kids")) {
+		          ;
+		        } else {
+		          _pname.splice(1,0,"all");
+		        }
+		    }
+		}
+		
 	    var _ptype = "supercategory";
 	    _siteSection = _pname[0];
 	    _superCategory = _category = _subCategory = _pname[0] + ":" + _pname[1];
@@ -1154,15 +1158,28 @@ pmc.getPageNameShopPage = function() {
 	      _eVar2 = _pname[1] + ":" + _pname[2];
 	      _eVar3 = _pname[1] + ":" + _pname[2] + ":" + _pname[3];
 	    }
-	    utag_data["pmc_prop1"] = pmc.removeHTML(_ptype);
+	    if(digitalData.page.pageCategory.primaryCategory == "shop") {
+		    utag_data["pmc_prop1"] = pmc.removeHTML(_ptype);
+	    }
+	    if(digitalData.page.pageCategory.primaryCategory == "stores") {
+		    utag_data["pmc_prop1"] = "stores";
+	    } 
+	    
 	    utag_data["pmc_prop2"] = pmc.removeHTML(_siteSection);
-	    utag_data["pmc_prop3"] = pmc.removeHTML(_superCategory);
-	    utag_data["pmc_prop4"] = pmc.removeHTML(_category);
-	    utag_data["pmc_prop5"] = pmc.removeHTML(_subCategory);
-	    utag_data["pmc_eVar1"] = pmc.removeHTML(_eVar1);
-	    utag_data["pmc_eVar2"] = pmc.removeHTML(_eVar2);
-	    utag_data["pmc_eVar3"] = pmc.removeHTML(_eVar3);
-	    return _pname.join(":"); 
+		utag_data["pmc_prop3"] = pmc.removeHTML(_superCategory);
+		utag_data["pmc_prop4"] = pmc.removeHTML(_category);
+		utag_data["pmc_prop5"] = pmc.removeHTML(_subCategory);
+	    
+	    if(digitalData.page.pageCategory.primaryCategory == "shop") {
+	    	utag_data["pmc_eVar1"] = pmc.removeHTML(_eVar1);
+	    	utag_data["pmc_eVar2"] = pmc.removeHTML(_eVar2);
+	    	utag_data["pmc_eVar3"] = pmc.removeHTML(_eVar3);
+	    } else {
+	    	utag_data["pmc_eVar1"] = "";
+	    	utag_data["pmc_eVar2"] = "";
+	    	utag_data["pmc_eVar3"] = "";
+	    }
+	    return pmc.removeHTML(_pname.join(":")); 
 	  } else {
 	      try {
 	        if (pmc.prop18 == "mobile site") {
@@ -1441,10 +1458,7 @@ pmc.pageView = function() {
 						//pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "search";
 						//pmc.pageViewSearchPage();
 						return;
-					}/* else if (digitalData.page.pageCategory.primaryCategory == "home") {
-					 pmc.pageViewHomePage();
-					 return;
-					 }*/ else if (digitalData.page.pageCategory.primaryCategory == "customer-service") {
+					} else if (digitalData.page.pageCategory.primaryCategory == "customer-service") {
 						pmc.pageViewCustomerServicePage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "registry") {
@@ -1476,7 +1490,7 @@ pmc.pageView = function() {
 						pmc.pageViewAccountPage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "stores") {
-						pmc.pageViewStorePage();
+						//pmc.pageViewStorePage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "internationalcheckout") {
 						pmc.pageViewInternationalCheckout();

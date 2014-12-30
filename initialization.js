@@ -1044,13 +1044,6 @@ pmc.pageViewInternationalCheckout = function() {
 	}
 };
 
-pmc.pageViewCustomerServicePage = function() {
-
-	pmc.setBasePageName(); 
-
-};
-
-
 	pmc.getPageName = function() {
 		//if (typeof digitalData.page.pageCategory.categories != "undefined" && digitalData.page.pageCategory.categories.length > 0 ) {
 		var _pname = [];
@@ -1132,7 +1125,7 @@ pmc.pageViewCustomerServicePage = function() {
 			}
 		}
 		
-		if (digitalData.page.pageCategory.primaryCategory == "recipe" && utag_data["pmc_prop1"] == "pages") {
+		if (digitalData.page.pageCategory.primaryCategory == "recipe" && (utag_data["pmc_prop1"] == "pages" || utag_data["pmc_prop2"] == "pages")) {
 			utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "recipe";
 		}
 		

@@ -129,8 +129,8 @@ pmc.updateCategoryRefinements = function(c) {
 	    	pmc_prop17 : pmc.prop17,
 	    	pmc_eVar39 : pmc.eVar39,
 	    	pmc_eVar40 : pmc.eVar40,
-			pmc_eVar18 : pmc.eVar18,
-			pmc_prop18 : pmc.prop18
+			pmc_eVar18 : utag_data["pmc_eVar18"],
+			pmc_prop18 : utag_data["pmc_prop18"]
 	    });
 	}
 };
@@ -677,8 +677,8 @@ pmc.trackOrderPurchase = function(order) {
 		pmc_event36 : order.event36,
 		pmc_event38 : order.event38,
 		pmc_eVar4 : pmc.eVar4,
-		pmc_eVar18 : pmc.eVar18,
-		pmc_prop18 : pmc.prop18
+		pmc_eVar18 : utag_data["pmc_eVar18"],
+		pmc_prop18 : utag_data["pmc_prop18"]
 	});
 };
 
@@ -735,10 +735,10 @@ pmc.emailSignUp = function(a, b, c) {
 		pmc_prop5 : "customer-service",
 		pmc_prop6 : pmc.prop6,
 		pmc_prop7 : pmc.prop7,
-		pmc_eVar18 : pmc.eVar18,
+		pmc_eVar18 : utag_data["pmc_eVar18"],
 		pmc_eVar41 : pmc.eVar41,
 		pmc_eVar42 : pmc.eVar42,
-		pmc_prop18 : pmc.prop18
+		pmc_prop18 : utag_data["pmc_prop18"]
 	});
 };
 
@@ -773,8 +773,8 @@ pmc.registryAdd = function(a, b, c) {
 			pmc_prop3 : "add item",
 			pmc_prop4 : "add item",
 			pmc_prop5 : "add item",
-			pmc_eVar18 : pmc.eVar18,
-			pmc_prop18 : pmc.prop18
+			pmc_eVar18 : utag_data["pmc_eVar18"],
+			pmc_prop18 : utag_data["pmc_prop18"]
 		});
 	}
 };
@@ -802,8 +802,8 @@ pmc.wishlistAdd = function(a, b, c) {
 			pmc_event16 : "event16",
 			pmc_eVar35 : b.data.wishlist.id,
 			pmc_products : pmc.getProductString(items),
-			pmc_eVar18 : pmc.eVar18,
-			pmc_prop18 : pmc.prop18
+			pmc_eVar18 : utag_data["pmc_eVar18"],
+			pmc_prop18 : utag_data["pmc_prop18"]
 		});
 	}
 };
@@ -1149,7 +1149,7 @@ pmc.getPageName = function() {
 	    return pmc.removeHTML(_pname.join(":")).toLowerCase(); 
 	 // } else {
 	//      try {
-	 //       if (pmc.prop18 == "mobile site") {
+	 //       if (utag_data["pmc_prop18"] == "mobile site") {
 	  //          utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = digitalData.page.pageType;
 	//						return digitalData.page.pageName.toLowerCase();
 	//					}
@@ -1227,8 +1227,8 @@ pmc.cartAdd = function(a, b, c) {
 						pmc_event70 : "event70",
 						pmc_scOpen : "scOpen",
 						pmc_products : pmc.getProductString(items),
-						pmc_eVar18 : pmc.eVar18,
-						pmc_prop18 : pmc.prop18
+						pmc_eVar18 : utag_data["pmc_eVar18"],
+						pmc_prop18 : utag_data["pmc_prop18"]
 					});
 				} else {
 					utag.link({
@@ -1240,8 +1240,8 @@ pmc.cartAdd = function(a, b, c) {
 						pmc_event70 : "event70",
 						pmc_scOpen : "scOpen",
 						pmc_products : pmc.getProductString(items),
-						pmc_eVar18 : pmc.eVar18,
-						pmc_prop18 : pmc.prop18
+						pmc_eVar18 : utag_data["pmc_eVar18"],
+						pmc_prop18 : utag_data["pmc_prop18"]
 					});
 				}
 			} else {
@@ -1253,8 +1253,8 @@ pmc.cartAdd = function(a, b, c) {
 						pmc_event69 : "event69",
 						pmc_event70 : "event70",
 						pmc_products : pmc.getProductString(items),
-						pmc_eVar18 : pmc.eVar18,
-						pmc_prop18 : pmc.prop18
+						pmc_eVar18 : utag_data["pmc_eVar18"],
+						pmc_prop18 : utag_data["pmc_prop18"]
 					});
 				} else {
 					utag.link({
@@ -1265,8 +1265,8 @@ pmc.cartAdd = function(a, b, c) {
 						pmc_event69 : "event69",
 						pmc_event70 : "event70",
 						pmc_products : pmc.getProductString(items),
-						pmc_eVar18 : pmc.eVar18,
-						pmc_prop18 : pmc.prop18
+						pmc_eVar18 : utag_data["pmc_eVar18"],
+						pmc_prop18 : utag_data["pmc_prop18"]
 					});
 				}
 			}
@@ -1279,8 +1279,8 @@ pmc.cartAdd = function(a, b, c) {
 					pmc_event69 : "event69",
 					pmc_event70 : "event70",
 					pmc_products : pmc.getProductString(items),
-					pmc_eVar18 : pmc.eVar18,
-					pmc_prop18 : pmc.prop18
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
 				});
 			} else {
 				utag.link({
@@ -1290,8 +1290,8 @@ pmc.cartAdd = function(a, b, c) {
 					pmc_event69 : "event69",
 					pmc_event70 : "event70",
 					pmc_products : pmc.getProductString(items),
-					pmc_eVar18 : pmc.eVar18,
-					pmc_prop18 : pmc.prop18
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
 				});
 			}
 		}
@@ -1385,7 +1385,7 @@ pmc.pageView = function() {
 			}
 
 			if (digitalData.page.attributes.mobile == true) {
-				pmc.prop18 = pmc.eVar18 = "mobile site";
+				utag_data["pmc_prop18"] = utag_data["pmc_eVar18"] = "mobile site";
 			}
 
 			if (digitalData.page.attributes.accountCreated == "true" || digitalData.page.attributes.accountCreated == true) {
@@ -1505,8 +1505,8 @@ pmc.quickLook = function(a, b, c) {
 		pmc_eVar42 : c.page.attributes.cmCategoryId,
 		pmc_prop6 : "D=v41",
 		pmc_eVar41 : c.page.attributes.cmPageId,
-		pmc_eVar18 : pmc.eVar18,
-		pmc_prop18 : pmc.prop18
+		pmc_eVar18 : utag_data["pmc_eVar18"],
+		pmc_prop18 : utag_data["pmc_prop18"]
 	});
 };
 
@@ -1527,8 +1527,8 @@ pmc.quickBuy = function(a, b, c) {
 		pmc_eVar42 : c.page.attributes.cmCategoryId,
 		pmc_prop6 : "D=v41",
 		pmc_eVar41 : c.page.attributes.cmPageId,
-		pmc_eVar18 : pmc.eVar18,
-		pmc_prop18 : pmc.prop18
+		pmc_eVar18 : utag_data["pmc_eVar18"],
+		pmc_prop18 : utag_data["pmc_prop18"]
 		
 	});
 };
@@ -1548,8 +1548,8 @@ pmc.personalizationStartCallback = function(a, b, c) {
 		pmc_prop4 : "product",
 		pmc_prop5 : "product",
 		pmc_pageName : "product: monogram preview overlay",
-		pmc_eVar18 : pmc.eVar18,
-		pmc_prop18 : pmc.prop18
+		pmc_eVar18 : utag_data["pmc_eVar18"],
+		pmc_prop18 : utag_data["pmc_prop18"]
 	});
 };
 
@@ -1569,8 +1569,8 @@ pmc.altImageClick = function(a, b, c) {
 					pmc_event39 : "event39",
 					pmc_products : ";" + groupID + ";;;event39=1",
 					pmc_prop19 : "",
-					pmc_eVar18 : pmc.eVar18,
-					pmc_prop18 : pmc.prop18
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
 				});
 			} else if (b.data.name) {
 				utag.link({
@@ -1584,8 +1584,8 @@ pmc.altImageClick = function(a, b, c) {
 					pmc_event39 : "event39",
 					pmc_products : ";" + groupID + ";;;event39=1",
 					pmc_prop19 : "",
-					pmc_eVar18 : pmc.eVar18,
-					pmc_prop18 : pmc.prop18
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
 				});
 			}
 		}
@@ -1611,8 +1611,8 @@ pmc.overlayPageView = function(a, b, c, overlayName, prop1) {
 			pmc_products : "",
 			pmc_event42 : null,
 			pmc_event41 : null,
-			pmc_eVar18 : pmc.eVar18,
-			pmc_prop18 : pmc.prop18
+			pmc_eVar18 : utag_data["pmc_eVar18"],
+			pmc_prop18 : utag_data["pmc_prop18"]
 		});
 	} else {
 		utag.view({
@@ -1633,8 +1633,8 @@ pmc.overlayPageView = function(a, b, c, overlayName, prop1) {
 			pmc_products : "",
 			pmc_event42 : null,
 			pmc_event41 : null,
-			pmc_eVar18 : pmc.eVar18,
-			pmc_prop18 : pmc.prop18
+			pmc_eVar18 : utag_data["pmc_eVar18"],
+			pmc_prop18 : utag_data["pmc_prop18"]
 		});
 	} 
 };	
@@ -1677,10 +1677,10 @@ pmc.registerCallbacks = function() {
 					pmc_prop5 : "customer-service",
 					pmc_prop6 : "D=v41",
 					pmc_prop7 : "D=v42",
-					pmc_eVar18 : pmc.eVar18,
+					pmc_eVar18 : utag_data["pmc_eVar18"],
 					pmc_eVar41 : c.page.attributes.cmPageId,
 					pmc_eVar42 : c.page.attributes.cmCategoryId,
-					pmc_prop18 : pmc.prop18
+					pmc_prop18 : utag_data["pmc_prop18"]
 				});
 			}
 			if (b.name == "cartEvent") {
@@ -1707,8 +1707,8 @@ pmc.registerCallbacks = function() {
 					pmc_products : "",
 					pmc_event42 : null,
 					pmc_event41 : null,
-					pmc_eVar18 : pmc.eVar18,
-					pmc_prop18 : pmc.prop18
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
 				});
 			}
 			if (b.name == "addChild" && b.target == "WISHLIST: ITEM ADDED") {
@@ -1730,8 +1730,8 @@ pmc.registerCallbacks = function() {
 					pmc_products : "",
 					pmc_event42 : null,
 					pmc_event41 : null,
-					pmc_eVar18 : pmc.eVar18,
-					pmc_prop18 : pmc.prop18
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
 
 				});
 			}
@@ -1754,8 +1754,8 @@ pmc.registerCallbacks = function() {
 						pmc_products : "",
 						pmc_event42 : null,
 						pmc_event41 : null,
-						pmc_eVar18 : pmc.eVar18,
-						pmc_prop18 : pmc.prop18
+						pmc_eVar18 : utag_data["pmc_eVar18"],
+						pmc_prop18 : utag_data["pmc_prop18"]
 					});
 			}
 			if (b.name == "addChild" && b.target == "MINIPIP_OVERLAY") {
@@ -1777,8 +1777,8 @@ pmc.registerCallbacks = function() {
 						pmc_products : "",
 						pmc_event42 : null,
 						pmc_event41 : null,
-						pmc_eVar18 : pmc.eVar18,
-						pmc_prop18 : pmc.prop18
+						pmc_eVar18 : utag_data["pmc_eVar18"],
+						pmc_prop18 : utag_data["pmc_prop18"]
 					});
 			}
 			if (b.name == "addChild" && b.target == "POPUP: SHIPPING OPTIONS") {
@@ -1829,8 +1829,8 @@ pmc.registerCallbacks = function() {
 										pmc_prop72 : b.data.data.campaign.substring(0, 48) + "|" + b.data.data.placement.substring(0, 48),
 										link_text : "content personalization - element interaction",
 										pmc_prop19 : "",
-										pmc_eVar18 : pmc.eVar18,
-										pmc_prop18 : pmc.prop18,
+										pmc_eVar18 : utag_data["pmc_eVar18"],
+										pmc_prop18 : utag_data["pmc_prop18"],
 										pmc_event72 : "event72",
 										pmc_prop73 : b.data.data.productId.substring(0, 99)
 									});
@@ -1839,8 +1839,8 @@ pmc.registerCallbacks = function() {
 										pmc_prop72 : b.data.data.campaign.substring(0, 48) + "|" + b.data.data.placement.substring(0, 48),
 										link_text : "content personalization - element interaction",
 										pmc_prop19 : "",
-										pmc_eVar18 : pmc.eVar18,
-										pmc_prop18 : pmc.prop18,
+										pmc_eVar18 : utag_data["pmc_eVar18"],
+										pmc_prop18 : utag_data["pmc_prop18"],
 										pmc_event72 : "event72"
 									});
 								}
@@ -1856,40 +1856,40 @@ pmc.registerCallbacks = function() {
 					pmc_prop13 : pmc.removeHTML(b.data.category + ":" + b.data.item),
 					link_text : "element interaction",
 					pmc_prop19 : "",
-					pmc_eVar18 : pmc.eVar18,
-					pmc_prop18 : pmc.prop18
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
 				});
 			} else if(b.name == "elementInteraction" && b.data.item.match(/MULTI-SHIP EXPAND LINE/gi) != null) { 
 				utag.link({
 					pmc_prop13 : pmc.removeHTML(b.data.category + ":" + b.data.item),
 					link_text : "element interaction",
 					pmc_prop19 : "",
-					pmc_eVar18 : pmc.eVar18,
-					pmc_prop18 : pmc.prop18
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
 				});
 			} else if(b.name == "elementInteraction" && b.data.item.match(/MULTI-SHIP COLLAPSE LINE/gi) != null) { 
 				utag.link({
 					pmc_prop13 : pmc.removeHTML(b.data.category + ":" + b.data.item),
 					link_text : "element interaction",
 					pmc_prop19 : "",
-					pmc_eVar18 : pmc.eVar18,
-					pmc_prop18 : pmc.prop18
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
 				});
 			} else if(b.name == "elementInteraction" && b.data.item.match(/GIFT ORDER YES/gi) != null) { 
 				utag.link({
 					pmc_prop13 : pmc.removeHTML(b.data.category + ":" + b.data.item),
 					link_text : "element interaction",
 					pmc_prop19 : "",
-					pmc_eVar18 : pmc.eVar18,
-					pmc_prop18 : pmc.prop18
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
 				});
 			} else if(b.name == "elementInteraction" && b.data.item.match(/SHIPPING SAME AS BILLING/gi) != null) { 
 				utag.link({
 					pmc_prop13 : pmc.removeHTML(b.data.category + ":" + b.data.item),
 					link_text : "element interaction",
 					pmc_prop19 : "",
-					pmc_eVar18 : pmc.eVar18,
-					pmc_prop18 : pmc.prop18
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
 				});
 			} else if (b.name == "elementInteraction") {
 				//console.log(b.name);
@@ -1906,8 +1906,8 @@ pmc.registerCallbacks = function() {
 								link_text : "element interaction",
 								pmc_products : ";" + c.product.productID.prodID,
 								pmc_prop19 : "",
-								pmc_eVar18 : pmc.eVar18,
-								pmc_prop18 : pmc.prop18
+								pmc_eVar18 : utag_data["pmc_eVar18"],
+								pmc_prop18 : utag_data["pmc_prop18"]
 							});
 						} else if(b.data.name) {
 							utag.link({
@@ -1917,8 +1917,8 @@ pmc.registerCallbacks = function() {
 								link_text : "element interaction",
 								pmc_products : ";" + c.product.productID.prodID,
 								pmc_prop19 : "",
-								pmc_eVar18 : pmc.eVar18,
-								pmc_prop18 : pmc.prop18
+								pmc_eVar18 : utag_data["pmc_eVar18"],
+								pmc_prop18 : utag_data["pmc_prop18"]
 							});
 						}
 					}
@@ -1947,8 +1947,8 @@ pmc.registerCallbacks = function() {
 										pmc_prop6 : pmc.prop6,
 										pmc_prop7 : pmc.prop7,
 										pmc_prop20 : b.data.newPage,
-										pmc_eVar18 : pmc.eVar18,
-										pmc_prop18 : pmc.prop18
+										pmc_eVar18 : utag_data["pmc_eVar18"],
+										pmc_prop18 : utag_data["pmc_prop18"]
 									});
 							}
 						}
@@ -1971,8 +1971,8 @@ pmc.registerCallbacks = function() {
 									pmc_event56 : "event56",
 									link_text : "backorder date viewed",
 									pmc_products : ";" + b.data.data.groupId + ";;;event56=1;eVar33=" + b.data.data.sku + "|eVar46=" + diffDays,
-									pmc_eVar18 : pmc.eVar18,
-									pmc_prop18 : pmc.prop18
+									pmc_eVar18 : utag_data["pmc_eVar18"],
+									pmc_prop18 : utag_data["pmc_prop18"]
 								});
 							}
 						}
@@ -1988,8 +1988,8 @@ pmc.registerCallbacks = function() {
 									pmc_event55 : "event55",
 									link_text : "view availability date displayed",
 									pmc_products : ";" + b.data.data.groupId + ";;;event55=1;eVar45=mixed availability",
-									pmc_eVar18 : pmc.eVar18,
-									pmc_prop18 : pmc.prop18
+									pmc_eVar18 : utag_data["pmc_eVar18"],
+									pmc_prop18 : utag_data["pmc_prop18"]
 								});
 							}
 						}

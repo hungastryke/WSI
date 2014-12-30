@@ -447,10 +447,6 @@ pmc.purchase = function() {
 	return;
 };
 
-pmc.pageViewAccountPage = function() {
-	pmc.setBasePageName();
-};
-
 pmc.setSearchResultType = function() {
 	if(digitalData.page.attributes.searchResultsType) {
 		var searchResultsType = digitalData.page.attributes.searchResultsType.toLowerCase()
@@ -468,11 +464,6 @@ pmc.setSearchResultType = function() {
 	} else {
 		return "unknown"
 	}
-};
-
-pmc.pageViewSearchPage = function() {
-	//pmc.setRefinements(); 
-	return;
 };
 
 pmc.pageViewProductDetailsPage = function() {
@@ -1050,21 +1041,6 @@ pmc.pageViewWishlistPage = function() {
 	}
 };
 
-pmc.pageViewStorePage = function() {
-	pmc.setBasePageName(); 
-};
-
-pmc.pageViewCustomPage = function() {
-	pmc.setBasePageName();
-	pmc.pageType = pmc.prop1; 
-};
-
-pmc.pageViewRoomPage = function() {
-	pmc.pageType = digitalData.page.pageCategory.primaryCategory;
-	pmc.setBasePageName();
-	pmc.eVar9 = "shop";
-};
-
 pmc.pageViewInternationalCheckout = function() {
 	pmc.pageType = "internationalcheckout";
 	pmc.setBasePageName(); 
@@ -1087,20 +1063,8 @@ pmc.pageViewCustomerServicePage = function() {
 	} 
 };
 
-pmc.pageViewRecommendationsPage = function() { 
-	pmc.setBasePageName(); 
-	return; 
-};
-
-pmc.pageViewGiftPage = function() { 
-	pmc.setBasePageName();  
-	pmc.pageType = "gift"
-	pmc.eVar9 = "shop";
-	return; 
-};
-
 pmc.getPageName = function() {
-	  if (typeof digitalData.page.pageCategory.categories != "undefined" && digitalData.page.pageCategory.categories.length > 0) {
+	  //if (typeof digitalData.page.pageCategory.categories != "undefined" && digitalData.page.pageCategory.categories.length > 0 ) {
 	    var _pname = [];
 	    var _ptype = "";
 	    var _siteSection = "";
@@ -1112,8 +1076,8 @@ pmc.getPageName = function() {
 	    var _eVar3 = "";
 	    
 	    for(var i=1;typeof utag_data["_pathname" + i.toString()] != "undefined";i++) {
-	      if(utag_data["_pathname" + i.toString()] != "m" && utag_data["_pathname" + i.toString()] != "" ) {
-	        _pname.push(utag_data["_pathname" + i.toString()])
+	      if(utag_data["_pathname" + i.toString()].toLowerCase() != "m" && utag_data["_pathname" + i.toString()] != "" && utag_data["_pathname" + i.toString()].split(".").length < 2) {
+	        _pname.push(utag_data["_pathname" + i.toString()]);
 	      }
 	    }
 	    
@@ -1128,12 +1092,17 @@ pmc.getPageName = function() {
 		        }
 		    }
 		}
-		
+
+	if(typeof _pname[1] != "undefined") {	
 	    var _ptype = "supercategory";
 	    _siteSection = _pname[0];
 	    _superCategory = _category = _subCategory = _pname[0] + ":" + _pname[1];
 	    _eVar1 = _eVar2 = _eVar3 =_pname[1];
-	    
+	 } else {
+	     var _ptype = digitalData.page.pageCategory.primaryCategory.toLowerCase();
+	    _siteSection = _superCategory = _category = _subCategory = _pname[0];
+	}
+
 	    if(_pname.length >= 3) {
 	      _ptype = "category";
 	      _siteSection = _pname[0];
@@ -1151,41 +1120,44 @@ pmc.getPageName = function() {
 	      _eVar3 = _pname[1] + ":" + _pname[2] + ":" + _pname[3];
 	    }
 	    if(digitalData.page.pageCategory.primaryCategory == "shop") {
-		    utag_data["pmc_prop1"] = pmc.removeHTML(_ptype);
+		    utag_data["pmc_prop1"] = pmc.removeHTML(_ptype).toLowerCase();
 	    }
-	    if(digitalData.page.pageCategory.primaryCategory == "stores") {
-		    utag_data["pmc_prop1"] = "stores";
-	    } 
-	    if(digitalData.page.pageCategory.primaryCategory == "design-studio") {
-		    utag_data["pmc_prop1"] = "design-studio";
+	    else {
+		    utag_data["pmc_prop1"] = digitalData.page.pageCategory.primaryCategory.toLowerCase();
 	    }
 	    
-	    utag_data["pmc_prop2"] = pmc.removeHTML(_siteSection);
-		utag_data["pmc_prop3"] = pmc.removeHTML(_superCategory);
-		utag_data["pmc_prop4"] = pmc.removeHTML(_category);
-		utag_data["pmc_prop5"] = pmc.removeHTML(_subCategory);
+	    utag_data["pmc_prop2"] = pmc.removeHTML(_siteSection).toLowerCase();
+		utag_data["pmc_prop3"] = pmc.removeHTML(_superCategory).toLowerCase();
+		utag_data["pmc_prop4"] = pmc.removeHTML(_category).toLowerCase();
+		utag_data["pmc_prop5"] = pmc.removeHTML(_subCategory).toLowerCase();
 	    
-	    if(digitalData.page.pageCategory.primaryCategory == "shop") {
-	    	utag_data["pmc_eVar1"] = pmc.removeHTML(_eVar1);
-	    	utag_data["pmc_eVar2"] = pmc.removeHTML(_eVar2);
-	    	utag_data["pmc_eVar3"] = pmc.removeHTML(_eVar3);
+	    if(digitalData.page.pageCategory.primaryCategory == "shop" || digitalData.page.pageCategory.primaryCategory == "room") {
+	    	utag_data["pmc_eVar1"] = pmc.removeHTML(_eVar1).toLowerCase();
+	    	utag_data["pmc_eVar2"] = pmc.removeHTML(_eVar2).toLowerCase();
+	    	utag_data["pmc_eVar3"] = pmc.removeHTML(_eVar3).toLowerCase();
 	    } else {
 	    	utag_data["pmc_eVar1"] = "";
 	    	utag_data["pmc_eVar2"] = "";
 	    	utag_data["pmc_eVar3"] = "";
 	    }
-	    return pmc.removeHTML(_pname.join(":")); 
-	  } else {
-	      try {
-	        if (pmc.prop18 == "mobile site") {
-	            utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = digitalData.page.pageType;
-							return digitalData.page.pageName.toLowerCase();
-						}
-					} catch(e) {
-						;
-					}
-	  }
-	 return "unknown";
+                _pname = [];
+	    for(var i=1;typeof utag_data["_pathname" + i.toString()] != "undefined";i++) {
+	      if(utag_data["_pathname" + i.toString()].toLowerCase() != "m" && utag_data["_pathname" + i.toString()] != "") {
+	        _pname.push(utag_data["_pathname" + i.toString()].split(".")[0]);
+	      }
+	    }
+	    return pmc.removeHTML(_pname.join(":")).toLowerCase(); 
+	 // } else {
+	//      try {
+	 //       if (pmc.prop18 == "mobile site") {
+	  //          utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = digitalData.page.pageType;
+	//						return digitalData.page.pageName.toLowerCase();
+	//					}
+	//				} catch(e) {
+	//					;
+	//				}
+	 //}
+	 //return "unknown";
 };
  
 pmc.cartAdd = function(a, b, c) {
@@ -1436,8 +1408,8 @@ pmc.pageView = function() {
 			try {
 				if (digitalData.page && digitalData.page.pageCategory != undefined) {
 
-					pmc.prop1 = "unknown";
-					pmc.pageType = "unknown";
+					//pmc.prop1 = "unknown";
+					//pmc.pageType = "unknown";
 
 					if (digitalData.page.pageCategory.primaryCategory == "shop") {
 						return;
@@ -1475,14 +1447,14 @@ pmc.pageView = function() {
 						 */
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "pages") {
-						pmc.pageViewCustomPage();
+						//pmc.pageViewCustomPage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "room") {
-						pmc.pageViewRoomPage();
+						//pmc.pageViewRoomPage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "account") {
-						pmc.pageType = "account";
-						pmc.pageViewAccountPage();
+						//pmc.pageType = "account";
+						//pmc.pageViewAccountPage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "stores") {
 						//pmc.pageViewStorePage();
@@ -1494,10 +1466,10 @@ pmc.pageView = function() {
 						//pmc.pageViewDesignStudioPage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "recommendations") {
-						pmc.pageViewRecommendationsPage();
+						//pmc.pageViewRecommendationsPage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "gift") {
-						pmc.pageViewGiftPage();
+						//pmc.pageViewGiftPage();
 						return;
 					} else {
 						try {
@@ -1581,13 +1553,6 @@ pmc.personalizationStartCallback = function(a, b, c) {
 	});
 };
 
-/*
-pmc.personalizationStart = function(groupID) {
-	pmc.event49 = "event49";
-	pmc.productString  = ";" + groupID;
-	return;
-};
-*/
 
 pmc.altImageClick = function(a, b, c) {
 		var groupID = c.product.productID.prodID;

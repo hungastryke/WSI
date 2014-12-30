@@ -808,15 +808,6 @@ pmc.wishlistAdd = function(a, b, c) {
 	}
 };
 
-pmc.pageViewRecipePage = function() {
-	pmc.setBasePageName();
-	pmc.eVar9 = "recipe";
-
-	if(pmc.prop1 == "pages") {
-		pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "recipe";
-	}
-};
-
 pmc.pageViewKnownPathnames = function() {
 	if (document.location.pathname.match("/checkout/thanks.html") != null && digitalData.x_transaction != null) {
 		pmc.pageName = pmc.pageType = "checkout:order confirmation"
@@ -1057,109 +1048,108 @@ pmc.pageViewCustomerServicePage = function() {
 
 	pmc.setBasePageName(); 
 
-	// workaround for pbteen
-	if (pmc.eVar41 == "CUSTOMER SERVICE:EMAIL SIGNUP THANKYOU") {
-		pmc.event32 = "event32";
-	} 
 };
 
-pmc.getPageName = function() {
-	  //if (typeof digitalData.page.pageCategory.categories != "undefined" && digitalData.page.pageCategory.categories.length > 0 ) {
-	    var _pname = [];
-	    var _ptype = "";
-	    var _siteSection = "";
-	    var _superCategory = "";
-	    var _category = "";
-	    var _subCategory = "";
-	    var _eVar1 = "";
-	    var _eVar2 = "";
-	    var _eVar3 = "";
-	    
-	    for(var i=1;typeof utag_data["_pathname" + i.toString()] != "undefined";i++) {
-	      if(utag_data["_pathname" + i.toString()].toLowerCase() != "m" && utag_data["_pathname" + i.toString()] != "" && utag_data["_pathname" + i.toString()].split(".").length < 2) {
-	        _pname.push(utag_data["_pathname" + i.toString()]);
-	      }
-	    }
-	    
-	    if(digitalData.page.pageCategory.primaryCategory == "shop") {
-		    if(typeof window.location.hostname.match(/potterybarnkids.com/i) != "undefined" 
-		       && window.location.hostname.match(/potterybarnkids.com/i) != null 
-		       && window.location.hostname.match(/potterybarnkids.com/i).length > 0) {
-		        if(typeof _pname[1] != "undefined" && (_pname[1] == "baby" || _pname[1] == "kids")) {
-		          ;
-		        } else {
-		          _pname.splice(1,0,"all");
-		        }
-		    }
+
+	pmc.getPageName = function() {
+		//if (typeof digitalData.page.pageCategory.categories != "undefined" && digitalData.page.pageCategory.categories.length > 0 ) {
+		var _pname = [];
+		var _ptype = "";
+		var _siteSection = "";
+		var _superCategory = "";
+		var _category = "";
+		var _subCategory = "";
+		var _eVar1 = "";
+		var _eVar2 = "";
+		var _eVar3 = "";
+
+		for (var i = 1; typeof utag_data["_pathname" + i.toString()] != "undefined"; i++) {
+			if (utag_data["_pathname" + i.toString()].toLowerCase() != "m" && utag_data["_pathname" + i.toString()] != "" && utag_data["_pathname" + i.toString()].split(".").length < 2) {
+				_pname.push(utag_data["_pathname" + i.toString()]);
+			}
 		}
 
-	if(typeof _pname[1] != "undefined") {	
-	    var _ptype = "supercategory";
-	    _siteSection = _pname[0];
-	    _superCategory = _category = _subCategory = _pname[0] + ":" + _pname[1];
-	    _eVar1 = _eVar2 = _eVar3 =_pname[1];
-	 } else {
-	     var _ptype = digitalData.page.pageCategory.primaryCategory.toLowerCase();
-	    _siteSection = _superCategory = _category = _subCategory = _pname[0];
-	}
+		if (digitalData.page.pageCategory.primaryCategory == "shop") {
+			if ( typeof window.location.hostname.match(/potterybarnkids.com/i) != "undefined" && window.location.hostname.match(/potterybarnkids.com/i) != null && window.location.hostname.match(/potterybarnkids.com/i).length > 0) {
+				if ( typeof _pname[1] != "undefined" && (_pname[1] == "baby" || _pname[1] == "kids")) {
+					;
+				} else {
+					_pname.splice(1, 0, "all");
+				}
+			}
+		}
 
-	    if(_pname.length >= 3) {
-	      _ptype = "category";
-	      _siteSection = _pname[0];
-	      _superCategory = _pname[0] + ":" + _pname[1];
-	      _category = _subCategory = _pname[0] + ":" + _pname[1] + ":" + _pname[2];
-	      _eVar2 = _eVar3 = _pname[1] + ":" + _pname[2];
-	    }
-	    if(_pname.length >= 4) {
-	      _ptype = "subcategory";
-	      _siteSection = _pname[0];
-	      _superCategory = _pname[0] + ":" + _pname[1];
-	      _category = _pname[0] + ":" + _pname[1] + ":" + _pname[2];
-	      _subCategory = _pname[0] + ":" + _pname[1] + ":" + _pname[2] + ":" + _pname[3];
-	      _eVar2 = _pname[1] + ":" + _pname[2];
-	      _eVar3 = _pname[1] + ":" + _pname[2] + ":" + _pname[3];
-	    }
-	    if(digitalData.page.pageCategory.primaryCategory == "shop") {
-		    utag_data["pmc_prop1"] = pmc.removeHTML(_ptype).toLowerCase();
-	    }
-	    else {
-		    utag_data["pmc_prop1"] = digitalData.page.pageCategory.primaryCategory.toLowerCase();
-	    }
-	    
-	    utag_data["pmc_prop2"] = pmc.removeHTML(_siteSection).toLowerCase();
+		if ( typeof _pname[1] != "undefined") {
+			var _ptype = "supercategory";
+			_siteSection = _pname[0];
+			_superCategory = _category = _subCategory = _pname[0] + ":" + _pname[1];
+			_eVar1 = _eVar2 = _eVar3 = _pname[1];
+		} else {
+			var _ptype = digitalData.page.pageCategory.primaryCategory.toLowerCase();
+			_siteSection = _superCategory = _category = _subCategory = _pname[0];
+		}
+
+		if (_pname.length >= 3) {
+			_ptype = "category";
+			_siteSection = _pname[0];
+			_superCategory = _pname[0] + ":" + _pname[1];
+			_category = _subCategory = _pname[0] + ":" + _pname[1] + ":" + _pname[2];
+			_eVar2 = _eVar3 = _pname[1] + ":" + _pname[2];
+		}
+		if (_pname.length >= 4) {
+			_ptype = "subcategory";
+			_siteSection = _pname[0];
+			_superCategory = _pname[0] + ":" + _pname[1];
+			_category = _pname[0] + ":" + _pname[1] + ":" + _pname[2];
+			_subCategory = _pname[0] + ":" + _pname[1] + ":" + _pname[2] + ":" + _pname[3];
+			_eVar2 = _pname[1] + ":" + _pname[2];
+			_eVar3 = _pname[1] + ":" + _pname[2] + ":" + _pname[3];
+		}
+		if (digitalData.page.pageCategory.primaryCategory == "shop") {
+			utag_data["pmc_prop1"] = pmc.removeHTML(_ptype).toLowerCase();
+		} else {
+			utag_data["pmc_prop1"] = digitalData.page.pageCategory.primaryCategory.toLowerCase();
+		}
+
+		utag_data["pmc_prop2"] = pmc.removeHTML(_siteSection).toLowerCase();
 		utag_data["pmc_prop3"] = pmc.removeHTML(_superCategory).toLowerCase();
 		utag_data["pmc_prop4"] = pmc.removeHTML(_category).toLowerCase();
 		utag_data["pmc_prop5"] = pmc.removeHTML(_subCategory).toLowerCase();
-	    
-	    if(digitalData.page.pageCategory.primaryCategory == "shop" || digitalData.page.pageCategory.primaryCategory == "room") {
-	    	utag_data["pmc_eVar1"] = pmc.removeHTML(_eVar1).toLowerCase();
-	    	utag_data["pmc_eVar2"] = pmc.removeHTML(_eVar2).toLowerCase();
-	    	utag_data["pmc_eVar3"] = pmc.removeHTML(_eVar3).toLowerCase();
-	    } else {
-	    	utag_data["pmc_eVar1"] = "";
-	    	utag_data["pmc_eVar2"] = "";
-	    	utag_data["pmc_eVar3"] = "";
-	    }
-                _pname = [];
-	    for(var i=1;typeof utag_data["_pathname" + i.toString()] != "undefined";i++) {
-	      if(utag_data["_pathname" + i.toString()].toLowerCase() != "m" && utag_data["_pathname" + i.toString()] != "") {
-	        _pname.push(utag_data["_pathname" + i.toString()].split(".")[0]);
-	      }
-	    }
-	    return pmc.removeHTML(_pname.join(":")).toLowerCase(); 
-	 // } else {
-	//      try {
-	 //       if (utag_data["pmc_prop18"] == "mobile site") {
-	  //          utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = digitalData.page.pageType;
-	//						return digitalData.page.pageName.toLowerCase();
-	//					}
-	//				} catch(e) {
-	//					;
-	//				}
-	 //}
-	 //return "unknown";
-};
- 
+
+		if (digitalData.page.pageCategory.primaryCategory == "shop" || digitalData.page.pageCategory.primaryCategory == "room") {
+			utag_data["pmc_eVar1"] = pmc.removeHTML(_eVar1).toLowerCase();
+			utag_data["pmc_eVar2"] = pmc.removeHTML(_eVar2).toLowerCase();
+			utag_data["pmc_eVar3"] = pmc.removeHTML(_eVar3).toLowerCase();
+		} else {
+			utag_data["pmc_eVar1"] = "";
+			utag_data["pmc_eVar2"] = "";
+			utag_data["pmc_eVar3"] = "";
+		}
+		_pname = [];
+		for (var i = 1; typeof utag_data["_pathname" + i.toString()] != "undefined"; i++) {
+			if (utag_data["_pathname" + i.toString()].toLowerCase() != "m" && utag_data["_pathname" + i.toString()] != "") {
+				_pname.push(utag_data["_pathname" + i.toString()].split(".")[0]);
+			}
+		}
+		
+		if (digitalData.page.pageCategory.primaryCategory == "recipe" && utag_data["pmc_prop1"] == "pages") {
+			utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "recipe";
+		}
+		
+		return pmc.removeHTML(_pname.join(":")).toLowerCase();
+		// } else {
+		//      try {
+		//       if (utag_data["pmc_prop18"] == "mobile site") {
+		//          utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = digitalData.page.pageType;
+		//						return digitalData.page.pageName.toLowerCase();
+		//					}
+		//				} catch(e) {
+		//					;
+		//				}
+		//}
+		//return "unknown";
+	};
+
 pmc.cartAdd = function(a, b, c) {
 	//console.log(b.data.items && b.data.items.item);
 	//console.log(b.data.items);
@@ -1418,15 +1408,15 @@ pmc.pageView = function() {
 						pmc.pageViewProductDetailsPage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "recipe") {
-						pmc.pageType = pmc.prop1 = "recipe";
-						pmc.pageViewRecipePage();
+						//pmc.pageType = pmc.prop1 = "recipe";
+						//pmc.pageViewRecipePage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "search") {
 						//pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "search";
 						//pmc.pageViewSearchPage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "customer-service") {
-						pmc.pageViewCustomerServicePage();
+						//pmc.pageViewCustomerServicePage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "registry") {
 						pmc.pageViewRegistryPage();

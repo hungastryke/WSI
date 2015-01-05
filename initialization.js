@@ -1007,6 +1007,7 @@ pmc.getBackorderedProductString = function() {
 	}
 }
 
+/*
 pmc.pageViewRegistryPage = function() {
 
 	pmc.setBasePageName();
@@ -1062,7 +1063,7 @@ pmc.pageViewRegistryPage = function() {
 		return;
 	}
 };
-
+*/
 pmc.pageViewWishlistPage = function() {
 	pmc.setBasePageName(); 
 	if (window.location.pathname.match(/\/wishlist\/[A-Za-z0-9]+\//) != null) {
@@ -1193,9 +1194,46 @@ pmc.pageViewInternationalCheckout = function() {
 			}
 		}
 		
-		if ((digitalData.page.pageCategory.primaryCategory == "recipe" || digitalData.page.pageCategory.primaryCategory == "registry") && (utag_data["pmc_prop1"] == "pages" || utag_data["pmc_prop2"] == "pages")) {
+		if ((digitalData.page.pageCategory.primaryCategory == "recipe") && (utag_data["pmc_prop1"] == "pages" || utag_data["pmc_prop2"] == "pages")) {
 			utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "recipe";
 		}
+		
+		if (digitalData.page.pageCategory.primaryCategory == "registry") {
+			if (pmc.removeHTML(_pname.join(":")).toLowerCase().match("registry-list") != null || pmc.removeHTML(_pname.join(":")).toLowerCase().match("completion-list") != null) {
+				utag_data["pmc_event45"] = "event45";
+				utag_data["pmc_eVar9"] = "registry";
+				if (digitalData.x_state.giftGiver == true) {
+					utag_data["pmc_eVar9"] = "registry:registry list gift giver";
+				}
+				if (digitalData.x_state.registrant == true) {
+					utag_data["pmc_eVar9"] = "registry:registry list registrant";
+				}
+				if (digitalData.x_state.completionUser == true) {
+					utag_data["pmc_eVar9"] = "registry:completion program registrant";
+				} 
+			}
+			
+			if (pmc.removeHTML(_pname.join(":")).toLowerCase().match("registry-list") != null) {
+				utag_data["pmc_prop1"] = "registry list"; 
+			}
+			
+			if (pmc.removeHTML(_pname.join(":")).toLowerCase().match("create-registry-confirmation") != null || pmc.pageName.match("congratulations-create") != null) {
+				utag_data["pmc_event44"] = "event44"; 
+			}
+			
+			if (pmc.removeHTML(_pname.join(":")).toLowerCase().match("registry-confirmation") != null) {
+				utag_data["pmc_prop1"] = "add to registry";
+				utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "add item";
+				return ("add item:add to registry");
+			}
+			
+			if (pmc.removeHTML(_pname.join(":")).toLowerCase() == "shoppingcart:confirmation") {
+				utag_data["pmc_prop1"] = "add to cart";
+				utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "add item";
+				return ("add item:add to cart");
+			}
+		}
+		
 		
 		return pmc.removeHTML(_pname.join(":")).toLowerCase();
 		// } else {
@@ -1480,7 +1518,7 @@ pmc.pageView = function() {
 						//pmc.pageViewCustomerServicePage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "registry") {
-						pmc.pageViewRegistryPage();
+						//pmc.pageViewRegistryPage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "wishlist") {
 						pmc.pageViewWishlistPage();

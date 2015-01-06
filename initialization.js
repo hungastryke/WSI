@@ -1201,79 +1201,20 @@ pmc.pageView = function() {
 
 			try {
 				if (digitalData.page && digitalData.page.pageCategory != undefined) {
-
-					//pmc.prop1 = "unknown";
-					//pmc.pageType = "unknown";
-
-					if (digitalData.page.pageCategory.primaryCategory == "shop") {
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "products") {
+					if (digitalData.page.pageCategory.primaryCategory == "products") {
 						pmc.pageType = "product detail";
 						pmc.pageViewProductDetailsPage();
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "recipe") {
-						//pmc.pageType = pmc.prop1 = "recipe";
-						//pmc.pageViewRecipePage();
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "search") {
-						//pmc.pageType = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "search";
-						//pmc.pageViewSearchPage();
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "customer-service") {
-						//pmc.pageViewCustomerServicePage();
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "registry") {
-						//pmc.pageViewRegistryPage();
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "wishlist") {
-						//pmc.pageViewWishlistPage();
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "checkout") {
-						//pmc.pageViewCheckoutPage();
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "shoppingcart") {
-						/*
-						 if (digitalData.page.pageName == "MONOGRAM OPTIONS") {
-						 pmc.pageType = pmc.prop1 = "product personalization";
-						 pmc.pageName = pmc.removeHTML(digitalData.page.pageName).toLowerCase();
-						 pmc.event49 = "event49";
-						 }
-						 */
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "pages") {
-						//pmc.pageViewCustomPage();
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "room") {
-						//pmc.pageViewRoomPage();
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "account") {
-						//pmc.pageType = "account";
-						//pmc.pageViewAccountPage();
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "stores") {
-						//pmc.pageViewStorePage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "internationalcheckout") {
 						pmc.pageViewInternationalCheckout();
 						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "design-studio") {
-						//pmc.pageViewDesignStudioPage();
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "recommendations") {
-						//pmc.pageViewRecommendationsPage();
-						return;
-					} else if (digitalData.page.pageCategory.primaryCategory == "gift") {
-						//pmc.pageViewGiftPage();
-						return;
 					} else {
 						try {
-							//pmc.setBasePageName();
 							utag_data["pmc_pageName"] = pmc.getPageName();
 						} catch(e) {
-							pmc.pageName = "unknown";
+							utag_data["pmc_pageName"] = "unknown";
 						}
 					}
-
 				}
 			} catch (e) {
 				;

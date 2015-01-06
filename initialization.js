@@ -134,7 +134,7 @@ pmc.updateCategoryRefinements = function(c) {
 	    });
 	}
 };
-
+/*
 pmc.setBasePageName = function () {
 	 
 	// parseUri 1.2.2
@@ -221,7 +221,7 @@ pmc.setBasePageName = function () {
 		}
 	}
 };
-
+*/
 pmc.cartReviewProductString = function() {
 	pmc.order = pmc.newOrder();
 	if (digitalData) {
@@ -1088,16 +1088,15 @@ pmc.pageViewWishlistPage = function() {
 	}
 };
 */
+
 pmc.pageViewInternationalCheckout = function() {
-	pmc.pageType = "internationalcheckout";
-	pmc.setBasePageName(); 
-	pmc.eVar4 = "international";
 	if (digitalData.x_transaction) {
 		if (digitalData.x_transaction.orders) {
-			pmc.event58 = "event58";
+			utag_data["pmc_event58"] = "event58";
 			pmc.purchase();
 		}
 	}
+
 };
 
 	pmc.getPageName = function() {
@@ -1571,7 +1570,8 @@ pmc.pageView = function() {
 						return;
 					} else {
 						try {
-							pmc.setBasePageName();
+							//pmc.setBasePageName();
+							utag_data["pmc_pageName"] = pmc.getPageName();
 						} catch(e) {
 							pmc.pageName = "unknown";
 						}

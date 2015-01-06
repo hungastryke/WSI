@@ -1064,6 +1064,7 @@ pmc.pageViewRegistryPage = function() {
 	}
 };
 */
+/*
 pmc.pageViewWishlistPage = function() {
 	pmc.setBasePageName(); 
 	if (window.location.pathname.match(/\/wishlist\/[A-Za-z0-9]+\//) != null) {
@@ -1086,7 +1087,7 @@ pmc.pageViewWishlistPage = function() {
 		pmc.eVar9 = "wishlist:gift giver";
 	}
 };
-
+*/
 pmc.pageViewInternationalCheckout = function() {
 	pmc.pageType = "internationalcheckout";
 	pmc.setBasePageName(); 
@@ -1114,7 +1115,7 @@ pmc.pageViewInternationalCheckout = function() {
 		if (digitalData.page.pageCategory.primaryCategory == "registry") {
 			if (window.location.pathname.match(/\/shoppingcart/) != null) {
 				utag_data["pmc_eVar34"] = window.location.pathname.match(/\/shoppingcart\/[A-Za-z0-9]+\//).toString().replace(/\/shoppingcart\//g, "").replace(/\//g, "");
-			} else {
+			} else if (window.location.pathname.match(/\/registry\/[A-Za-z0-9]+\//) != null){
 				utag_data["pmc_eVar34"] = window.location.pathname.match(/\/registry\/[A-Za-z0-9]+\//).toString().replace(/\/registry\//g, "").replace(/\//g, "");
 			}
 		}
@@ -1217,7 +1218,7 @@ pmc.pageViewInternationalCheckout = function() {
 				utag_data["pmc_prop1"] = "registry list"; 
 			}
 			
-			if (pmc.removeHTML(_pname.join(":")).toLowerCase().match("create-registry-confirmation") != null || pmc.pageName.match("congratulations-create") != null) {
+			if (pmc.removeHTML(_pname.join(":")).toLowerCase().match("create-registry-confirmation") != null || pmc.removeHTML(_pname.join(":")).toLowerCase().match("congratulations-create") != null) {
 				utag_data["pmc_event44"] = "event44"; 
 			}
 			
@@ -1231,6 +1232,14 @@ pmc.pageViewInternationalCheckout = function() {
 				utag_data["pmc_prop1"] = "add to cart";
 				utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "add item";
 				return ("add item:add to cart");
+			}
+		}
+		
+		if (digitalData.page.pageCategory.primaryCategory == "wishlist") {
+			if (window.location.pathname.match(/\/wishlist\/[A-Za-z0-9]+\//) != null) {
+				pmc.wishlistID = window.location.pathname.match(/\/wishlist\/[A-Za-z0-9]+\//).toString().replace(/\/wishlist\//g, "").replace(/\//g, "");
+				pmc.pageName = pmc.pageName.replace(":"+pmc.wishlistID, "");
+				utag_data["pmc_eVar35"] = pmc.wishlistID;
 			}
 		}
 		
@@ -1521,7 +1530,7 @@ pmc.pageView = function() {
 						//pmc.pageViewRegistryPage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "wishlist") {
-						pmc.pageViewWishlistPage();
+						//pmc.pageViewWishlistPage();
 						return;
 					} else if (digitalData.page.pageCategory.primaryCategory == "checkout") {
 						//pmc.pageViewCheckoutPage();

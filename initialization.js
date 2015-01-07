@@ -721,17 +721,6 @@ pmc.wishlistAdd = function(a, b, c) {
 	}
 };
 
-pmc.pageViewKnownPathnames = function() {
-	if (document.location.pathname.match("/checkout/thanks.html") != null && digitalData.x_transaction != null) {
-		pmc.pageName = pmc.pageType = "checkout:order confirmation"
-		pmc.channel = pmc.prop1 = pmc.prop2 = pmc.prop3 = pmc.prop4 = pmc.prop5 = "checkout";
-		pmc.purchase();
-		return true;
-	}
-	
-	return false;
-};
-
 pmc.getBackorderedProductString = function() {
 	pmc.backorder = pmc.newOrder();				
 		if (typeof (digitalData.component) != "undefined") {
@@ -816,11 +805,18 @@ pmc.pageViewInternationalCheckout = function() {
 			}
 		}
 		
+		if (digitalData.page.pageCategory.primaryCategory == "wishlist") {
+			if (window.location.pathname.match(/\/wishlist\/[A-Za-z0-9]+\//) != null) {
+				utag_data["pmc_eVar35"] = window.location.pathname.match(/\/wishlist\/[A-Za-z0-9]+\//).toString().replace(/\/wishlist\//g, "").replace(/\//g, "");
+			}
+		}
+		
 		for (var i = 1; typeof utag_data["_pathname" + i.toString()] != "undefined"; i++) {
 			if (utag_data["_pathname" + i.toString()].toLowerCase() != "m" 
 				&& utag_data["_pathname" + i.toString()] != "" 
 				&& utag_data["_pathname" + i.toString()].split(".").length < 2 
-				&& utag_data["_pathname" + i.toString()] != utag_data["pmc_eVar34"]) {
+				&& utag_data["_pathname" + i.toString()] != utag_data["pmc_eVar34"]
+				&& utag_data["_pathname" + i.toString()] != utag_data["pmc_eVar35"]) {
 				_pname.push(utag_data["_pathname" + i.toString()]);
 			}
 		}
@@ -886,7 +882,8 @@ pmc.pageViewInternationalCheckout = function() {
 		for (var i = 1; typeof utag_data["_pathname" + i.toString()] != "undefined"; i++) {
 			if (utag_data["_pathname" + i.toString()].toLowerCase() != "m" 
 				&& utag_data["_pathname" + i.toString()] != "" 
-				&& utag_data["_pathname" + i.toString()] != utag_data["pmc_eVar34"]) {
+				&& utag_data["_pathname" + i.toString()] != utag_data["pmc_eVar34"]
+				&& utag_data["_pathname" + i.toString()] != utag_data["pmc_eVar35"]) {
 				_pname.push(utag_data["_pathname" + i.toString()].split(".")[0]);
 			}
 		}
@@ -930,15 +927,6 @@ pmc.pageViewInternationalCheckout = function() {
 				return ("add item:add to cart");
 			}
 		}
-		
-		if (digitalData.page.pageCategory.primaryCategory == "wishlist") {
-			if (window.location.pathname.match(/\/wishlist\/[A-Za-z0-9]+\//) != null) {
-				pmc.wishlistID = window.location.pathname.match(/\/wishlist\/[A-Za-z0-9]+\//).toString().replace(/\/wishlist\//g, "").replace(/\//g, "");
-				pmc.pageName = pmc.pageName.replace(":"+pmc.wishlistID, "");
-				utag_data["pmc_eVar35"] = pmc.wishlistID;
-			}
-		}
-		
 		
 		return pmc.removeHTML(_pname.join(":")).toLowerCase();
 		// } else {
@@ -1195,7 +1183,10 @@ pmc.pageView = function() {
 				}
 			}
 
-			if (pmc.pageViewKnownPathnames() == true) {
+			if (document.location.pathname.match("/checkout/thanks.html") != null && digitalData.x_transaction != null) {
+				utag_data["pmc_pageName"] = "checkout:order confirmation"
+				pmc.channel = utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "checkout";
+				pmc.purchase();
 				return;
 			}
 

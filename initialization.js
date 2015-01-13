@@ -385,26 +385,26 @@ pmc.pageViewProductDetailsPage = function() {
 			pmc.event18 = "event18";
 			pmc.prodView = "prodView";
 			if (digitalData.product != undefined && digitalData.product.productID != undefined && digitalData.product.productID.prodID != undefined) {
-				pmc.pageName = "product detail:" + digitalData.product.productID.prodID;
+				utag_data["pmc_pageName"] = "product detail:" + digitalData.product.productID.prodID;
 			}
 
-			pmc.prop1 = "product detail";
-			pmc.prop2 = "product detail";
-			pmc.prop3 = "product detail";
-			pmc.prop4 = "product detail";
-			pmc.prop5 = "product detail";
+			utag_data["pmc_prop1"] = "product detail";
+			utag_data["pmc_prop2"] = "product detail";
+			utag_data["pmc_prop3"] = "product detail";
+			utag_data["pmc_prop4"] = "product detail";
+			utag_data["pmc_prop5"] = "product detail";
 
 			if (digitalData.page.attributes.template == "simple") {
-				pmc.prop1 = "product detail:simple pip";
+				utag_data["pmc_prop1"] = "product detail:simple pip";
 			}
 			if (digitalData.page.attributes.template == "complex") {
-				pmc.prop1 = "product detail:complex pip";
+				utag_data["pmc_prop1"] = "product detail:complex pip";
 			}
 			if (digitalData.page.attributes.template == "upholstery pip") {
-				pmc.prop1 = "product detail:upholstery pip";
+				utag_data["pmc_prop1"] = "product detail:upholstery pip";
 			}
 			if (digitalData.product.productID.prodID == "gift-card" || digitalData.product.productID.prodID == "gift-cards" || digitalData.product.productID.prodID == "pottery-barn-gift-cards") {
-				pmc.prop1 = "product detail:" + digitalData.product.productID.prodID;
+				utag_data["pmc_prop1"] = "product detail:" + digitalData.product.productID.prodID;
 			}
 
 			pmc.pip = pmc.newOrder();
@@ -1660,17 +1660,17 @@ pmc.registerCallbacks = function() {
 							if(b.data.action == 'pagination') {
 								pmc.pageView();
 								utag.view({
-										pmc_pageName : pmc.pageName,
-										pmc_eVar1 : pmc.eVar1,
-										pmc_eVar2 : pmc.eVar2,
-										pmc_eVar3 : pmc.eVar3,
+										pmc_pageName : utag_data["pmc_pageName"],
+										pmc_eVar1 : utag_data["pmc_eVar1"],
+										pmc_eVar2 : utag_data["pmc_eVar2"],
+										pmc_eVar3 : utag_data["pmc_eVar3"],
 										pmc_eVar41 : pmc.eVar41,
 										pmc_eVar42 : pmc.eVar42,
-										pmc_prop1 : pmc.prop1,
-										pmc_prop2 : pmc.prop2,
-										pmc_prop3 : pmc.prop3,
-										pmc_prop4 : pmc.prop4,
-										pmc_prop5 : pmc.prop5,
+										pmc_prop1 : utag_data["pmc_prop1"],
+										pmc_prop2 : utag_data["pmc_prop2"],
+										pmc_prop3 : utag_data["pmc_prop3"],
+										pmc_prop4 : utag_data["pmc_prop4"],
+										pmc_prop5 : utag_data["pmc_prop5"],
 										pmc_prop6 : pmc.prop6,
 										pmc_prop7 : pmc.prop7,
 										pmc_prop20 : b.data.newPage,

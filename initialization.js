@@ -1573,7 +1573,8 @@ pmc.registerCallbacks = function() {
 					pmc_eVar18 : utag_data["pmc_eVar18"],
 					pmc_prop18 : utag_data["pmc_prop18"]
 				});
-				if (b.name == "addChild" && b.target == "international shipping to") {
+			}
+			if (b.name == "addChild" && b.target == "international shipping to") {
 				utag.view({
 					pmc_pageName : b.target,
 					pmc_prop1 : "overlay",

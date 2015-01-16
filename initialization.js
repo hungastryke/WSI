@@ -1382,7 +1382,7 @@ pmc.overlayPageView = function(a, b, c, overlayName, prop1) {
 pmc.registerCallbacks = function() {
 
 	WSI.dataLayer.registerCallback(function(a, b, c) {
-		//console.log("Callback: ", a, b, c);
+		console.log("Callback: ", a, b, c);
 		if(typeof(s) != 'undefined' && typeof(s) == 'object') {
 			if (s.events) {
 				//console.log("s.events " + s.events);
@@ -1550,6 +1550,51 @@ pmc.registerCallbacks = function() {
 			}
 			if (b.name == "addChild" && b.target == "Monogram Preview Overlay") {
 				pmc.personalizationStartCallback(a, b, c);
+			}
+			if (b.name == "addChild" && b.target == "monogram guide") {
+				utag.view({
+					pmc_pageName : b.target,
+					pmc_prop1 : "popup",
+					pmc_prop2 : "monogram-options",
+					pmc_prop3 : "monogram-options",
+					pmc_prop4 : "monogram-options",
+					pmc_prop5 : "monogram-options",
+					pmc_event50 : "",
+					pmc_event47 : "",
+					pmc_prop14 : "",
+					pmc_eVar21 : "",
+					pmc_prop7 : "D=v42",
+					pmc_eVar42 : "OVERLAY",
+					pmc_prop6 : "D=v41",
+					pmc_eVar41 : "MONOGRAM GUIDE",
+					pmc_products : "",
+					pmc_event42 : null,
+					pmc_event41 : null,
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
+				});
+				if (b.name == "addChild" && b.target == "international shipping to") {
+				utag.view({
+					pmc_pageName : b.target,
+					pmc_prop1 : "overlay",
+					pmc_prop2 : "international",
+					pmc_prop3 : "international",
+					pmc_prop4 : "international",
+					pmc_prop5 : "international",
+					pmc_event50 : "",
+					pmc_event47 : "",
+					pmc_prop14 : "",
+					pmc_eVar21 : "",
+					pmc_prop7 : "D=v42",
+					pmc_eVar42 : "INTERNATIONAL",
+					pmc_prop6 : "D=v41",
+					pmc_eVar41 : "INTERNATIONAL: SHIPPING TO",
+					pmc_products : "",
+					pmc_event42 : null,
+					pmc_event41 : null,
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
+				});
 			}
 			
 			//console.log("|||****");

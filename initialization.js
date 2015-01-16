@@ -1709,6 +1709,20 @@ pmc.registerCallbacks = function() {
 						}
 					}
 				}
+				if(typeof b.data.item != "undefined") {
+					if(b.data.item == "EMAIL SIGNUP : EMAIL FORM") {
+						utag.link({
+								pmc_event32 : "event32",
+								pmc_eVar38 : "Personalized Content Widget",
+								pmc_eVar43 : b.data.email,
+								link_text : "element interaction",
+								pmc_products : "",
+								pmc_prop19 : "",
+								pmc_eVar18 : utag_data["pmc_eVar18"],
+								pmc_prop18 : utag_data["pmc_prop18"]
+							});
+					}
+				}
 			}
 			
 			if (b.name == "updateLayer") {

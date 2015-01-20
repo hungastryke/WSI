@@ -1,4 +1,5 @@
 pmc = {};
+/*
 pmc.searchToJSON = function() {
 	try {
 		var rep = {
@@ -21,7 +22,7 @@ pmc.searchToJSON = function() {
 		return {};
 	}
 };
-
+*/
 pmc.removeHTML = function(str) {
 	try {
 		var div = document.createElement('div');
@@ -382,7 +383,7 @@ pmc.setSearchResultType = function() {
 pmc.pageViewProductDetailsPage = function() {
  
 		if (pmc.eVar42 != "M:PIP INTERSTITIAL") {
-			pmc.event18 = "event18";
+			utag_data["pmc_event18"] = "event18";
 			pmc.prodView = "prodView";
 			if (digitalData.product != undefined && digitalData.product.productID != undefined && digitalData.product.productID.prodID != undefined) {
 				utag_data["pmc_pageName"] = "product detail:" + digitalData.product.productID.prodID;
@@ -452,7 +453,7 @@ pmc.pageViewProductDetailsPage = function() {
 			if (typeof (digitalData.product.attributes) != "undefined") {
 				if (typeof (digitalData.product.attributes.persistentIDs) != "undefined") {
 					if (digitalData.product.attributes.persistentIDs.length > 0) {
-						pmc.event19 = "event19";
+						utag_data["pmc_event19"] = "event19";
 						
 						for (var i = 0; i < digitalData.product.attributes.persistentIDs.length; i++) {
 	
@@ -513,6 +514,7 @@ pmc.pageViewProductDetailsPage = function() {
 				utag_data["pmc_products"] = pmc.productString = pmc.getProductString(pmc.pip.orderItems);
 			}
 
+			/*
 			if (pmc.urlVariables.words != undefined && pmc.urlVariables.words != null && pmc.urlVariables.words != "") {
 				// PIP from a redirected search:
 				pmc.prop9 = pmc.eVar27 = pmc.urlVariables.words.toLowerCase();
@@ -523,6 +525,7 @@ pmc.pageViewProductDetailsPage = function() {
 				pmc.prop22 = pmc.eVar51 = "cqs";
 				pmc.eVar9 = "search:cqs search";
 			}
+			*/
 		} 
 };
 
@@ -1163,7 +1166,7 @@ pmc.pageView = function() {
 	//console.log(digitalData);
 	if ( typeof digitalData != "undefined") {
 
-		pmc.urlVariables = pmc.searchToJSON();
+		//pmc.urlVariables = pmc.searchToJSON();
 
 		if (digitalData.page && digitalData.page.attributes != undefined) {
 

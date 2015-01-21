@@ -1600,6 +1600,29 @@ pmc.registerCallbacks = function() {
 					pmc_prop18 : utag_data["pmc_prop18"]
 				});
 			}
+			if (b.name == "addChild" && b.target == "international product eligibility") {
+				utag.view({
+					pmc_pageName : b.target,
+					pmc_prop1 : "overlay",
+					pmc_prop2 : "customer-service",
+					pmc_prop3 : "customer-service",
+					pmc_prop4 : "customer-service",
+					pmc_prop5 : "customer-service",
+					pmc_event50 : "",
+					pmc_event47 : "",
+					pmc_prop14 : "",
+					pmc_eVar21 : "",
+					pmc_prop7 : "D=v42",
+					pmc_eVar42 : "INTL",
+					pmc_prop6 : "D=v41",
+					pmc_eVar41 : "INTL: PRODUCT ELIGIBILITY OVERLAY",
+					pmc_products : "",
+					pmc_event42 : null,
+					pmc_event41 : null,
+					pmc_eVar18 : utag_data["pmc_eVar18"],
+					pmc_prop18 : utag_data["pmc_prop18"]
+				});
+			}
 			
 			//console.log("|||****");
 			//console.log("|||****"+b.name);

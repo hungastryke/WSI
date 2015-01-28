@@ -1385,7 +1385,7 @@ pmc.overlayPageView = function(a, b, c, overlayName, prop1) {
 pmc.registerCallbacks = function() {
 
 	WSI.dataLayer.registerCallback(function(a, b, c) {
-		console.log("Callback: ", a, b, c);
+		//console.log("Callback: ", a, b, c);
 		if(typeof(s) != 'undefined' && typeof(s) == 'object') {
 			if (s.events) {
 				//console.log("s.events " + s.events);

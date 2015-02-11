@@ -902,6 +902,19 @@ pmc.pageViewInternationalCheckout = function() {
 				_pname.push(utag_data["_pathname" + i.toString()].split(".")[0]);
 			}
 		}
+		
+		if(typeof digitalData.page.pageCategory != "undefined") {
+			if (digitalData.page.pageCategory.primaryCategory == "shop") {
+				if ( typeof window.location.hostname.match(/potterybarnkids.com/i) != "undefined" && window.location.hostname.match(/potterybarnkids.com/i) != null && window.location.hostname.match(/potterybarnkids.com/i).length > 0) {
+					if ( typeof _pname[1] != "undefined" && (_pname[1] == "baby" || _pname[1] == "kids")) {
+						;
+					} else {
+						_pname.splice(1, 0, "all");
+					}
+				}
+			}
+		}
+		
 		if(typeof digitalData.page.pageCategory != "undefined") {
 			if ((digitalData.page.pageCategory.primaryCategory == "recipe") && (utag_data["pmc_prop1"] == "pages" || utag_data["pmc_prop2"] == "pages")) {
 				utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "recipe";
@@ -1833,6 +1846,7 @@ pmc.registerCallbacks = function() {
 					});
 				}
 		    }
+		    /*
 		    if (b.name === "personalizedResponse" && b.data && 
 		    		b.data.placements && b.data.placements.length > 0 ) {
 	    		var placements = b.data.placements,
@@ -1857,6 +1871,7 @@ pmc.registerCallbacks = function() {
 	    		utag_data["pmc_event71"] = "event71";
 	    		utag_data["pmc_eVar71"] = "TEST/CONTROL";
 	    	}
+	    	*/
 		}
 	}, true);
 };

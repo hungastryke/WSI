@@ -405,7 +405,8 @@ pmc.pageViewProductDetailsPage = function() {
 				utag_data["pmc_prop1"] = "product detail:upholstery pip";
 			}
 			if (digitalData.product.productID.prodID == "gift-card" || digitalData.product.productID.prodID == "gift-cards" || digitalData.product.productID.prodID == "pottery-barn-gift-cards") {
-				utag_data["pmc_prop1"] = "product detail:" + digitalData.product.productID.prodID;
+				//utag_data["pmc_prop1"] = "product detail:" + digitalData.product.productID.prodID;
+				utag_data["pmc_prop1"] = "product detail:gift card"
 			}
 
 			pmc.pip = pmc.newOrder();
@@ -960,11 +961,7 @@ pmc.pageViewInternationalCheckout = function() {
 				}
 			}
 		}
-		if (typeof _pname[_pname.length-1] != undefined) {
-			if(_pname[_pname.length-1].toLowerCase() == "gift-cards" || _pname[_pname.length-1].toLowerCase() == "pottery-barn-gift-cards") {
-				utag_data["pmc_prop1"] = "product detail:gift card";
-			}
-		}
+		
 		return pmc.removeHTML(_pname.join(":")).toLowerCase();
 		// } else {
 		//      try {

@@ -920,6 +920,10 @@ pmc.pageViewInternationalCheckout = function() {
 				utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "recipe";
 			}
 			
+			if ((digitalData.page.pageCategory.primaryCategory == "stores")) {
+				utag_data["pmc_prop5"] = utag_data["pmc_prop4"];
+			}
+			
 			if (digitalData.page.pageCategory.primaryCategory == "registry") {
 				if (pmc.removeHTML(_pname.join(":")).toLowerCase().match("registry-list") != null || pmc.removeHTML(_pname.join(":")).toLowerCase().match("completion-list") != null) {
 					utag_data["pmc_event45"] = "event45";

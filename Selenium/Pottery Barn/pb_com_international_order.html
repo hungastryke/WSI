@@ -43,7 +43,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id='subCatListContainer']/ul/li[3]/a/span</td>
+	<td>css=span.product-name</td>
 	<td></td>
 </tr>
 <tr>
@@ -72,93 +72,78 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__FIRST_NAME_id</td>
-	<td>brandon</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__LAST_NAME_id</td>
+	<td>selectWindow</td>
+	<td>name=envoy</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__LAST_NAME_id</td>
-	<td>stewart</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__ADDRESS1_id</td>
-	<td></td>
+	<td>css=input[name=&quot;given-name&quot;]</td>
+	<td>Brandon</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__ADDRESS1_id</td>
-	<td>11911 Ne 1st St</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__CITY_id</td>
-	<td></td>
+	<td>css=input[name=&quot;family-name&quot;]</td>
+	<td>Stewart</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__CITY_id</td>
-	<td>Calgary</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__POSTAL_CODE_id</td>
-	<td></td>
+	<td>css=input[name=&quot;address-line1&quot;]</td>
+	<td>11911 NE 1st st</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__POSTAL_CODE_id</td>
+	<td>css=input[name=&quot;city&quot;]</td>
+	<td>Alberta</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=input[name=&quot;postal-code&quot;]</td>
 	<td>T1X 0L3</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__PHONE_PRIMARY_id</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__PHONE_PRIMARY_id</td>
+	<td>css=input[name=&quot;tel&quot;]</td>
 	<td>4255558855</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>css=input[name=&quot;email&quot;]</td>
+	<td>hwd@gmail.com</td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__EMAIL_id</td>
+	<td>css=#payment-method-cc</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=formId:fld_SHIPPING_ADDRESS__EMAIL_id</td>
-	<td>bstewart@pointmarc.com</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>formId:fld_PAYMENT_INFORMATION__PAYMENT_METHOD_id:0</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=formId:fld_PAYMENT_INFORMATION__CARD_NUMBER_id</td>
+	<td>css=#cc-num</td>
 	<td>4397078180002445</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>formId:fld_PAYMENT_INFORMATION__EXPIRATION_MONTH_id</td>
-	<td>12</td>
+	<td>css=#cc-exp-month</td>
+	<td>label=4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>css=#cc-exp-year</td>
+	<td>label=2018</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=formId:fld_PAYMENT_INFORMATION__SECURITY_CODE_id</td>
+	<td>css=#cc-sec-num</td>
 	<td>111</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>id=formId:submitBtnId</td>
+	<td>click</td>
+	<td>css=#submit-order-btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>deleteAllVisibleCookies</td>
+	<td></td>
 	<td></td>
 </tr>
 </tbody></table>

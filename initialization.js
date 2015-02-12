@@ -960,7 +960,11 @@ pmc.pageViewInternationalCheckout = function() {
 				}
 			}
 		}
-		
+		if (typeof _pname[_pname.length-1] != undefined) {
+			if(_pname[_pname.length-1].toLowerCase() == "gift-cards" || _pname[_pname.length-1].toLowerCase() == "pottery-barn-gift-cards") {
+				utag_data["pmc_prop1"] = "product detail:gift card";
+			}
+		}
 		return pmc.removeHTML(_pname.join(":")).toLowerCase();
 		// } else {
 		//      try {

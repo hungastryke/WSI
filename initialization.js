@@ -1,28 +1,5 @@
 pmc = {};
-/*
-pmc.searchToJSON = function() {
-	try {
-		var rep = {
-			'?' : '{"',
-			'=' : '":"',
-			'&' : '","'
-		};
 
-		var s_searchToJSON = document.location.search.replace(/[\?]+[\&]+/g, "?");
-		if ((s_searchToJSON.match(/\&$/gi)) != null) {
-			s_searchToJSON = s_searchToJSON.substring(0, s_searchToJSON.length - 1);
-		}
-		s_searchToJSON = s_searchToJSON.replace(/[\&]+/g, "&");
-		s_searchToJSON = s_searchToJSON.replace(/[\?\=\&]/g, function(r) {
-			return rep[r];
-		});
-
-		return JSON.parse(s_searchToJSON.length ? s_searchToJSON + '"}' : "{}");
-	} catch (e) {
-		return {};
-	}
-};
-*/
 pmc.removeHTML = function(str) {
 	try {
 		var div = document.createElement('div');
@@ -346,7 +323,7 @@ pmc.purchase = function() {
 		pmc.eVar8 = pmc.orders[0].eVar8;
 		pmc.eVar5 = pmc.orders[0].eVar5;
 		pmc.eVar6 = pmc.orders[0].eVar6;
-		pmc.eVar34 = pmc.orders[0].eVar34;
+		utag_data["pmc_eVar34"] = pmc.orders[0].eVar34;
 		utag_data["pmc_eVar43"] = pmc.orders[0].eVar43;
 		pmc.event36 = pmc.orders[0].event36;
 
@@ -887,6 +864,11 @@ pmc.pageViewInternationalCheckout = function() {
 				utag_data["pmc_eVar1"] = pmc.removeHTML(_eVar1).toLowerCase();
 				utag_data["pmc_eVar2"] = pmc.removeHTML(_eVar2).toLowerCase();
 				utag_data["pmc_eVar3"] = pmc.removeHTML(_eVar3).toLowerCase();
+				// ID 3232
+				if (digitalData.page.pageCategory.primaryCategory == "room") {
+					utag_data["pmc_eVar2"] = "room:" + utag_data["pmc_eVar2"];
+					utag_data["pmc_eVar3"] = "room:" + utag_data["pmc_eVar3"];
+				}
 			} else {
 				utag_data["pmc_eVar1"] = "";
 				utag_data["pmc_eVar2"] = "";
@@ -912,6 +894,26 @@ pmc.pageViewInternationalCheckout = function() {
 					} else {
 						_pname.splice(1, 0, "all");
 					}
+				}
+			}
+			
+			// ID 3228
+			if(typeof digitalData.page.pageCategory.categories != "undefined") {
+			  if(digitalData.page.pageCategory.categories.toString().match(/design-lab/) != null) {
+			    utag_data["pmc_prop1"] = "shop"; 
+			  }
+			}
+			
+			// ID 3232
+			if(utag_data["pmc_prop2"] == "room") {
+				utag_data["pmc_prop1"] = utag_data["pmc_eVar1"] = utag_data["pmc_prop3"];
+			}
+			
+			// ID 3235
+			if(document.location.hostname.match(/pbteen/) != null) {
+				if(utag_data["pmc_prop3"] == "shop:gifts") {
+					utag_data["pmc_prop1"] = "shop";
+					utag_data["pmc_eVar1"] = "gifts"
 				}
 			}
 		}

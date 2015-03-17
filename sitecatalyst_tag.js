@@ -2,7 +2,7 @@
 Copyright 1996-2013 Adobe, Inc. All Rights Reserved
 More info available at http://www.omniture.com */
 /************************ ADDITIONAL FEATURES ************************
-     Version 4.01
+     Version 4.02
 */
 
 var s_account="##UTVARconfig_reportsuite##";
@@ -34,7 +34,7 @@ s.s_codeVersion="4.01"
 s.trackDownloadLinks=true
 s.trackExternalLinks=true
 s.trackInlineStats=true
-s.linkInternalFilters="javascript:,williams-sonoma.com,potterybarn.com,potterybarnkids.com,pbteen.com,westelm.com,markandgraham.com,rejuvenation.com,cultivation.com,ab.mgimgs.com,rk.mgimgs.com,ab.pbimgs.com,rk.pbimgs.com,ab.pkimgs.com,rk.pkimgs.com,ab.ptimgs.com,rk.ptimgs.com,ab.weimgs.com,rk.weimgs.com,ab.wsimgs.com,rk.wsimgs.com,williams-sonoma.cashstar.com,potterybarn.cashstar.com,potterybarnkids.cashstar.com,pbteen.cashstar.com,westelm.cashstar.com,markandgraham.cashstar.com,recs.richrelevance.com";
+s.linkInternalFilters="javascript:,williams-sonoma.com,potterybarn.com,potterybarnkids.com,pbteen.com,westelm.com,markandgraham.com,rejuvenation.com,cultivation.com,ab.mgimgs.com,rk.mgimgs.com,ab.pbimgs.com,rk.pbimgs.com,ab.pkimgs.com,rk.pkimgs.com,ab.ptimgs.com,rk.ptimgs.com,ab.weimgs.com,rk.weimgs.com,ab.wsimgs.com,rk.wsimgs.com,williams-sonoma.cashstar.com,potterybarn.cashstar.com,potterybarnkids.cashstar.com,pbteen.cashstar.com,westelm.cashstar.com,markandgraham.cashstar.com,recs.richrelevance.com,-m.cashstar.com";
 s.linkLeaveQueryString=false
 s.linkTrackVars="None"
 s.linkTrackEvents="None"
@@ -174,7 +174,7 @@ try {
 	if(!s.prop19||s.prop19=='no value')s.prop26="";
 	
 	//pkey from search
-	if(!s.eVar30&&s.getQueryParam('cm_src').indexOf('PRODUCTSEARCH')>-1){
+	if(!s.eVar30&&(s.getQueryParam('cm_src').indexOf('PRODUCTSEARCH')>-1||s.getQueryParam('cm_src').indexOf('CQS')>-1)){
 	s.eVar30=s.getQueryParam('pkey');
 	}
 	if (!s.eVar30 && s.events && s.events.indexOf('prodView') > -1) {

@@ -141,6 +141,14 @@ pmc.cartReviewProductString = function() {
 															 
 												utag_data["pmc_event56"] = "event56";
 												
+												if(typeof diffDays != "undefined" && diffDays > 0) {
+													utag_data["pmc_event74"] = "event74";
+													orderItem.purchaseIncrementorEvents.push({
+														"eventName" : "event74",
+														"value" : diffDays
+													});
+												}
+			
 												orderItem.purchaseIncrementorEvents.push({
 													"eventName" : "event56",
 													"value" : 1
@@ -720,6 +728,14 @@ pmc.getBackorderedProductString = function() {
 							var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 	
 							utag_data["pmc_event56"] = "event56";
+							
+							if(typeof diffDays != "undefined" && diffDays > 0) {
+								utag_data["pmc_event74"] = "event74";
+								orderItem.purchaseIncrementorEvents.push({
+									"eventName" : "event74",
+									"value" : diffDays
+								});
+							}							
 							
 							orderItem.description = digitalData.component[j].attributes.groupId;
 							orderItem.itemNumber = digitalData.component[j].attributes.sku;
@@ -1813,13 +1829,25 @@ pmc.registerCallbacks = function() {
 								var d1 = new Date(); 
 								var timeDiff = Math.abs(d2.getTime() - d1.getTime());
 								var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-								utag.link({
-									pmc_event56 : "event56",
-									link_text : "backorder date viewed",
-									pmc_products : ";" + b.data.data.groupId + ";;;event56=1;eVar33=" + b.data.data.sku + "|eVar46=" + diffDays,
-									pmc_eVar18 : utag_data["pmc_eVar18"],
-									pmc_prop18 : utag_data["pmc_prop18"]
-								});
+								
+								if(typeof diffDays != "undefined" && diffDays > 0) {
+									utag.link({
+										pmc_event56 : "event56",
+										pmc_event74 : "event74",
+										link_text : "backorder date viewed",
+										pmc_products : ";" + b.data.data.groupId + ";;;event56=1|event74=" + diffDays + ";eVar33=" + b.data.data.sku + "|eVar46=" + diffDays,
+										pmc_eVar18 : utag_data["pmc_eVar18"],
+										pmc_prop18 : utag_data["pmc_prop18"]
+									});
+								} else {
+									utag.link({
+										pmc_event56 : "event56",
+										link_text : "backorder date viewed",
+										pmc_products : ";" + b.data.data.groupId + ";;;event56=1;eVar33=" + b.data.data.sku + "|eVar46=" + diffDays,
+										pmc_eVar18 : utag_data["pmc_eVar18"],
+										pmc_prop18 : utag_data["pmc_prop18"]
+									});									
+								}
 							}
 						}
 					}

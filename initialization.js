@@ -335,12 +335,17 @@ pmc.purchase = function() {
 		utag_data["pmc_eVar43"] = pmc.orders[0].eVar43;
 		pmc.event36 = pmc.orders[0].event36;
 
-		if (digitalData.page.attributes.expressCheckout === true) {
-			pmc.eVar4 = "express";
-		} else if (digitalData.x_user && digitalData.x_user.profile) {
-			pmc.eVar4 = "authenticated regular";
-		} else {
-			pmc.eVar4 = "guest regular";
+		if(typeof digitalData.page.attributes.checkoutType != "undefined") {
+			if(digitalData.page.attributes.checkoutType == "express" || digitalData.page.attributes.checkoutType == "visa"){
+				utag_data["pmc_eVar4"] = digitalData.page.attributes.checkoutType;
+			}
+			if(digitalData.page.attributes.checkoutType == "normal"){
+				if (digitalData.x_user && digitalData.x_user.profile) {
+					utag_data["pmc_eVar4"] = 'authenticated regular';
+				} else {
+					utag_data["pmc_eVar4"] = 'guest regular';
+				}
+			}	
 		}
 	}
 	return;

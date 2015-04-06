@@ -339,7 +339,7 @@ pmc.purchase = function() {
 			if(digitalData.page.attributes.checkoutType == "express" || digitalData.page.attributes.checkoutType == "visa"){
 				utag_data["pmc_eVar4"] = digitalData.page.attributes.checkoutType;
 			}
-			if(digitalData.page.attributes.checkoutType == "normal"){
+			if(digitalData.page.attributes.checkoutType == "regular"){
 				if (digitalData.x_user && digitalData.x_user.profile) {
 					utag_data["pmc_eVar4"] = 'authenticated regular';
 				} else {

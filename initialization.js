@@ -517,6 +517,10 @@ pmc.pageViewProductDetailsPage = function() {
 				pmc.eVar9 = "search:cqs search";
 			}
 			*/
+			
+			if(digitalData.page.attributes.searchPfm != "undefined" && digitalData.page.attributes.searchPfm != "") {
+				utag_data["pmc_eVar9"] = digitalData.page.attributes.searchPfm;
+			}
 		} 
 };
 

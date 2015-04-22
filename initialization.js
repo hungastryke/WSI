@@ -948,6 +948,10 @@ pmc.pageViewInternationalCheckout = function() {
 				utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "recipe";
 			}
 			
+			if ((digitalData.page.pageCategory.primaryCategory == "recipe") && typeof digitalData.page.pageCategory.categories == "undefined") {
+				utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "recipe detail";
+			}
+			
 			if ((digitalData.page.pageCategory.primaryCategory == "stores")) {
 				utag_data["pmc_prop5"] = utag_data["pmc_prop4"];
 			}

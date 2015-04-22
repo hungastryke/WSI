@@ -1446,7 +1446,13 @@ pmc.registerCallbacks = function() {
 			//console.log(b.target);
 			//console.log(b.data.category);
 			//console.log(b.data.item);
-			 
+			if(b.name == "dataLayerReady") {
+				try {
+					pmc.pageView();
+				} catch(e) {
+					;
+				}
+			}
 			if (b.name == "addToCart") {
 				pmc.cartAdd(a, b, c);
 			}

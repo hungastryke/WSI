@@ -1307,12 +1307,14 @@ pmc.quickLook = function(a, b, c) {
 		pmc_eVar41 : c.page.attributes.cmPageId,
 		pmc_eVar18 : utag_data["pmc_eVar18"],
 		pmc_prop18 : utag_data["pmc_prop18"],
-		page_type : "product"
+		page_type : "product",
+		product_sku : [groupID]
 	});
 };
 
 pmc.quickBuy = function(a, b, c) {
 	var groupID = c.product.productID.prodID;
+	
 	utag.view({
 		pmc_event42 : "event42",
 		pmc_prodView : "prodView",
@@ -1330,8 +1332,8 @@ pmc.quickBuy = function(a, b, c) {
 		pmc_eVar41 : c.page.attributes.cmPageId,
 		pmc_eVar18 : utag_data["pmc_eVar18"],
 		pmc_prop18 : utag_data["pmc_prop18"],
-		page_type : "product"
-		
+		page_type : "product",
+		product_sku : [groupID]
 	});
 };
 

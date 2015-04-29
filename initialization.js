@@ -1015,6 +1015,8 @@ pmc.cartAdd = function(a, b, c) {
 	if (b.data.items && b.data.items.item) {
 		var items = new Array();
 		var groupIds = new Array(); 
+		var unit_prices = new Array();
+		var quantities = new Array();  
 		//console.log(b.data.items.item.length);
 		for (var i = 0; i < b.data.items.item.length; i++) {
 			var item = pmc.newOrderItem();
@@ -1031,6 +1033,8 @@ pmc.cartAdd = function(a, b, c) {
 				"eventName" : "event69",
 				"value" : b.data.items.item[i].quantity
 			});
+			quantities.push(b.data.items.item[i].quantity);
+			
 			item.description = pmc.removeHTML(b.data.items.item[i].groupId);
 			groupIds.push(item.description);
 			//b.items.item[i].membership
@@ -1047,6 +1051,8 @@ pmc.cartAdd = function(a, b, c) {
 				"evarName" : "eVar33",
 				"value" : item.itemNumber
 			});
+			
+			unit_prices.push(pmc.roundValue(item.itemTotal, 2));
 
 			items.push(item);
 			
@@ -1077,6 +1083,8 @@ pmc.cartAdd = function(a, b, c) {
 						pmc_scOpen : "scOpen",
 						pmc_products : pmc.getProductString(items),
 						ta_groupIds : groupIds,
+						ta_unit_prices : unit_prices,
+						ta_quantities : quantities,
 						pmc_eVar18 : utag_data["pmc_eVar18"],
 						pmc_prop18 : utag_data["pmc_prop18"]
 					});
@@ -1091,6 +1099,8 @@ pmc.cartAdd = function(a, b, c) {
 						pmc_scOpen : "scOpen",
 						pmc_products : pmc.getProductString(items),
 						ta_groupIds : groupIds,
+						ta_unit_prices : unit_prices,
+						ta_quantities : quantities,
 						pmc_eVar18 : utag_data["pmc_eVar18"],
 						pmc_prop18 : utag_data["pmc_prop18"]
 					});
@@ -1105,6 +1115,8 @@ pmc.cartAdd = function(a, b, c) {
 						pmc_event70 : "event70",
 						pmc_products : pmc.getProductString(items),
 						ta_groupIds : groupIds,
+						ta_unit_prices : unit_prices,
+						ta_quantities : quantities,
 						pmc_eVar18 : utag_data["pmc_eVar18"],
 						pmc_prop18 : utag_data["pmc_prop18"]
 					});
@@ -1118,6 +1130,8 @@ pmc.cartAdd = function(a, b, c) {
 						pmc_event70 : "event70",
 						pmc_products : pmc.getProductString(items),
 						ta_groupIds : groupIds,
+						ta_unit_prices : unit_prices,
+						ta_quantities : quantities,
 						pmc_eVar18 : utag_data["pmc_eVar18"],
 						pmc_prop18 : utag_data["pmc_prop18"]
 					});
@@ -1133,6 +1147,8 @@ pmc.cartAdd = function(a, b, c) {
 					pmc_event70 : "event70",
 					pmc_products : pmc.getProductString(items),
 					ta_groupIds : groupIds,
+					ta_unit_prices : unit_prices,
+					ta_quantities : quantities,
 					pmc_eVar18 : utag_data["pmc_eVar18"],
 					pmc_prop18 : utag_data["pmc_prop18"]
 				});
@@ -1145,6 +1161,8 @@ pmc.cartAdd = function(a, b, c) {
 					pmc_event70 : "event70",
 					pmc_products : pmc.getProductString(items),
 					ta_groupIds : groupIds,
+					ta_unit_prices : unit_prices,
+					ta_quantities : quantities,
 					pmc_eVar18 : utag_data["pmc_eVar18"],
 					pmc_prop18 : utag_data["pmc_prop18"]
 				});

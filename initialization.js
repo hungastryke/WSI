@@ -1106,7 +1106,7 @@ pmc.cartAdd = function(a, b, c) {
 				"value" : item.itemNumber
 			});
 			
-			unit_prices.push(pmc.roundValue(item.itemTotal, 2));
+			unit_prices.push(b.data.totalPrice);
 
 			items.push(item);
 			

@@ -1106,7 +1106,7 @@ pmc.cartAdd = function(a, b, c) {
 				"value" : item.itemNumber
 			});
 			
-			unit_prices.push(b.data.totalPrice);
+			unit_prices.push(b.data.items.item[i].price);
 
 			items.push(item);
 			

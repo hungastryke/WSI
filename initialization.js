@@ -208,6 +208,60 @@ pmc.cartReviewProductString = function() {
 	}
 };
 
+pmc.backorderInterstitialProductString = function () {
+  pmc.order = pmc.newOrder();
+  if (digitalData) {
+    if (typeof digitalData.component != 'undefined') {
+      for (var i = 0; i < digitalData.component.length; i++) {
+        if (typeof digitalData.component[i].componentID.componentID != 'undefined') {
+          if (typeof digitalData.component[i].componentID.componentID.toLowerCase() == 'view availability' && typeof digitalData.component[i].attributes != 'undefined') {
+            var item = digitalData.component[i].attributes;
+            var orderItem = pmc.newOrderItem();
+            orderItem.description = item.groupID;
+            orderItem.purchaseMerchandisingEvars.push({
+              'evarName': 'eVar33',
+              'value': item.sku
+            });
+            if (typeof (item.backorder) != 'undefined') {
+              var d2 = new Date(item.backorder);
+              var d1 = new Date();
+              var timeDiff = Math.abs(d2.getTime() - d1.getTime());
+              var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+              utag_data['pmc_event56'] = 'event56';
+              if (typeof diffDays != 'undefined' && diffDays > 0) {
+                utag_data['pmc_event74'] = 'event74';
+                orderItem.purchaseIncrementorEvents.push({
+                  'eventName': 'event74',
+                  'value': diffDays
+                });
+              }
+              orderItem.purchaseIncrementorEvents.push({
+                'eventName': 'event56',
+                'value': 1
+              });
+              orderItem.purchaseMerchandisingEvars.push({
+                'evarName': 'eVar45',
+                'value': 'backordered'
+              });
+              orderItem.purchaseMerchandisingEvars.push({
+                'evarName': 'eVar46',
+                'value': diffDays
+              });
+            }
+            pmc.order.orderItems.push(orderItem);
+          }
+        }
+      }
+    }
+  }
+  if (pmc.order.orderItems.length > 0) {
+    return pmc.getProductString(pmc.order.orderItems);
+  } else {
+    return '';
+  }
+};
+
+
 pmc.purchase = function() {
 
 	if (digitalData) {
@@ -1542,7 +1596,11 @@ pmc.registerCallbacks = function() {
 					pmc_event42 : null,
 					pmc_event41 : null,
 					pmc_eVar18 : utag_data["pmc_eVar18"],
-					pmc_prop18 : utag_data["pmc_prop18"]
+					pmc_prop18 : utag_data["pmc_prop18"],
+					ta_groupIds : utag_data["ta_groupIds"],
+					ta_unit_prices : utag_data["ta_unit_prices"],
+					ta_quantities : utag_data["ta_quantities"],
+					ta_update_cart_type : utag_data["ta_update_cart_type"]
 				});
 			}
 			if (b.name == "addChild" && b.target == "WISHLIST: ITEM ADDED") {

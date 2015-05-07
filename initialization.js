@@ -214,10 +214,10 @@ pmc.backorderInterstitialProductString = function () {
     if (typeof digitalData.component != 'undefined') {
       for (var i = 0; i < digitalData.component.length; i++) {
         if (typeof digitalData.component[i].componentID.componentID != 'undefined') {
-          if (typeof digitalData.component[i].componentID.componentID.toLowerCase() == 'view availability' && typeof digitalData.component[i].attributes != 'undefined') {
+          if (digitalData.component[i].componentID.componentID.toLowerCase() == 'view availability' && typeof digitalData.component[i].attributes != 'undefined') {
             var item = digitalData.component[i].attributes;
             var orderItem = pmc.newOrderItem();
-            orderItem.description = item.groupID;
+            orderItem.description = item.groupId;
             orderItem.purchaseMerchandisingEvars.push({
               'evarName': 'eVar33',
               'value': item.sku
@@ -1124,6 +1124,10 @@ pmc.cartAdd = function(a, b, c) {
 
 		//console.log(items);
 		//console.log(pmc_monogrammed);
+		var update_cart_type = "Partial";
+		if(utag_data["pmc_prop18"] == "mobile site") {
+			update_cart_type = "Full";
+		}
 
 		if (a.x_cart) {
 			if (a.x_cart.attributes.itemCount == 0 || b.data.items.item.length == c.x_cart.attributes.itemCount) {
@@ -1139,7 +1143,7 @@ pmc.cartAdd = function(a, b, c) {
 						ta_groupIds : groupIds,
 						ta_unit_prices : unit_prices,
 						ta_quantities : quantities,
-						ta_update_cart_type : "Partial",
+						ta_update_cart_type : update_cart_type,
 						pmc_eVar18 : utag_data["pmc_eVar18"],
 						pmc_prop18 : utag_data["pmc_prop18"]
 					});
@@ -1156,7 +1160,7 @@ pmc.cartAdd = function(a, b, c) {
 						ta_groupIds : groupIds,
 						ta_unit_prices : unit_prices,
 						ta_quantities : quantities,
-						ta_update_cart_type : "Partial",
+						ta_update_cart_type : update_cart_type,
 						pmc_eVar18 : utag_data["pmc_eVar18"],
 						pmc_prop18 : utag_data["pmc_prop18"]
 					});
@@ -1173,7 +1177,7 @@ pmc.cartAdd = function(a, b, c) {
 						ta_groupIds : groupIds,
 						ta_unit_prices : unit_prices,
 						ta_quantities : quantities,
-						ta_update_cart_type : "Partial",
+						ta_update_cart_type : update_cart_type,
 						pmc_eVar18 : utag_data["pmc_eVar18"],
 						pmc_prop18 : utag_data["pmc_prop18"]
 					});
@@ -1189,7 +1193,7 @@ pmc.cartAdd = function(a, b, c) {
 						ta_groupIds : groupIds,
 						ta_unit_prices : unit_prices,
 						ta_quantities : quantities,
-						ta_update_cart_type : "Partial",
+						ta_update_cart_type : update_cart_type,
 						pmc_eVar18 : utag_data["pmc_eVar18"],
 						pmc_prop18 : utag_data["pmc_prop18"]
 					});
@@ -1207,7 +1211,7 @@ pmc.cartAdd = function(a, b, c) {
 					ta_groupIds : groupIds,
 					ta_unit_prices : unit_prices,
 					ta_quantities : quantities,
-					ta_update_cart_type : "Partial",
+					ta_update_cart_type : update_cart_type,
 					pmc_eVar18 : utag_data["pmc_eVar18"],
 					pmc_prop18 : utag_data["pmc_prop18"]
 				});
@@ -1222,7 +1226,7 @@ pmc.cartAdd = function(a, b, c) {
 					ta_groupIds : groupIds,
 					ta_unit_prices : unit_prices,
 					ta_quantities : quantities,
-					ta_update_cart_type : "Partial",
+					ta_update_cart_type : update_cart_type,
 					pmc_eVar18 : utag_data["pmc_eVar18"],
 					pmc_prop18 : utag_data["pmc_prop18"]
 				});

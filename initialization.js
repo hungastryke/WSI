@@ -2100,11 +2100,17 @@ pmc.registerCallbacks = function() {
 	    		utag_data["pmc_eVar71"] = "TEST/CONTROL";
 	    	}
 	    	*/
+	    	/*
 	    	if (b.name === "contentImpression") {
 	    		if ( b.data.programStatus !== "INELIGIBLE" ) {
 	    				var placementDetails = [ b.data.programStatus, 
-	    				                         b.data.campaign.substring(0, 48), 
-	    				                         b.data.placement.substring(0, 49) ];
+	    				                         b.data.campaign.substring(0, 48) 
+	    				                       ];
+	    				if(typeof b.data.placement != "undefined") {
+	    					if(b.data.placement.length > 0) {
+	    						placementDetails.push(b.data.placement.substring(0, 49));
+	    					}
+	    				}                         
 	    				if(typeof b.data.productId != "undefined") {
 	    					if(b.data.productId.length > 0) {
 	    						placementDetails.push(b.data.productId.substring(0, 99));
@@ -2120,6 +2126,7 @@ pmc.registerCallbacks = function() {
 			    		});
 	    		}
 	    	}
+	    	*/
 		}
 	}, true);
 };

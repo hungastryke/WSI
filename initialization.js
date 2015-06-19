@@ -992,7 +992,7 @@ pmc.pageViewInternationalCheckout = function() {
 			if(document.location.hostname.match(/pbteen/) != null) {
 				if(utag_data["pmc_prop3"] == "shop:gifts") {
 					utag_data["pmc_prop1"] = "shop";
-					utag_data["pmc_eVar1"] = "gifts"
+					utag_data["pmc_eVar1"] = "gifts";
 				}
 			}
 		}
@@ -2127,6 +2127,14 @@ pmc.registerCallbacks = function() {
 	    		}
 	    	}
 	    	*/
+	    	if (b.name === "scrollSet") {
+	    		utag_data["pmc_event75"] = b.data;
+		    	utag_data["pmc_mobileInfiniteScroll"] = "infinite scroll";
+	    		utag.link({
+		    		pmc_event75 : utag_data["pmc_event75"],
+		    		pmc_mobileInfiniteScroll : utag_data["pmc_mobileInfiniteScroll"]
+	    		});
+	    	}
 		}
 	}, true);
 };

@@ -575,6 +575,16 @@ pmc.pageViewProductDetailsPage = function() {
 			if(digitalData.page.attributes.searchPfm != "undefined" && digitalData.page.attributes.searchPfm != "") {
 				utag_data["pmc_eVar9"] = digitalData.page.attributes.searchPfm;
 			}
+			
+			utag_data["pmc_event33"] = (function () {
+			  if (typeof digitalData.page.attributes.searchTypeahead != 'undefined' && digitalData.page.attributes.searchTypeahead == true) {
+			    return 'event33';
+			  } else {
+			    return '';
+			  }
+			})();		
+			utag_data["pmc_event73"] = (digitalData.page.attributes.searchTypeahead == true) ? "event73" : "";
+			utag_data["pmc_prop9"] = utag_data["pmc_eVar27"] = (digitalData.page.attributes.searchTypeahead == true && typeof digitalData.page.attributes.searchTerm != "undefined") ? digitalData.page.attributes.searchTerm.toLowerCase() : "";
 		} 
 };
 
@@ -2129,7 +2139,7 @@ pmc.registerCallbacks = function() {
 	    	*/
 	    	if (b.name === "scrollSet") {
 	    		utag_data["pmc_event75"] = b.data;
-		    	utag_data["pmc_mobileInfiniteScroll"] = "infinite scroll";
+		    	utag_data["pmc_mobileInfiniteScroll"] = "infinite-scroll";
 	    		utag.link({
 		    		pmc_event75 : utag_data["pmc_event75"],
 		    		pmc_mobileInfiniteScroll : utag_data["pmc_mobileInfiniteScroll"]

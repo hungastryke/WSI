@@ -407,7 +407,7 @@ pmc.purchase = function() {
 
 pmc.setSearchResultType = function() {
 	if(digitalData.page.attributes.searchResultsType) {
-		var searchResultsType = digitalData.page.attributes.searchResultsType.toLowerCase()
+		var searchResultsType = digitalData.page.attributes.searchResultsType.toLowerCase();
 		if(searchResultsType === "partialmatch") {
 			return "partial-match";
 		} else if(searchResultsType === "spellcorrected") {
@@ -420,7 +420,7 @@ pmc.setSearchResultType = function() {
 			return digitalData.page.attributes.searchResultsType.toLowerCase();
 		}
 	} else {
-		return "unknown"
+		return "unknown";
 	}
 };
 
@@ -450,7 +450,7 @@ pmc.pageViewProductDetailsPage = function() {
 			}
 			if (digitalData.product.productID.prodID == "gift-card" || digitalData.product.productID.prodID == "gift-cards" || digitalData.product.productID.prodID == "pottery-barn-gift-cards") {
 				//utag_data["pmc_prop1"] = "product detail:" + digitalData.product.productID.prodID;
-				utag_data["pmc_prop1"] = "product detail:gift card"
+				utag_data["pmc_prop1"] = "product detail:gift card";
 			}
 
 			pmc.pip = pmc.newOrder();
@@ -576,13 +576,7 @@ pmc.pageViewProductDetailsPage = function() {
 				utag_data["pmc_eVar9"] = digitalData.page.attributes.searchPfm;
 			}
 			
-			utag_data["pmc_event33"] = (function () {
-			  if (typeof digitalData.page.attributes.searchTypeahead != 'undefined' && digitalData.page.attributes.searchTypeahead == true) {
-			    return 'event33';
-			  } else {
-			    return '';
-			  }
-			})();		
+			utag_data["pmc_event33"] = (digitalData.page.attributes.searchTypeahead == true) ? "event33" : "";		
 			utag_data["pmc_event73"] = (digitalData.page.attributes.searchTypeahead == true) ? "event73" : "";
 			utag_data["pmc_prop9"] = utag_data["pmc_eVar27"] = (digitalData.page.attributes.searchTypeahead == true && typeof digitalData.page.attributes.searchTerm != "undefined") ? digitalData.page.attributes.searchTerm.toLowerCase() : "";
 		} 
@@ -1986,6 +1980,17 @@ pmc.registerCallbacks = function() {
 								pmc_eVar18 : utag_data["pmc_eVar18"],
 								pmc_prop18 : utag_data["pmc_prop18"]
 							});
+					}
+					if(b.data.category == "TABBED CONTENT") {
+						utag.link({
+								pmc_prop14 : b.data.category + b.data.item,
+								pmc_eVar21 : b.data.category + b.data.item,
+								link_text : "element interaction",
+								pmc_products : "",
+								pmc_prop19 : "",
+								pmc_eVar18 : utag_data["pmc_eVar18"],
+								pmc_prop18 : utag_data["pmc_prop18"]
+						});
 					}
 				}
 			}

@@ -579,6 +579,7 @@ pmc.pageViewProductDetailsPage = function() {
 			utag_data["pmc_event33"] = (digitalData.page.attributes.searchTypeahead == true) ? "event33" : "";		
 			utag_data["pmc_event73"] = (digitalData.page.attributes.searchTypeahead == true) ? "event73" : "";
 			utag_data["pmc_prop9"] = utag_data["pmc_eVar27"] = (digitalData.page.attributes.searchTypeahead == true && typeof digitalData.page.attributes.searchTerm != "undefined") ? digitalData.page.attributes.searchTerm.toLowerCase() : "";
+			utag_data["pmc_eVar9"] = (digitalData.page.attributes.searchTypeahead == true && typeof digitalData.page.attributes.searchPfm != "undefined") ? digitalData.page.attributes.searchPfm : "";
 		} 
 };
 

@@ -1866,10 +1866,30 @@ pmc.registerCallbacks = function() {
 					
 					if (b.data.name.match(/personalized content/gi) != null) {
 						//console.log("****");
-						if ( typeof b.data.data.programStatus != "undefined") {
+						//if ( typeof b.data.data.programStatus != "undefined") {
 							//console.log("****");
-							if (b.data.data.programStatus.match(/control/gi) != null || b.data.data.programStatus.match(/test/gi) != null) {
-								//console.log("****");
+						//	if (b.data.data.programStatus.match(/control/gi) != null || b.data.data.programStatus.match(/test/gi) != null) {
+								//console.log("****");   		
+								var campaignStatus = [];  
+			    				if(typeof b.data.data.campaignStatus != "undefined") {
+			    					if(b.data.data.campaignStatus.length > 0) {
+				    					campaignStatus.push(b.data.data.campaignStatus);
+				    				} else {
+				    					campaignStatus.push("");
+				    				}
+			    				} else {
+				    					campaignStatus.push("");
+				    			}
+				    			if(typeof b.data.data.campaign != "undefined") {
+			    					if(b.data.data.campaign.length > 0) {
+				    					campaignStatus.push(b.data.data.campaign);
+				    				} else {
+				    					campaignStatus.push("");
+				    				}
+			    				} else {
+				    					campaignStatus.push("");
+				    			}
+								
 								if ( typeof b.data.data.productId != "undefined" && b.data.data.productId != "") {
 									utag.link({
 										pmc_prop72 : b.data.data.campaign.substring(0, 48) + "|" + b.data.data.placement.substring(0, 48),
@@ -1877,8 +1897,13 @@ pmc.registerCallbacks = function() {
 										pmc_prop19 : "",
 										pmc_eVar18 : utag_data["pmc_eVar18"],
 										pmc_prop18 : utag_data["pmc_prop18"],
+										pmc_eVar71 : b.data.data.programStatus,
 										pmc_event72 : "event72",
-										pmc_prop73 : b.data.data.productId.substring(0, 99)
+										pmc_eVar72 : campaignStatus.join("|"),
+										pmc_eVar73 : b.data.data.placement,
+										pmc_prop73 : b.data.data.productId.substring(0, 99),
+										pmc_eVar74 : b.data.data.productId.substring(0, 99),
+										pmc_eVar75 : b.data.data.treatment
 									});
 								} else {
 									utag.link({
@@ -1887,11 +1912,15 @@ pmc.registerCallbacks = function() {
 										pmc_prop19 : "",
 										pmc_eVar18 : utag_data["pmc_eVar18"],
 										pmc_prop18 : utag_data["pmc_prop18"],
-										pmc_event72 : "event72"
+										pmc_eVar71 : b.data.data.programStatus,
+										pmc_event72 : "event72",
+										pmc_eVar72 : campaignStatus.join("|"),
+										pmc_eVar73 : b.data.data.placement,
+										pmc_eVar75 : b.data.data.treatment
 									});
 								}
-							}
-						}
+					//		}
+					//	}
 					}
 				}
 			
@@ -2116,33 +2145,56 @@ pmc.registerCallbacks = function() {
 	    		utag_data["pmc_eVar71"] = "TEST/CONTROL";
 	    	}
 	    	*/
-	    	/*
 	    	if (b.name === "contentImpression") {
-	    		if ( b.data.programStatus !== "INELIGIBLE" ) {
-	    				var placementDetails = [ b.data.programStatus, 
-	    				                         b.data.campaign.substring(0, 48) 
-	    				                       ];
+	    		if ( typeof b.data.programStatus != "undefined" && b.data.programStatus !== "INELIGIBLE" || b.data.type == "personalizedContent") {
+	    			    utag_data["pmc_eVar71"] = b.data.programStatus;
+	    				var campaignStatus = [];  
+	    				if(typeof b.data.campaignStatus != "undefined") {
+	    					if(b.data.campaignStatus.length > 0) {
+		    					campaignStatus.push(b.data.campaignStatus);
+		    				} else {
+		    					campaignStatus.push("");
+		    				}
+	    				} else {
+		    					campaignStatus.push("");
+		    			}
+		    			if(typeof b.data.campaign != "undefined") {
+	    					if(b.data.campaign.length > 0) {
+		    					campaignStatus.push(b.data.campaign);
+		    				} else {
+		    					campaignStatus.push("");
+		    				}
+	    				} else {
+		    					campaignStatus.push("");
+		    			}
+		    			utag_data["pmc_eVar72"] = campaignStatus.join("|");
+		    			
 	    				if(typeof b.data.placement != "undefined") {
 	    					if(b.data.placement.length > 0) {
-	    						placementDetails.push(b.data.placement.substring(0, 49));
-	    					}
+		    					utag_data["pmc_eVar73"] = b.data.placement;
+		    				}
 	    				}                         
 	    				if(typeof b.data.productId != "undefined") {
 	    					if(b.data.productId.length > 0) {
-	    						placementDetails.push(b.data.productId.substring(0, 99));
+	    						utag_data["pmc_eVar74"] = b.data.productId.substring(0, 99);
 	    					}
 	    				}
-	    				utag_data["pmc_list1"] = placementDetails.join("|");
-	    				utag_data["pmc_event71"] = "event71";
-	    				utag_data["pmc_eVar71"] = b.data.campaignStatus;
+	    				if(typeof b.data.treatment != "undefined") {
+	    					if(b.data.treatment.length > 0) {
+		    					utag_data["pmc_eVar75"] = b.data.treatment;
+		    				}
+	    				}
+	    				utag_data["pmc_event71"] = "event71";   				
 			    		utag.link({
-			    			pmc_list1 : utag_data["pmc_list1"],
 			    			pmc_event71 : utag_data["pmc_event71"],
-			    			pmc_eVar71 : utag_data["pmc_eVar71"]
+			    			pmc_eVar71 : utag_data["pmc_eVar71"],
+			    			pmc_eVar72 : utag_data["pmc_eVar72"],
+			    			pmc_eVar73 : utag_data["pmc_eVar73"],
+			    			pmc_eVar74 : utag_data["pmc_eVar74"],
+			    			pmc_eVar75 : utag_data["pmc_eVar75"]
 			    		});
 	    		}
 	    	}
-	    	*/
 	    	if (b.name === "scrollSet") {
 	    		utag_data["pmc_event75"] = b.data;
 		    	utag_data["pmc_mobileInfiniteScroll"] = "infinite-scroll";

@@ -558,28 +558,6 @@ pmc.pageViewProductDetailsPage = function() {
 			if (pmc.pip.orderItems.length > 0) {
 				utag_data["pmc_products"] = pmc.productString = pmc.getProductString(pmc.pip.orderItems);
 			}
-
-			/*
-			if (pmc.urlVariables.words != undefined && pmc.urlVariables.words != null && pmc.urlVariables.words != "") {
-				// PIP from a redirected search:
-				pmc.prop9 = pmc.eVar27 = pmc.urlVariables.words.toLowerCase();
-				pmc.prop10 = "0";
-				pmc.prop11 = pmc.eVar29 = "cqs";
-				pmc.event33 = "event33";
-				pmc.event35 = "event35";
-				pmc.prop22 = pmc.eVar51 = "cqs";
-				pmc.eVar9 = "search:cqs search";
-			}
-			*/
-			
-			if(digitalData.page.attributes.searchPfm != "undefined" && digitalData.page.attributes.searchPfm != "") {
-				utag_data["pmc_eVar9"] = digitalData.page.attributes.searchPfm;
-			}
-			
-			utag_data["pmc_event33"] = (digitalData.page.attributes.searchTypeahead == true) ? "event33" : "";		
-			utag_data["pmc_event73"] = (digitalData.page.attributes.searchTypeahead == true) ? "event73" : "";
-			utag_data["pmc_prop9"] = utag_data["pmc_eVar27"] = (digitalData.page.attributes.searchTypeahead == true && typeof digitalData.page.attributes.searchTerm != "undefined") ? digitalData.page.attributes.searchTerm.toLowerCase() : "";
-			utag_data["pmc_eVar9"] = (digitalData.page.attributes.searchTypeahead == true && typeof digitalData.page.attributes.searchPfm != "undefined") ? digitalData.page.attributes.searchPfm : "";
 		} 
 };
 
@@ -1861,62 +1839,60 @@ pmc.registerCallbacks = function() {
 			//console.log("|||****");
 			//console.log("|||****"+b.name);
 			//console.log("|||****"+b.data.name);
-				if (b.name == "elementInteraction" && typeof b.data.name != "undefined") {
+				if (b.name == "elementInteraction") {
 					//console.log("****");
-					
-					if (b.data.name.match(/personalized content/gi) != null) {
-						//console.log("****");
-						//if ( typeof b.data.data.programStatus != "undefined") {
-							//console.log("****");
-						//	if (b.data.data.programStatus.match(/control/gi) != null || b.data.data.programStatus.match(/test/gi) != null) {
-								//console.log("****");   		
+					//console.log(b.data);
+					if (b.data.type == "personalizedContent") {		
 								var campaignStatus = [];  
-			    				if(typeof b.data.data.campaignStatus != "undefined") {
-			    					if(b.data.data.campaignStatus.length > 0) {
-				    					campaignStatus.push(b.data.data.campaignStatus);
+			    				if(typeof b.data.campaignStatus != "undefined") {
+			    					if(b.data.campaignStatus.length > 0) {
+				    					campaignStatus.push(b.data.campaignStatus);
 				    				} else {
 				    					campaignStatus.push("");
 				    				}
 			    				} else {
 				    					campaignStatus.push("");
 				    			}
-				    			if(typeof b.data.data.campaign != "undefined") {
-			    					if(b.data.data.campaign.length > 0) {
-				    					campaignStatus.push(b.data.data.campaign);
+				    			if(typeof b.data.campaign != "undefined") {
+			    					if(b.data.campaign.length > 0) {
+				    					campaignStatus.push(b.data.campaign);
 				    				} else {
 				    					campaignStatus.push("");
 				    				}
 			    				} else {
 				    					campaignStatus.push("");
 				    			}
-								
-								if ( typeof b.data.data.productId != "undefined" && b.data.data.productId != "") {
+								var placement = "";
+								if (typeof b.data.placement != "undefined") {
+									placement = b.data.placement; 
+								}
+								if ( typeof b.data.productId != "undefined" && b.data.productId != "") {
 									utag.link({
-										pmc_prop72 : b.data.data.campaign.substring(0, 48) + "|" + b.data.data.placement.substring(0, 48),
+										pmc_prop72 : b.data.campaign + "|" + placement,
 										link_text : "content personalization - element interaction",
 										pmc_prop19 : "",
 										pmc_eVar18 : utag_data["pmc_eVar18"],
 										pmc_prop18 : utag_data["pmc_prop18"],
-										pmc_eVar71 : b.data.data.programStatus,
+										pmc_eVar71 : b.data.programStatus,
 										pmc_event72 : "event72",
 										pmc_eVar72 : campaignStatus.join("|"),
-										pmc_eVar73 : b.data.data.placement,
-										pmc_prop73 : b.data.data.productId.substring(0, 99),
-										pmc_eVar74 : b.data.data.productId.substring(0, 99),
-										pmc_eVar75 : b.data.data.treatment
+										pmc_eVar73 : b.data.placement,
+										pmc_prop73 : b.data.productId,
+										pmc_eVar74 : b.data.productId,
+										pmc_eVar75 : b.data.treatment
 									});
 								} else {
 									utag.link({
-										pmc_prop72 : b.data.data.campaign.substring(0, 48) + "|" + b.data.data.placement.substring(0, 48),
+										pmc_prop72 : b.data.campaign + "|" + placement,
 										link_text : "content personalization - element interaction",
 										pmc_prop19 : "",
 										pmc_eVar18 : utag_data["pmc_eVar18"],
 										pmc_prop18 : utag_data["pmc_prop18"],
-										pmc_eVar71 : b.data.data.programStatus,
+										pmc_eVar71 : b.data.programStatus,
 										pmc_event72 : "event72",
 										pmc_eVar72 : campaignStatus.join("|"),
-										pmc_eVar73 : b.data.data.placement,
-										pmc_eVar75 : b.data.data.treatment
+										pmc_eVar73 : b.data.placement,
+										pmc_eVar75 : b.data.treatment
 									});
 								}
 					//		}
@@ -2000,16 +1976,41 @@ pmc.registerCallbacks = function() {
 				}
 				if(typeof b.data.item != "undefined") {
 					if(b.data.item == "EMAIL SIGNUP : EMAIL FORM") {
+						var campaignStatus = [];  
+			    		if(typeof b.data.data.campaignStatus != "undefined") {
+			    			if(b.data.data.campaignStatus.length > 0) {
+				    			campaignStatus.push(b.data.data.campaignStatus);
+				    		} else {
+				 				campaignStatus.push("");
+				  			}
+			    		} else {
+							campaignStatus.push("");
+						}
+				 		if(typeof b.data.data.campaign != "undefined") {
+			    			if(b.data.data.campaign.length > 0) {
+				    			campaignStatus.push(b.data.data.campaign);
+				    		} else {
+				    			campaignStatus.push("");
+				  			}
+			    		} else {
+							campaignStatus.push("");
+				    	}
 						utag.link({
 								pmc_event32 : "event32",
 								pmc_eVar38 : "Personalized Content Widget",
 								pmc_eVar43 : b.data.email,
-								link_text : "element interaction",
+								link_text : "email signup/content personalization - element interaction",
 								pmc_products : "",
 								pmc_prop19 : "",
 								pmc_eVar18 : utag_data["pmc_eVar18"],
-								pmc_prop18 : utag_data["pmc_prop18"]
-							});
+								pmc_prop18 : utag_data["pmc_prop18"],
+								pmc_prop72 : b.data.data.campaign + "|" + b.data.data.placement,
+								pmc_eVar71 : b.data.data.programStatus,
+								pmc_event72 : "event72",
+								pmc_eVar72 : campaignStatus.join("|"),
+								pmc_eVar73 : b.data.data.placement,
+								pmc_eVar75 : b.data.data.treatment
+						});
 					}
 					if(b.data.category == "TABBED CONTENT") {
 						utag.link({
@@ -2023,6 +2024,10 @@ pmc.registerCallbacks = function() {
 						});
 					}
 				}
+			}
+			
+			if(b.name == "elementInteraction" && b.data.category == "Checkout" && b.data.item == "visa") {
+				utag.link({ pmc_scCheckout : "checkout", pmc_eVar4 : b.data.item });
 			}
 			
 			if (b.name == "updateLayer") {

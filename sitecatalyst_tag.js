@@ -338,8 +338,13 @@ try {
 	}
 	
 	if(s.events&&s.events.indexOf('event33')>-1&&s.prop10){
-	  s.events=s.apl(s.events,'event67='+s.prop10,',',2);
+	if (s.prop10=="redirect") {
+	s.events=s.apl(s.events,'event67=0',',',2);
 	}
+else {
+      s.events=s.apl(s.events,'event67='+s.prop10,',',2);
+   }
+    }
 	/* create productmerch product for merchandising eVar binding */
 	if(s.eVar9&&(!s.products||(s.products&&s.products.indexOf(';productmerch')>-1)||s.newProduct=='true')&&(s.p_fo('onemerch')==1||(s.linkType!=''&&s.linkTrackVars.indexOf('eVar9')>-1)))
 	{

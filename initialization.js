@@ -1839,67 +1839,85 @@ pmc.registerCallbacks = function() {
 			//console.log("|||****");
 			//console.log("|||****"+b.name);
 			//console.log("|||****"+b.data.name);
+
 				if (b.name == "elementInteraction") {
 					//console.log("****");
 					//console.log(b.data);
-					if (b.data.type == "personalizedContent") {		
-								var campaignStatus = [];  
-			    				if(typeof b.data.campaignStatus != "undefined") {
-			    					if(b.data.campaignStatus.length > 0) {
-				    					campaignStatus.push(b.data.campaignStatus);
-				    				} else {
-				    					campaignStatus.push("");
-				    				}
-			    				} else {
-				    					campaignStatus.push("");
-				    			}
-				    			if(typeof b.data.campaign != "undefined") {
-			    					if(b.data.campaign.length > 0) {
-				    					campaignStatus.push(b.data.campaign);
-				    				} else {
-				    					campaignStatus.push("");
-				    				}
-			    				} else {
-				    					campaignStatus.push("");
-				    			}
-								var placement = "";
-								if (typeof b.data.placement != "undefined") {
-									placement = b.data.placement; 
-								}
-								if ( typeof b.data.productId != "undefined" && b.data.productId != "") {
-									utag.link({
-										pmc_prop72 : b.data.campaign + "|" + placement,
-										link_text : "content personalization - element interaction",
-										pmc_prop19 : "",
-										pmc_eVar18 : utag_data["pmc_eVar18"],
-										pmc_prop18 : utag_data["pmc_prop18"],
-										pmc_eVar71 : b.data.programStatus,
-										pmc_event72 : "event72",
-										pmc_eVar72 : campaignStatus.join("|"),
-										pmc_eVar73 : b.data.placement,
-										pmc_prop73 : b.data.productId,
-										pmc_eVar74 : b.data.productId,
-										pmc_eVar75 : b.data.treatment
-									});
-								} else {
-									utag.link({
-										pmc_prop72 : b.data.campaign + "|" + placement,
-										link_text : "content personalization - element interaction",
-										pmc_prop19 : "",
-										pmc_eVar18 : utag_data["pmc_eVar18"],
-										pmc_prop18 : utag_data["pmc_prop18"],
-										pmc_eVar71 : b.data.programStatus,
-										pmc_event72 : "event72",
-										pmc_eVar72 : campaignStatus.join("|"),
-										pmc_eVar73 : b.data.placement,
-										pmc_eVar75 : b.data.treatment
-									});
-								}
-					//		}
-					//	}
+					if (b.data.type == "personalizedContent") {
+						var campaignStatus = [];
+						if ( typeof b.data.campaignStatus != "undefined") {
+							if (b.data.campaignStatus.length > 0) {
+								campaignStatus.push(b.data.campaignStatus);
+							} else {
+								campaignStatus.push("");
+							}
+						} else {
+							campaignStatus.push("");
+						}
+						if ( typeof b.data.campaign != "undefined") {
+							if (b.data.campaign.length > 0) {
+								campaignStatus.push(b.data.campaign);
+							} else {
+								campaignStatus.push("");
+							}
+						} else {
+							campaignStatus.push("");
+						}
+						var placement = "";
+						if ( typeof b.data.placement != "undefined") {
+							placement = b.data.placement;
+						}
+						if ( typeof b.data.productId != "undefined" && b.data.productId != "") {
+							utag.link({
+								pmc_prop72 : b.data.campaign + "|" + placement,
+								link_text : "content personalization - element interaction",
+								pmc_prop19 : "",
+								pmc_eVar18 : utag_data["pmc_eVar18"],
+								pmc_prop18 : utag_data["pmc_prop18"],
+								pmc_eVar71 : b.data.programStatus,
+								pmc_event72 : "event72",
+								pmc_eVar72 : campaignStatus.join("|"),
+								pmc_eVar73 : b.data.placement,
+								pmc_prop73 : b.data.productId,
+								pmc_eVar74 : b.data.productId,
+								pmc_eVar75 : b.data.treatment
+							});
+						} else {
+							if ( typeof b.data.email != "undefined" && b.data.email != "") {
+								utag.link({
+									pmc_prop72 : b.data.campaign + "|" + placement,
+									link_text : "content personalization - element interaction",
+									pmc_prop19 : "",
+									pmc_eVar18 : utag_data["pmc_eVar18"],
+									pmc_prop18 : utag_data["pmc_prop18"],
+									pmc_eVar71 : b.data.programStatus,
+									pmc_event72 : "event72",
+									pmc_eVar72 : campaignStatus.join("|"),
+									pmc_eVar73 : b.data.placement,
+									pmc_eVar75 : b.data.treatment,
+									pmc_eVar43 : b.data.email,
+									pmc_eVar38 : "Personalized Content Widget",
+									pmc_event32 : "event32",
+									pmc_event53 : "event53"
+								});
+							} else {
+								utag.link({
+									pmc_prop72 : b.data.campaign + "|" + placement,
+									link_text : "content personalization - element interaction",
+									pmc_prop19 : "",
+									pmc_eVar18 : utag_data["pmc_eVar18"],
+									pmc_prop18 : utag_data["pmc_prop18"],
+									pmc_eVar71 : b.data.programStatus,
+									pmc_event72 : "event72",
+									pmc_eVar72 : campaignStatus.join("|"),
+									pmc_eVar73 : b.data.placement,
+									pmc_eVar75 : b.data.treatment
+								});
+							}
+						}
 					}
 				}
-			
+
 			if (b.name == "elementInteraction" && (b.data.category == "PIP" || b.data.category == "Alt Image Interaction") && b.data.item.match(/ALT IMAGE/gi) != null) {
 				pmc.altImageClick(a, b, c);
 			} else if(b.name == "elementInteraction" && b.data.item.match(/ORDER SUMMARY EXPAND/gi) != null) { 

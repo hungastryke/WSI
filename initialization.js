@@ -379,15 +379,15 @@ pmc.purchase = function() {
 		pmc._purchase = "purchase";
 		pmc.productString = pmc.orders[0].productString;
 		pmc.purchaseID = pmc.orders[0].number;
-		pmc.state = pmc.orders[0].state;
-		pmc.zip = pmc.orders[0].zip;
+		utag_data["pmc_state"] = pmc.orders[0].state;
+		utag_data["pmc_zip"] = pmc.orders[0].zip;
 		pmc.eVar7 = pmc.orders[0].eVar7;
 		pmc.eVar8 = pmc.orders[0].eVar8;
 		pmc.eVar5 = pmc.orders[0].eVar5;
-		pmc.eVar6 = pmc.orders[0].eVar6;
+		utag_data["pmc_eVar6"] = pmc.orders[0].eVar6;
 		utag_data["pmc_eVar34"] = pmc.orders[0].eVar34;
 		utag_data["pmc_eVar43"] = pmc.orders[0].eVar43;
-		pmc.event36 = pmc.orders[0].event36;
+		utag_data["pmc_eVar36"] = pmc.orders[0].event36;
 
 		if(typeof digitalData.page.attributes.checkoutType != "undefined") {
 			if(digitalData.page.attributes.checkoutType == "express" || digitalData.page.attributes.checkoutType == "visa"){
@@ -428,7 +428,7 @@ pmc.pageViewProductDetailsPage = function() {
  
 		if (pmc.eVar42 != "M:PIP INTERSTITIAL") {
 			utag_data["pmc_event18"] = "event18";
-			pmc.prodView = "prodView";
+			utag_data["pmc_prodView"] = "prodView";
 			if (digitalData.product != undefined && digitalData.product.productID != undefined && digitalData.product.productID.prodID != undefined) {
 				utag_data["pmc_pageName"] = "product detail:" + digitalData.product.productID.prodID;
 			}
@@ -655,9 +655,9 @@ pmc.debugStatus = function(msg) {
 };
 
 pmc.emailSignUp = function(a, b, c) {
-	pmc.eVar41 = pmc.eVar42 = pmc.prop6 = pmc.prop7 = "";  // clear in case values exist.
+	utag_data["pmc_eVar41"] = pmc.eVar42 = pmc.prop6 = pmc.prop7 = "";  // clear in case values exist.
 	if(typeof(c.page.attributes.cmPageId) !== "undefined") {
-		pmc.eVar41 = c.page.attributes.cmPageId;
+		utag_data["pmc_eVar41"] = c.page.attributes.cmPageId;
 		pmc.prop6 = "D=v41";
 	}
 	if(typeof(c.page.attributes.cmCategoryId) !== "undefined") {
@@ -684,7 +684,7 @@ pmc.emailSignUp = function(a, b, c) {
 		pmc_prop6 : pmc.prop6,
 		pmc_prop7 : pmc.prop7,
 		pmc_eVar18 : utag_data["pmc_eVar18"],
-		pmc_eVar41 : pmc.eVar41,
+		pmc_eVar41 : utag_data["pmc_eVar41"],
 		pmc_eVar42 : pmc.eVar42,
 		pmc_prop18 : utag_data["pmc_prop18"]
 	});
@@ -1227,7 +1227,7 @@ pmc.cartEvent = function(a, b, c) {
 					var items = new Array();
 					var item = pmc.newOrderItem();
 				
-					item.itemNumber = b.data.SKU
+					item.itemNumber = b.data.SKU;
 						
 					item.purchaseIncrementorEvents.push({
 						"eventName" : "event11",
@@ -1255,7 +1255,7 @@ pmc.cartEvent = function(a, b, c) {
 					var items = new Array();
 					var item = pmc.newOrderItem();
 				
-					item.itemNumber = b.data.SKU
+					item.itemNumber = b.data.SKU;
 					item.description = pmc.removeHTML(b.data.groupId);
 					
 					item.purchaseMerchandisingEvars.push({
@@ -1369,7 +1369,7 @@ pmc.pageView = function() {
 		if (digitalData.page && digitalData.page.attributes != undefined) {
 
 			if ( typeof digitalData.page.attributes.cmPageId != "undefined") {
-				pmc.eVar41 = digitalData.page.attributes.cmPageId;
+				utag_data["pmc_eVar41"] = digitalData.page.attributes.cmPageId;
 				pmc.prop6 = "D=v41";
 
 			}
@@ -1386,7 +1386,7 @@ pmc.pageView = function() {
 
 			if (digitalData.page.attributes.accountCreated == "true" || digitalData.page.attributes.accountCreated == true) {
 				pmc.event52 = "event52";
-				pmc.eVar48 = "authenticated";
+				utag_data["pmc_eVar48"] = "authenticated";
 				if (digitalData.x_user) {
 					if (digitalData.x_user.profile != undefined) {
 						if (digitalData.x_user.profile.profileEmail != undefined) {
@@ -1399,7 +1399,7 @@ pmc.pageView = function() {
 
 			if (document.location.pathname.match("/checkout/thanks.html") != null && digitalData.x_transaction != null) {
 				utag_data["pmc_pageName"] = "checkout:order confirmation"
-				pmc.channel = utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "checkout";
+				utag_data["pmc_channel"] = utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "checkout";
 				pmc.purchase();
 				return;
 			}
@@ -2060,7 +2060,7 @@ pmc.registerCallbacks = function() {
 										pmc_eVar1 : utag_data["pmc_eVar1"],
 										pmc_eVar2 : utag_data["pmc_eVar2"],
 										pmc_eVar3 : utag_data["pmc_eVar3"],
-										pmc_eVar41 : pmc.eVar41,
+										pmc_eVar41 : utag_data["pmc_eVar41"],
 										pmc_eVar42 : pmc.eVar42,
 										pmc_prop1 : utag_data["pmc_prop1"],
 										pmc_prop2 : utag_data["pmc_prop2"],

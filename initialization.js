@@ -986,7 +986,10 @@ pmc.pageViewInternationalCheckout = function() {
 			}
 			
 			if ((digitalData.page.pageCategory.primaryCategory == "recipe") && typeof digitalData.page.pageCategory.categories == "undefined") {
-				utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "recipe detail";
+				if(typeof digitalData.page.attributes.recipeViewEvent != "undefined"  && digitalData.page.attributes.recipeViewEvent == true) {
+					utag_data["pmc_event57"] = "event57";
+					utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "recipe detail";
+				}   
 			}
 			
 			if ((digitalData.page.pageCategory.primaryCategory == "stores")) {

@@ -77,14 +77,14 @@ s._tpDST = {
 s.usePlugins=true
 function s_doPlugins(s) {
 
-try {    
+try {
 	/* Add calls to plugins here */
-	
+
 	/* Automate Custom ProdView Event */
 	if(s.events&&s.events.indexOf('prodView')>-1){
 		s.events=s.apl(s.events,'event22',',',2);
 		}
-	
+
 	var prevValue=s.getPreviousValue(s.pageName,'gpv_home','');
 	if(prevValue && (prevValue=="home page" || prevValue=="pages:baby")){
 		var cmType=s.getQueryParam('cm_type');
@@ -102,19 +102,19 @@ try {
 
 	/*getTimeParting set variables with different values*/
 	s.eVar22 = s.getTimeParting('n','-8');
-	
+
 	/*Monthly visit number*/
 	s.eVar23=s.getVisitNum('m','s_vnum2','s_invisit2');
-	
+
 	/*Days since last visit*/
 	s.eVar24=s.getDaysSinceLastVisit('s_lv');
-	
+
 	/*Pagename and page URL */
 	if(s.pageName) s.eVar10="D=pageName";
-	s.eVar11="D=g"; //URL parameter passed by image request	
-	
+	s.eVar11="D=g"; //URL parameter passed by image request
+
 	s.eVar44 = s.getNewRepeat(3650,'s_nr44');
-	
+
 	/*External campaigns*/
 	if(s.callType()!='+'){
 		if(!s.campaign&&s.getVisitStart("s_vst1")==1&&document.location.hostname.indexOf('.cashstar.com')==-1){
@@ -164,26 +164,26 @@ try {
 	if(!s.eVar15){
 	s.eVar15=s.getQueryParam('cm_re');
 	}
-	
+
 	//previous page name
-	s.prop19=s.getPreviousValue(s.pageName,'gpv_p19',''); 
+	s.prop19=s.getPreviousValue(s.pageName,'gpv_p19','');
 	//percent page viewed
 	var ppv=s.getPercentPageViewed(s.pageName);
 	s.prop26 = ppv[1];
 	if(!s.prop19||s.prop19=='no value')s.prop26="";
-	
+
 	//pkey from search
 	if(!s.eVar30&&(s.getQueryParam('cm_src').indexOf('PRODUCTSEARCH')>-1||s.getQueryParam('cm_src').indexOf('CQS')>-1)){
 	s.eVar30=s.getQueryParam('pkey');
 	}
 	if (!s.eVar30 && s.events && s.events.indexOf('prodView') > -1) {
         s.eVar30 = "no internal search pkey";
-    }	
+    }
 	/* Do not refire search event if the same search term passed in twice in a row */
 	if(s.prop9){
     var t_search = s.getValOnce(s.prop9+s.eVar42, 's_stv', 0);
 	}
-	if (t_search == '') 
+	if (t_search == '')
 	{
 		var a=s.split(s.events, ',');
 		var e='';
@@ -207,9 +207,9 @@ try {
 			if(docRef.indexOf(filters[f])>-1)
 				internalFlag = true;
 		}
-	}	
+	}
 	if(s.eVar12)
-	{	
+	{
 		s.eVar9='external campaign referral';
 		if(document.referrer.indexOf('google.com/catalogs/')!=-1){
 		s.eVar9='external natural referral';
@@ -227,12 +227,12 @@ try {
 		s.eVar2='D=v1';
 		s.eVar3='D=v1';
 		}
-		s.eVar39='no refinement';		
+		s.eVar39='no refinement';
 		s.eVar40='no refinement';
 		s.eVar51='non-search';
 	}
 	else if(document.referrer&&!internalFlag)
-	{	
+	{
 		s.eVar9='external natural referral';
 		if(document.referrer.indexOf('google.com/catalogs/a?source=merchant')!=-1){
 		s.eVar9='ecatalog';
@@ -247,10 +247,10 @@ try {
 		s.eVar2='D=v1';
 		s.eVar3='D=v1';
 		}
-		s.eVar39='no refinement';		
+		s.eVar39='no refinement';
 		s.eVar40='no refinement';
 		s.eVar51='non-search';
-	}	
+	}
 	else if(s.prop9&&s.prop9!='non-search')
 	{
 		if(!s.eVar28){
@@ -265,12 +265,12 @@ try {
 		s.eVar2='D=v1';
 		s.eVar3='D=v1';
 		if(!s.eVar39&&!s.eVar40){
-		s.eVar39='no refinement';		
+		s.eVar39='no refinement';
 		s.eVar40='no refinement';
 		}
-		
+
 	}
-	else if (s.eVar15 && s.eVar15 != 'non-internal ad cm_re') 
+	else if (s.eVar15 && s.eVar15 != 'non-internal ad cm_re')
     {
         s.eVar9 = 'internal ad';
         s.eVar27 = 'non-search';
@@ -301,7 +301,7 @@ try {
 		s.eVar29='non-search';
 		s.eVar15='non-internal ad cm_re';
 		if(!s.eVar39&&!s.eVar40){
-		s.eVar39='no refinement';		
+		s.eVar39='no refinement';
 		s.eVar40='no refinement';
 		}
 		s.eVar51='non-search';
@@ -320,7 +320,7 @@ try {
 		if (!s.eVar25) {
 			s.eVar25 = 'non-homepage link';
         }
-		s.eVar39='no refinement';		
+		s.eVar39='no refinement';
 		s.eVar40='no refinement';
 		s.eVar51='non-search';
 	}
@@ -335,7 +335,7 @@ try {
 	}
 	s.events=e.substring(0, e.length - 1);
 	}
-	
+
 	if(s.events&&s.events.indexOf('event33')>-1&&s.prop10){
 	if (s.prop10=="redirect") {
 	s.events=s.apl(s.events,'event67=0',',',2);
@@ -383,19 +383,16 @@ else {
 	  s.events=s.apl(s.events,'event53',',',2);
 	  s.c_w('core_email',"",-1);
 	}
-	
 
-		var e = new Date(), // date object
-        e43c2 = s.c_r( 'e43C2' ), //reads e43C2 cookie
-        encryption, // to be used as Base64 Encoding of SHA1-Hashed eVar43 or existing cookie to be set in eVar43
-        hash, // to be used as SHA1 Hash of either eVar43 or the existing cookie
-        _isCookiePlaintext = e43c2.search( /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i ) > -1; //checks to see if cookie is in plaintext email address format 
+	//Setting up Variables for e43C2 Cookie Check & Hashing
+        s._e43c2 = s.c_r( 'e43C2' ); //reads e43C2 cookie
+        s._isCookiePlaintext = s._e43c2.search( /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i ) > -1; //checks to see if cookie is in plaintext email address format
 
-	
+
 	if(s.events&&s.events.match(/(event32)|(event51)|(event52)|(event53)|(purchase)/)){ // if we're on a page with any of these events
     if(s.eVar43&&s.eVar43!=""){ // if eVar43 exists and has a string value
-        hashedVal( s.eVar43 ); // hash eVar43  
-        if( e43c2 != encryption ) { // if the hash value of eVar43 is not the same as the e43c2 cookie
+        hashedVal( s.eVar43 ); // hash eVar43
+        if( s._e43c2 != s._encryption ) { // if the hash value of eVar43 is not the same as the e43c2 cookie
             encodeCookie( true ); // encode and set the cookie and set event68
         }
     }
@@ -424,11 +421,11 @@ else {
 			}
 		}
 } else { // if not on a page with any of those events
-  cookieCheck(); // check to see if the cookie is in plaintext. if it is encode the cookie without setting it or event68 
+  cookieCheck(); // check to see if the cookie is in plaintext. if it is encode the cookie without setting it or event68
 }
 	s.plugins="";
 	s.tnt = s.trackTNT();
-	
+
 } catch (e) {
 }
 
@@ -532,7 +529,7 @@ s.getTimeParting=new Function("h","z",""
 +"imezoneOffset()*60000);d=new Date(d+(3600000*z));H=d.getHours();M=d"
 +".getMinutes();M=(M<10)?'0'+M:M;D=d.getDay();U=' AM';if(H>=12){U=' P"
 +"M';H=H-12;}if(H==0){H=12;}D=da[D];tm=H+':'+M+U;return(tm+'|'+D);}");
-/*                                                                 
+/*
 * Plugin: getVisitNum - version 3.0
 */
 s.getVisitNum=new Function("tp","c","c2",""
@@ -694,7 +691,7 @@ sVI[0]=hexToDec(sVI[0]);
 sVI[1]=hexToDec(sVI[1]);
 sVI=sVI.join('');
 
-var b=new Date(); 
+var b=new Date();
 b.setDate(b.getFullYear()+10);
 s.c_w('svi_orig',s.c_r('s_vi'),b);
 s.c_w('svi_dec',sVI,b);
@@ -705,11 +702,11 @@ return sVI;
 /**
  * Check to see if the e43c2 cookie is in plaintext format
  * If it is, encode and set it, then set event 68
- * @var  {_isCookiePlainText} boolean   cookie format
+ * @var  {s._isCookiePlainText} boolean   cookie format
  */
 function cookieCheck(){
-    if( _isCookiePlaintext ){ 
-        hashedVal( e43c2 );
+    if( s._isCookiePlaintext ){
+        hashedVal( s._e43c2 );
         encodeCookie( false );
     }
 }
@@ -721,8 +718,8 @@ function cookieCheck(){
  * @var     {encryption}    string      Base64 Encoding of SHA1-Hashed value    either E43C2 cookie or s.eVar43 value
  */
 function hashedVal( val ){
-    hash = CryptoJS.SHA1( val );
-    encryption = CryptoJS.enc.Base64.stringify( hash );
+    s._hash = CryptoJS.SHA1( val );
+    s._encryption = CryptoJS.enc.Base64.stringify( s._hash ); //to be used as Base64 Encoding of SHA1-Hashed eVar43 or existing cookie to be set in eVar43
 }
 
 /**
@@ -732,8 +729,10 @@ function hashedVal( val ){
  * @param  { _isNewcookie } boolean   sets the cookie and event68
  */
 function encodeCookie( _isNewCookie ){
-    e.setTime( e.getTime() + ( 730*86400000 ) ); 
-    s.c_w( 'e43C2', encryption, e );
+	var e = new Date(); // date object
+    e.setTime( e.getTime() + ( 730*86400000 ) );
+    s.c_w( 'e43C2', s._encryption, e );
+
     if( _isNewCookie ){
         s.events = s.apl( s.events,'event68',',',2 );
     }
@@ -771,23 +770,23 @@ s.trackingServerSecure="smetrics.williams-sonoma.com";
 if (window.location.host.match(/williams-sonoma.com/gi) != null || window.location.host.match(/williams-sonoma.*cashstar.com/gi) != null) {
     s.trackingServer = "metrics.williams-sonoma.com";
     s.trackingServerSecure = "smetrics.williams-sonoma.com";
-} 
+}
 else if (window.location.host.match(/pbteen.com/gi) != null || window.location.host.match(/pbteen.*cashstar.com/gi) != null) {
     s.trackingServer = "metrics.pbteen.com";
     s.trackingServerSecure = "smetrics.pbteen.com";
-} 
+}
 else if (window.location.host.match(/potterybarnkids.com/gi) != null || window.location.host.match(/potterybarnkids.*cashstar.com/gi) != null) {
     s.trackingServer = "metrics.potterybarnkids.com";
     s.trackingServerSecure = "smetrics.potterybarnkids.com";
-} 
+}
 else if (window.location.host.match(/westelm.com/gi) != null || window.location.host.match(/westelm.*cashstar.com/gi) != null) {
     s.trackingServer = "metrics.westelm.com";
     s.trackingServerSecure = "smetrics.westelm.com";
-} 
+}
 else if (window.location.host.match(/markandgraham.com/gi) != null || window.location.host.match(/markandgraham.*cashstar.com/gi) != null) {
     s.trackingServer = "metrics.markandgraham.com";
     s.trackingServerSecure = "smetrics.markandgraham.com";
-} 
+}
 else if (window.location.host.match(/potterybarn.com/gi) != null || window.location.host.match(/potterybarn.*cashstar.com/gi) != null) {
     s.trackingServer = "metrics.potterybarn.com";
     s.trackingServerSecure = "smetrics.potterybarn.com";
@@ -1018,8 +1017,9 @@ w.s_ft=new Function("c","c+='';var s,e,o,a,d,q,f,h,x;s=c.indexOf('=function(');w
 +"f(h==q&&!x)q='';if(h=='\\\\')x=x?0:1;else x=0}else{if(h=='\"'||h==\"'\")q=h;if(h=='{')d++;if(h=='}')d--}if(d>0)e++}c=c.substring(0,s)+'new Function('+(a?a+',':'')+'\"'+s_fe(c.substring(o+1,e))+'\")"
 +"'+c.substring(e+1);s=c.indexOf('=function(')}return c;");
 c=s_d(c);if(e>0){a=parseInt(i=v.substring(e+5));if(a>3)a=parseFloat(i)}else if(m>0)a=parseFloat(u.substring(m+10));else a=parseFloat(v);if(a<5||v.indexOf('Opera')>=0||u.indexOf('Opera')>=0)c=s_ft(c);if(!s){s=new Object;if(!w.s_c_in){w.s_c_il=new Array;w.s_c_in=0}s._il=w.s_c_il;s._in=w.s_c_in;s._il[s._in]=s;w.s_c_in++;}s._c='s_c';(new Function("s","un","pg","ss",c))(s,un,pg,ss);return s}
-function s_giqf(){var w=window,q=w.s_giq,i,t,s;if(q)for(i=0;i<q.length;i++){t=q[i];s=s_gi(t.oun);s.sa(t.un);s.setTagContainer(t.tagContainerName)}w.s_giq=0}s_giqf()
- // End s_code
+function s_giqf(){var w=window,q=w.s_giq,i,t,s;if(q)for(i=0;i<q.length;i++){t=q[i];s=s_gi(t.oun);s.sa(t.un);s.setTagContainer(t.tagContainerName)}w.s_giq=0}s_giqf() 
+// End s_code
+
 
 //tealium universal tag - utag.sender.19004.h27 v4.0.##UTVERSION##, Copyright ##UTYEAR## Tealium.com Inc. All Rights Reserved.
 try{

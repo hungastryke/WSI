@@ -2172,6 +2172,15 @@ pmc.registerCallbacks = function() {
 	    	}
 	    	*/
 	    	if (b.name === "contentImpression") {
+	    		if (typeof b.data.type != "undefined" && b.data.type == "video" && b.data.title != "undefined") {
+	    			if (digitalData.product != undefined && digitalData.product.productID != undefined && digitalData.product.productID.prodID != undefined) {
+		    			utag.link({
+				    		pmc_event54 : "event54",
+				    		pmc_eVar19 : b.data.title,
+				    		pmc_products : ";" + digitalData.product.productID.prodID + ";;;event54=1"
+				    	});
+				    }
+	    		}
 	    		if ( typeof b.data.programStatus != "undefined" && b.data.programStatus !== "INELIGIBLE" || b.data.type == "personalizedContent") {
 	    			    utag_data["pmc_eVar71"] = b.data.programStatus;
 	    				var campaignStatus = [];  

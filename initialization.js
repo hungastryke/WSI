@@ -426,7 +426,7 @@ pmc.setSearchResultType = function() {
 
 pmc.pageViewProductDetailsPage = function() {
  
-		if (pmc.eVar42 != "M:PIP INTERSTITIAL") {
+		if (utag_data["pmc_eVar42"] != "M:PIP INTERSTITIAL") {
 			utag_data["pmc_event18"] = "event18";
 			utag_data["pmc_prodView"] = "prodView";
 			if (digitalData.product != undefined && digitalData.product.productID != undefined && digitalData.product.productID.prodID != undefined) {
@@ -655,15 +655,15 @@ pmc.debugStatus = function(msg) {
 };
 
 pmc.emailSignUp = function(a, b, c) {
-	utag_data["pmc_eVar41"] = pmc.eVar42 = pmc.prop6 = pmc.prop7 = "";  // clear in case values exist.
+	utag_data["pmc_eVar41"] = utag_data["pmc_evar42"] = utag_data["pmc_prop6"] = utag_data["pmc_prop7"] = "";  // clear in case values exist.
 	if(typeof(c.page.attributes.cmPageId) !== "undefined") {
 		utag_data["pmc_eVar41"] = c.page.attributes.cmPageId;
-		pmc.prop6 = "D=v41";
+		utag_data["pmc_prop6"]  = "D=v41";
 	}
 	if(typeof(c.page.attributes.cmCategoryId) !== "undefined") {
-		pmc.eVar42 = c.page.attributes.cmCategoryId.split("||NOFACET")[0];
-		if(pmc.eVar42 != "") {
-			pmc.prop7 = "D=v42";
+		utag_data["pmc_evar42"] = c.page.attributes.cmCategoryId.split("||NOFACET")[0];
+		if(utag_data["pmc_evar42"] != "") {
+			utag_data["pmc_prop7"]  = "D=v42";
 		}
 	}
 
@@ -681,11 +681,11 @@ pmc.emailSignUp = function(a, b, c) {
 		pmc_prop3 : "customer-service",
 		pmc_prop4 : "customer-service",
 		pmc_prop5 : "customer-service",
-		pmc_prop6 : pmc.prop6,
-		pmc_prop7 : pmc.prop7,
+		pmc_prop6 : utag_data["pmc_prop6"],
+		pmc_prop7 : utag_data["pmc_prop7"],
 		pmc_eVar18 : utag_data["pmc_eVar18"],
 		pmc_eVar41 : utag_data["pmc_eVar41"],
-		pmc_eVar42 : pmc.eVar42,
+		pmc_eVar42 : utag_data["pmc_eVar42"],
 		pmc_prop18 : utag_data["pmc_prop18"]
 	});
 };
@@ -1373,13 +1373,13 @@ pmc.pageView = function() {
 
 			if ( typeof digitalData.page.attributes.cmPageId != "undefined") {
 				utag_data["pmc_eVar41"] = digitalData.page.attributes.cmPageId;
-				pmc.prop6 = "D=v41";
+				utag_data["pmc_prop6"] = "D=v41";
 
 			}
 			if ( typeof digitalData.page.attributes.cmCategoryId != "undefined") {
-				pmc.eVar42 = digitalData.page.attributes.cmCategoryId.split("||NOFACET")[0];
-				if (pmc.eVar42 != "") {
-					pmc.prop7 = "D=v42";
+				utag_data["pmc_eVar42"] = digitalData.page.attributes.cmCategoryId.split("||NOFACET")[0];
+				if (utag_data["pmc_eVar42"] != "") {
+					utag_data["pmc_prop7"] = "D=v42";
 				}
 			}
 
@@ -2064,14 +2064,14 @@ pmc.registerCallbacks = function() {
 										pmc_eVar2 : utag_data["pmc_eVar2"],
 										pmc_eVar3 : utag_data["pmc_eVar3"],
 										pmc_eVar41 : utag_data["pmc_eVar41"],
-										pmc_eVar42 : pmc.eVar42,
+										pmc_eVar42 : utag_data["pmc_eVar42"],
 										pmc_prop1 : utag_data["pmc_prop1"],
 										pmc_prop2 : utag_data["pmc_prop2"],
 										pmc_prop3 : utag_data["pmc_prop3"],
 										pmc_prop4 : utag_data["pmc_prop4"],
 										pmc_prop5 : utag_data["pmc_prop5"],
-										pmc_prop6 : pmc.prop6,
-										pmc_prop7 : pmc.prop7,
+										pmc_prop6 : utag_data["pmc_prop6"],
+										pmc_prop7 : utag_data["pmc_prop7"],
 										pmc_prop20 : b.data.newPage,
 										pmc_eVar18 : utag_data["pmc_eVar18"],
 										pmc_prop18 : utag_data["pmc_prop18"]

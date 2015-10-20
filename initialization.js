@@ -387,7 +387,7 @@ pmc.purchase = function() {
 		utag_data["pmc_eVar6"] = pmc.orders[0].eVar6;
 		utag_data["pmc_eVar34"] = pmc.orders[0].eVar34;
 		utag_data["pmc_eVar43"] = pmc.orders[0].eVar43;
-		utag_data["pmc_eVar36"] = pmc.orders[0].event36;
+		utag_data["pmc_event36"] = pmc.orders[0].event36;
 
 		if(typeof digitalData.page.attributes.checkoutType != "undefined") {
 			if(digitalData.page.attributes.checkoutType == "express" || digitalData.page.attributes.checkoutType == "visa"){

@@ -1396,12 +1396,14 @@ pmc.pageView = function() {
 							utag_data["pmc_eVar43"] = digitalData.x_user.profile.profileEmail;
 							utag_data["pmc_event53"] = "event53";
 						}
+						(typeof digitalData != "undefined" && typeof digitalData.x_user.attributes != "undefined") ? (digitalData.x_user.attributes.socialSignIn === true) ? utag_data["pmc_event31"] = ("event31") : utag_data["pmc_event31"] = (utag_data["pmc_event31"]) : utag_data["pmc_event31"] = (utag_data["pmc_event31"]);
+						utag_data["pmc_eVar38"] = "D=c2";
 					}
 				}
 			}
 
 			if (document.location.pathname.match("/checkout/thanks.html") != null && digitalData.x_transaction != null) {
-				utag_data["pmc_pageName"] = "checkout:order confirmation"
+				utag_data["pmc_pageName"] = "checkout:order confirmation";
 				utag_data["pmc_channel"] = utag_data["pmc_prop1"] = utag_data["pmc_prop2"] = utag_data["pmc_prop3"] = utag_data["pmc_prop4"] = utag_data["pmc_prop5"] = "checkout";
 				pmc.purchase();
 				return;

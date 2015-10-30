@@ -35,7 +35,7 @@ s.trackExternalLinks=true
 s.trackInlineStats=true
 s.linkInternalFilters="javascript:,williams-sonoma.com,potterybarn.com,potterybarnkids.com,pbteen.com,westelm.com,markandgraham.com,rejuvenation.com,cultivation.com,ab.mgimgs.com,rk.mgimgs.com,ab.pbimgs.com,rk.pbimgs.com,ab.pkimgs.com,rk.pkimgs.com,ab.ptimgs.com,rk.ptimgs.com,ab.weimgs.com,rk.weimgs.com,ab.wsimgs.com,rk.wsimgs.com,williams-sonoma.cashstar.com,potterybarn.cashstar.com,potterybarnkids.cashstar.com,pbteen.cashstar.com,westelm.cashstar.com,markandgraham.cashstar.com,recs.richrelevance.com,-m.cashstar.com";
 s.linkLeaveQueryString=false
-s.linkTrackVars="contextData.EVENTS"
+s.linkTrackVars="None"
 s.linkTrackEvents="None"
 
 /* Media Module Config */
@@ -77,7 +77,7 @@ s._tpDST = {
 s.usePlugins=true
 function s_doPlugins(s) {
 
-//try {
+try {
 	/* Add calls to plugins here */
 
 	/* Automate Custom ProdView Event */
@@ -428,8 +428,8 @@ else {
 
 	s.contextData['EVENTS'] = s.events ? s.events + ',' : '';
 
-//} catch (e) {
-//}
+} catch (e) {
+}
 
 }
 s.doPlugins=s_doPlugins

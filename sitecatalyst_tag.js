@@ -35,7 +35,7 @@ s.trackExternalLinks=true
 s.trackInlineStats=true
 s.linkInternalFilters="javascript:,williams-sonoma.com,potterybarn.com,potterybarnkids.com,pbteen.com,westelm.com,markandgraham.com,rejuvenation.com,cultivation.com,ab.mgimgs.com,rk.mgimgs.com,ab.pbimgs.com,rk.pbimgs.com,ab.pkimgs.com,rk.pkimgs.com,ab.ptimgs.com,rk.ptimgs.com,ab.weimgs.com,rk.weimgs.com,ab.wsimgs.com,rk.wsimgs.com,williams-sonoma.cashstar.com,potterybarn.cashstar.com,potterybarnkids.cashstar.com,pbteen.cashstar.com,westelm.cashstar.com,markandgraham.cashstar.com,recs.richrelevance.com,-m.cashstar.com";
 s.linkLeaveQueryString=false
-s.linkTrackVars="None"
+s.linkTrackVars="contextData.EVENTS"
 s.linkTrackEvents="None"
 
 /* Media Module Config */
@@ -77,7 +77,7 @@ s._tpDST = {
 s.usePlugins=true
 function s_doPlugins(s) {
 
-try {
+//try {
 	/* Add calls to plugins here */
 
 	/* Automate Custom ProdView Event */
@@ -426,8 +426,10 @@ else {
 	s.plugins="";
 	s.tnt = s.trackTNT();
 
-} catch (e) {
-}
+	s.contextData['EVENTS'] = s.events ? s.events + ',' : '';
+
+//} catch (e) {
+//}
 
 }
 s.doPlugins=s_doPlugins
@@ -1017,7 +1019,7 @@ w.s_ft=new Function("c","c+='';var s,e,o,a,d,q,f,h,x;s=c.indexOf('=function(');w
 +"f(h==q&&!x)q='';if(h=='\\\\')x=x?0:1;else x=0}else{if(h=='\"'||h==\"'\")q=h;if(h=='{')d++;if(h=='}')d--}if(d>0)e++}c=c.substring(0,s)+'new Function('+(a?a+',':'')+'\"'+s_fe(c.substring(o+1,e))+'\")"
 +"'+c.substring(e+1);s=c.indexOf('=function(')}return c;");
 c=s_d(c);if(e>0){a=parseInt(i=v.substring(e+5));if(a>3)a=parseFloat(i)}else if(m>0)a=parseFloat(u.substring(m+10));else a=parseFloat(v);if(a<5||v.indexOf('Opera')>=0||u.indexOf('Opera')>=0)c=s_ft(c);if(!s){s=new Object;if(!w.s_c_in){w.s_c_il=new Array;w.s_c_in=0}s._il=w.s_c_il;s._in=w.s_c_in;s._il[s._in]=s;w.s_c_in++;}s._c='s_c';(new Function("s","un","pg","ss",c))(s,un,pg,ss);return s}
-function s_giqf(){var w=window,q=w.s_giq,i,t,s;if(q)for(i=0;i<q.length;i++){t=q[i];s=s_gi(t.oun);s.sa(t.un);s.setTagContainer(t.tagContainerName)}w.s_giq=0}s_giqf() 
+function s_giqf(){var w=window,q=w.s_giq,i,t,s;if(q)for(i=0;i<q.length;i++){t=q[i];s=s_gi(t.oun);s.sa(t.un);s.setTagContainer(t.tagContainerName)}w.s_giq=0}s_giqf()
 // End s_code
 
 

@@ -12,23 +12,21 @@ import java.lang.*;
 
 public class WSIRegressionUAT3 {
     
+    public static String domain = "www.uat3.williams-sonoma.com";
+    public static String authentity = "http://wsqauser:SupC00k$@";
     
     // Starts a browser instance of the desired type according to the argument passed.
     // Defaults to Google Chrome.
     public static void startBrowser(String browser) {
         if (browser == "Firefox") {
-            startFirefox("http://wsqauser:SupC00k$@www.uat3.williams-sonoma.com");
-            //startFirefox("http://www.williams-sonoma.com/");
+            startFirefox(authentity + domain);
         }
         else if (browser == "IE") {
-            startIE("http://wsqauser:SupC00k$@www.uat3.williams-sonoma.com");
+            startIE(authentity + domain);
         }
         else {
-            startChrome("http://wsqauser:SupC00k$@www.uat3.williams-sonoma.com");
+            startChrome(authentity + domain);
         }
-        //Clicks twice to get through the subscription lightboxes that show up on first load
-        click(Point(5,5));
-        click(Point(5,5));
     }
 
     public static void buyCookware() {

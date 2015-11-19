@@ -30,6 +30,7 @@ public class WSIRegressionUAT3 {
         }
     }
     
+    // Checks to see if the close X is present, clicks it if so.
     public static void checkForOverlay() {
         try { Thread.sleep(3000); } catch (InterruptedException ex)  { System.out.println("Thread couldn't sleep"); }
         while ($(".overlayCloseButton").exists()) {
@@ -53,8 +54,10 @@ public class WSIRegressionUAT3 {
         click($("@continue"));
     }
 
+    //Clicks on Quicklook on a product on PotteryBarnKids.
     public static void productQuicklook() {
         goTo(authentity + "www.uat3.potterybarnkids.com/shop/bedding/girls-duvet-covers/?");
+        checkForOverlay();
         click("Quicklook");
     }
 

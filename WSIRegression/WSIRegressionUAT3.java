@@ -61,23 +61,15 @@ public class WSIRegressionUAT3 {
         click("Quicklook");
     }
 
-    public static void pipPageView() {
-        goTo(authentity + domain + "/products/nesmuk-janus-slicer/?pkey=ccutlery-slicers||&cm_src=Quickbuy&sku=9988705&qty=1");
-        waitUntil(Text("Nesmuk").exists);
+//TODO: Check best parctice for passing parameters in Java.
+    public static void pipPageView(String page) {
+        goTo(authentity + page);
     }
 
+// Adds a Santoku Knife to registry
     public static void addToRegistry() {
-        goTo("/products/shun-classic-hollow-ground-5in-santoku-knife/?transid=177819589008&pkey=ccutlery-santoku-knives%7C%7C&cm_src=E:cutlery-santoku-knives");
-        //goTo("http://www.williams-sonoma.com/products/shun-classic-hollow-ground-5in-santoku-knife/?transid=177819589008&pkey=ccutlery-santoku-knives%7C%7C&cm_src=E:cutlery-santoku-knives");
-        // if($("#emailAddr").exists()) {
-        //     click(Point(50, 50));
-        // }
-
-        // if($("#ad_email_field").exists()) {
-        //     click(Point(50, 50));
-        // }
-        click(Point(50, 50));
-        click(Point(50, 50));
+        goTo(authentity + domain + "/products/shun-classic-hollow-ground-5in-santoku-knife/?transid=177819589008&pkey=ccutlery-santoku-knives%7C%7C&cm_src=E:cutlery-santoku-knives");
+        checkForOverlay();
         click($("li.attributeValue a"));
         write("1", into($(".qty")));
         click("Add to Registry");
@@ -87,14 +79,24 @@ public class WSIRegressionUAT3 {
         click($("#anchor-btn-continue"));
     }
 
+//Adds Turkish Hydrocotton hand towel to wishlist.    
+    public static void addToWishlist() {
+        goTo(authentity + "www.markandgraham.com/products/turkish-hydro-cotton-towel-set-gray/?acctsignin=true&transid=682611204009");
+        checkForOverlay();
+        click($("li.attributeValue a"));
+        write("1", into($(".qty")));
+        click("Add to Wishlist");
+    }
+
     public static void main(String[] args) {
         startBrowser(defaultBrowser);
-        checkForOverlay();
-        //productQuicklook();
-       //pipPageView();
+        // checkForOverlay();
+        //pipPageView(domain + "/products/nesmuk-janus-slicer/?pkey=ccutlery-slicers||&cm_src=Quickbuy&sku=9988705&qty=1");
         //buyCookware();
         //addToRegistry();
-
-        killBrowser();
+        addToWishlist();
+        // productQuicklook();
+        //pipPageView("www.uat3.markandgraham.com/products/make-your-mark-white-cotton-collection-numbers/?pkey=cpersonalized-bedding-collections&&cpersonalized-bedding-collections");
+        // killBrowser();
    }
 }

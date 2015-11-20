@@ -12,6 +12,7 @@ import java.lang.*;
 
 public class WSIRegressionUAT3 {
     
+    static PrintStream a = System.out;
     public static String domain = "www.uat3.williams-sonoma.com";
     public static String authentity = "http://wsqauser:SupC00k$@";
     public static String defaultBrowser = "Chrome";
@@ -44,6 +45,13 @@ public class WSIRegressionUAT3 {
         goTo("www.uat3.williams-sonoma.com/products/ws-stainless-steel-thermo-clad-15-piece-cookware-set/?pkey=ccookware-sets||");
         click("Add to Cart");
         click("Checkout");
+
+        write("4", into($(".storetext")));
+       // a.println("Got to comment 2");
+        click($("[name='recalculate']"));
+        write("2", into($(".storetext")));
+       // a.println("Got to comment 2");
+        click($("[name='recalculate']"));
         goTo("secure.uat3.williams-sonoma.com/checkout/shipping.html");
         write("Just Testing", into(TextField("Full Name")));
         write("1801 12th Ave North", into(TextField("Address")));
@@ -59,6 +67,7 @@ public class WSIRegressionUAT3 {
         goTo(authentity + "www.uat3.potterybarnkids.com/shop/bedding/girls-duvet-covers/?");
         checkForOverlay();
         click("Quicklook");
+        try { Thread.sleep(3000); } catch (InterruptedException ex)  { System.out.println("Thread couldn't sleep"); }
     }
 
 //TODO: Check best parctice for passing parameters in Java.
@@ -81,7 +90,7 @@ public class WSIRegressionUAT3 {
 
 //Adds Turkish Hydrocotton hand towel to wishlist.    
     public static void addToWishlist() {
-        goTo(authentity + "www.markandgraham.com/products/turkish-hydro-cotton-towel-set-gray/?acctsignin=true&transid=682611204009");
+        goTo(authentity + "www.uat3.markandgraham.com/products/turkish-hydro-cotton-towel-set-gray/?acctsignin=true&transid=682611204009");
         checkForOverlay();
         click($("li.attributeValue a"));
         write("1", into($(".qty")));
@@ -91,12 +100,13 @@ public class WSIRegressionUAT3 {
     public static void main(String[] args) {
         startBrowser(defaultBrowser);
         // checkForOverlay();
-        //pipPageView(domain + "/products/nesmuk-janus-slicer/?pkey=ccutlery-slicers||&cm_src=Quickbuy&sku=9988705&qty=1");
-        //buyCookware();
-        //addToRegistry();
-        addToWishlist();
-        // productQuicklook();
-        //pipPageView("www.uat3.markandgraham.com/products/make-your-mark-white-cotton-collection-numbers/?pkey=cpersonalized-bedding-collections&&cpersonalized-bedding-collections");
-        // killBrowser();
+        // pipPageView(domain + "/products/nesmuk-janus-slicer/?pkey=ccutlery-slicers||&cm_src=Quickbuy&sku=9988705&qty=1");
+        // buyCookware();
+        // addToRegistry();
+        // addToWishlist();
+        productQuicklook();
+//TODO: Change URL structure to be more modular.        
+        pipPageView(authentity + "www.uat3.markandgraham.com/products/make-your-mark-white-cotton-collection-numbers/?pkey=cpersonalized-bedding-collections&&cpersonalized-bedding-collections");
+        killBrowser();
    }
 }

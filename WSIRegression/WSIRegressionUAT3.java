@@ -5,9 +5,6 @@
  */
 import static com.heliumhq.API.*;
 import java.io.*;
-import java.io.IOException; 
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
 import java.lang.*;
 
 public class WSIRegressionUAT3 {
@@ -70,7 +67,7 @@ public class WSIRegressionUAT3 {
         try { Thread.sleep(3000); } catch (InterruptedException ex)  { System.out.println("Thread couldn't sleep"); }
     }
 
-//TODO: Check best parctice for passing parameters in Java.
+//TODO: Check best practice for passing parameters in Java.
     public static void pipPageView(String page) {
         goTo(authentity + page);
     }
@@ -95,6 +92,64 @@ public class WSIRegressionUAT3 {
         click($("li.attributeValue a"));
         write("1", into($(".qty")));
         click("Add to Wishlist");
+    }
+
+    public static void increaseProductInCart() {
+        goTo(authentity + domain + "/products/all-clad-d5-stainless-steel-10-piece-cookware-set/?pkey=ccookware-sets%7C%7C");
+        click("Add to Cart");
+        click("Continue Shopping");
+        click("Cart");
+        write("2", into("Quantity"));
+        click($("@recalculate"));
+        write("1", into("Quantity"));
+        click($("@recalculate"));
+    }
+
+    public static void cartViews() {
+        goTo(authentity + domain + "/products/all-clad-d5-stainless-steel-10-piece-cookware-set/?pkey=ccookware-sets%7C%7C");
+        click("Add to Cart");
+        click("Continue Shopping");
+        click("Cart");
+    }
+
+    // pass no parameters to perform checkout as a guest
+    public static void purchaseFunnel() {
+        purchaseFunnel("guest", "guest");
+    }
+
+    public static void purchaseFunnel(String login, String password) {
+        goTo(authentity + domain + "/products/all-clad-d5-stainless-steel-10-piece-cookware-set/?pkey=ccookware-sets%7C%7C");
+        checkForOverlay();
+        click("Add to Cart");
+        click("Checkout");
+        click($("input.rollover.checkoutButton"));
+
+        if (login == "guest") {
+            click($("#continueAsGuest"));
+        } else {
+            write(login, into("Email"));
+            write(password, into("Password"));
+            click("Sign In");
+        }
+
+        // Shipping Address
+        write("Test Test", into("Full Name"));
+        write("1234 Test Lane", into("Address"));
+        write("Testopolis", into("City"));
+        select("State", "Washington");
+        write("98004", into("Zip"));
+        write("800.929.3114", into("Daytime Phone"));
+        click($("@continue"));
+
+        // Delivery and Gift Options
+        click($("@continue"));
+
+        // Billing Address
+        if (login != "guest") {
+            click("Use This Address");
+        }
+
+        // Billing Information
     }
 
     public static void main(String[] args) {

@@ -167,9 +167,11 @@ public class WSIRegressionUAT3 {
         // buyCookware();
         // addToRegistry();
         // addToWishlist();
-//        productQuicklook();
-        purchaseFunnel();
-//TODO: Change URL structure to be more modular.        
+        // productQuicklook();
+        // increaseProductInCart();
+        // cartViews();
+        // purchaseFunnel();
+//TODO: Change URL structure to be more modular.
         pipPageView(authentity + "www.uat3.markandgraham.com/products/make-your-mark-white-cotton-collection-numbers/?pkey=cpersonalized-bedding-collections&&cpersonalized-bedding-collections");
         killBrowser();
    }

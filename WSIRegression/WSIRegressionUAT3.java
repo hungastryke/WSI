@@ -150,6 +150,14 @@ public class WSIRegressionUAT3 {
         }
 
         // Billing Information
+        select("Card Type", "Visa");
+        select("Expiration", "01");
+        select("Expiration Year", "2025");
+        write("4111111111111111", into("Card Number"));
+        write("111", into("Security Code"));
+        write("test@test.com", into("Email"));
+        write("test@test.com", into("Confirm Email"));
+        click($("#placeOrder"));
     }
 
     public static void main(String[] args) {
@@ -159,7 +167,8 @@ public class WSIRegressionUAT3 {
         // buyCookware();
         // addToRegistry();
         // addToWishlist();
-        productQuicklook();
+//        productQuicklook();
+        purchaseFunnel();
 //TODO: Change URL structure to be more modular.        
         pipPageView(authentity + "www.uat3.markandgraham.com/products/make-your-mark-white-cotton-collection-numbers/?pkey=cpersonalized-bedding-collections&&cpersonalized-bedding-collections");
         killBrowser();

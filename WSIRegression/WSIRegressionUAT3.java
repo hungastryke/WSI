@@ -3,6 +3,17 @@
  * The tests run are based off of the Product interaction and Purchase Funnel Test Cases doc
  * Authors: RAnderson, NNogales.
  */
+import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.BrowserMobProxyServer;
+import net.lightbody.bmp.client.ClientUtil;
+import net.lightbody.bmp.core.har.Har;
+import org.openqa.selenium.Proxy;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
 import static com.heliumhq.API.*;
 import java.io.*;
 import java.lang.*;
@@ -160,19 +171,43 @@ public class WSIRegressionUAT3 {
         click($("#placeOrder"));
     }
 
-    public static void main(String[] args) {
-        startBrowser(defaultBrowser);
+    public static void main(String[] args) throws IOException {
+        // start the proxy
+        BrowserMobProxy proxy = new BrowserMobProxyServer();
+        proxy.start(0);
+
+        // get the Selenium proxy object
+        Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
+
+        // configure it as a desired capability
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
+
+        // start the browser up
+        WebDriver driver = new FirefoxDriver(capabilities);
+
+        // create a new HAR
+        proxy.newHar();
+
+        setDriver(driver);
+
+//        startBrowser(defaultBrowser);
         // checkForOverlay();
         // pipPageView(domain + "/products/nesmuk-janus-slicer/?pkey=ccutlery-slicers||&cm_src=Quickbuy&sku=9988705&qty=1");
         // buyCookware();
         // addToRegistry();
         // addToWishlist();
-        // productQuicklook();
+//         productQuicklook();
         // increaseProductInCart();
         // cartViews();
-        // purchaseFunnel();
+         purchaseFunnel();
 //TODO: Change URL structure to be more modular.
-        pipPageView(authentity + "www.uat3.markandgraham.com/products/make-your-mark-white-cotton-collection-numbers/?pkey=cpersonalized-bedding-collections&&cpersonalized-bedding-collections");
+//        pipPageView(authentity + "www.uat3.markandgraham.com/products/make-your-mark-white-cotton-collection-numbers/?pkey=cpersonalized-bedding-collections&&cpersonalized-bedding-collections");
+        // get the HAR data
+        Har har = proxy.getHar();
+
+        har.writeTo(new File("harlog.txt"));
+
         killBrowser();
    }
 }

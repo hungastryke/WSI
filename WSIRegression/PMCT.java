@@ -4,6 +4,7 @@ import net.lightbody.bmp.client.ClientUtil;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
 import net.lightbody.bmp.core.har.HarNameValuePair;
+import net.lightbody.bmp.core.har.HarRequest;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,14 +15,14 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class PMCT {
     private static String reqUrlFragment;
     private static Har har;
     private static BrowserMobProxy proxy;
+    private static String event;
+    private static HashMap<String, String> queryPairs;
 
     public enum browserType {
         CHROME,
@@ -64,37 +65,68 @@ public class PMCT {
     }
 
     public static class Expect {
-        public ArrayList<HarEntry> entryList;
         public String key;
 
         public void is(String val) {
-            for (HarEntry entry : entryList) {
-                List<HarNameValuePair> queryList = entry.getRequest().getQueryString();
-                for (HarNameValuePair pair : queryList) {
-                    if (Objects.equals(pair.getName(), key) && Objects.equals(pair.getValue(), val)) {
-                        System.out.println("FOUND!");
-                    }
+            String foundValue;
+
+            if (queryPairs.containsKey(key)) {
+                foundValue = queryPairs.get(key);
+                if (Objects.equals(val, foundValue)) {
+                    System.out.println("Pass: '" + key + "' is '" + val);
+                } else {
+                    System.out.println("FAIL: Expected '" + key + "' to be '" + val + "', was '" + foundValue + "' instead!");
                 }
+            } else {
+                System.out.println("ERROR: Key '" + key + "' not found!");
+                System.out.print(queryPairs);
             }
         }
     }
 
     public static Expect expect(String key) {
-        // get the HAR data
-        har = proxy.getHar();
+        // get the HAR data if it hasn't been built by a previous expect call
+        if (har == null) {
+            har = proxy.getHar();
 
-        List<HarEntry> entryList = har.getLog().getEntries();
-        ArrayList<HarEntry> filteredList = new ArrayList<>();
+            List<HarEntry> entryList = har.getLog().getEntries();
 
-        for (HarEntry entry : entryList) {
-            if (entry.getRequest().getUrl().contains(reqUrlFragment)) {
-                filteredList.add(entry);
+            for (HarEntry entry : entryList) {
+                HarRequest req = entry.getRequest();
+                if (req.getUrl().contains(reqUrlFragment)) {
+                    queryPairs = new HashMap<>();
+
+                    //create hashmap of querystring params to search through later
+                    for (HarNameValuePair pair : req.getQueryString()) {
+                        queryPairs.put(pair.getName(), pair.getValue());
+                    }
+
+                    break;
+                }
+            }
+
+            //check if the event we're looking for is in the request, warn if not
+            try {
+                Set<String> eventSet = new HashSet<String>(Arrays.asList(queryPairs.get("events").split(",")));
+
+                if (!eventSet.contains(event)) {
+                    System.out.println("WARNING: event '" + event + "' not found!");
+                }
+            } catch (Exception e) {
+                System.out.println("ERROR: No requests found with url fragment '" + reqUrlFragment + "'!");
+                throw e;
             }
         }
 
-        testCase.entryList = filteredList;
         testCase.key = key;
         return testCase;
+    }
+
+    public static void watchFor(String e) {
+        System.out.println("Watching for " + e + "...");
+        har = null;
+        proxy.newHar();
+        event = e;
     }
 
     public static void stop() {

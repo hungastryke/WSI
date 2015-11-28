@@ -3,16 +3,6 @@
  * The tests run are based off of the Product interaction and Purchase Funnel Test Cases doc
  * Authors: RAnderson, NNogales.
  */
-import net.lightbody.bmp.BrowserMobProxy;
-import net.lightbody.bmp.BrowserMobProxyServer;
-import net.lightbody.bmp.client.ClientUtil;
-import net.lightbody.bmp.core.har.Har;
-import org.openqa.selenium.Proxy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static com.heliumhq.API.*;
 import java.io.*;
@@ -129,7 +119,11 @@ public class WSIRegressionUAT3 {
     }
 
     public static void purchaseFunnel(String login, String password) {
+        PMCT.watchFor("event18");
         goTo(authentity + domain + "/products/all-clad-d5-stainless-steel-10-piece-cookware-set/?pkey=ccookware-sets%7C%7C");
+        PMCT.expect("v24").is("First Visit");
+
+        PMCT.watchFor("scView");
         checkForOverlay();
         click("Add to Cart");
         click("Checkout");
@@ -142,56 +136,40 @@ public class WSIRegressionUAT3 {
             write(password, into("Password"));
             click("Sign In");
         }
+        PMCT.expect("v42").is("CHECKOUT");
 
-        // Shipping Address
-        write("Test Test", into("Full Name"));
-        write("1234 Test Lane", into("Address"));
-        write("Testopolis", into("City"));
-        select("State", "Washington");
-        write("98004", into("Zip"));
-        write("800.929.3114", into("Daytime Phone"));
-        click($("@continue"));
-
-        // Delivery and Gift Options
-        click($("@continue"));
-
-        // Billing Address
-        if (login != "guest") {
-            click("Use This Address");
-        }
-
-        // Billing Information
-        select("Card Type", "Visa");
-        select("Expiration", "01");
-        select("Expiration Year", "2025");
-        write("4111111111111111", into("Card Number"));
-        write("111", into("Security Code"));
-        write("test@test.com", into("Email"));
-        write("test@test.com", into("Confirm Email"));
-        click($("#placeOrder"));
+//        // Shipping Address
+//        write("Test Test", into("Full Name"));
+//        write("1234 Test Lane", into("Address"));
+//        write("Testopolis", into("City"));
+//        select("State", "Washington");
+//        write("98004", into("Zip"));
+//        write("800.929.3114", into("Daytime Phone"));
+//        click($("@continue"));
+//
+//        // Delivery and Gift Options
+//        click($("@continue"));
+//
+//        // Billing Address
+//        if (login != "guest") {
+//            click("Use This Address");
+//        }
+//
+//        // Billing Information
+//        select("Card Type", "Visa");
+//        select("Expiration", "01");
+//        select("Expiration Year", "2025");
+//        write("4111111111111111", into("Card Number"));
+//        write("111", into("Security Code"));
+//        write("test@test.com", into("Email"));
+//        write("test@test.com", into("Confirm Email"));
+//        click($("#placeOrder"));
     }
 
-    public static void main(String[] args) throws IOException {
-        // start the proxy
-        BrowserMobProxy proxy = new BrowserMobProxyServer();
-        proxy.start(0);
+    public static void main(String[] args) {
+        setDriver(PMCT.start(PMCT.browserType.FIREFOX));
+        PMCT.setReqUrl("metrics.williams-sonoma.com");
 
-        // get the Selenium proxy object
-        Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
-
-        // configure it as a desired capability
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
-
-        // start the browser up
-        WebDriver driver = new FirefoxDriver(capabilities);
-
-        // create a new HAR
-        proxy.newHar();
-
-        setDriver(driver);
-
-//        startBrowser(defaultBrowser);
         // checkForOverlay();
         // pipPageView(domain + "/products/nesmuk-janus-slicer/?pkey=ccutlery-slicers||&cm_src=Quickbuy&sku=9988705&qty=1");
         // buyCookware();
@@ -203,11 +181,8 @@ public class WSIRegressionUAT3 {
          purchaseFunnel();
 //TODO: Change URL structure to be more modular.
 //        pipPageView(authentity + "www.uat3.markandgraham.com/products/make-your-mark-white-cotton-collection-numbers/?pkey=cpersonalized-bedding-collections&&cpersonalized-bedding-collections");
-        // get the HAR data
-        Har har = proxy.getHar();
 
-        har.writeTo(new File("harlog.txt"));
-
+        PMCT.stop();
         killBrowser();
    }
 }

@@ -122,8 +122,9 @@ public class WSIRegressionUAT3 {
         PMCT.watchFor("event18");
         goTo(authentity + domain + "/products/all-clad-d5-stainless-steel-10-piece-cookware-set/?pkey=ccookware-sets%7C%7C");
         PMCT.expect("v24").is("First Visit");
+        PMCT.expect("v41").contains("ALL-CLAD D5 STAINLESS-STEEL 10-PIECE COOKWARE SET");
 
-        PMCT.watchFor("scView");
+        PMCT.watchFor("scCheckout");
         checkForOverlay();
         click("Add to Cart");
         click("Checkout");
@@ -136,7 +137,7 @@ public class WSIRegressionUAT3 {
             write(password, into("Password"));
             click("Sign In");
         }
-        PMCT.expect("v42").is("CHECKOUT");
+        PMCT.expect("v41").is("ACCOUNT: CHECKOUT SIGN IN");
 
 //        // Shipping Address
 //        write("Test Test", into("Full Name"));

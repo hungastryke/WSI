@@ -73,9 +73,25 @@ public class PMCT {
             if (queryPairs.containsKey(key)) {
                 foundValue = queryPairs.get(key);
                 if (Objects.equals(val, foundValue)) {
-                    System.out.println("Pass: '" + key + "' is '" + val);
+                    System.out.println("Pass: '" + key + "' is '" + val + "'");
                 } else {
                     System.out.println("FAIL: Expected '" + key + "' to be '" + val + "', was '" + foundValue + "' instead!");
+                }
+            } else {
+                System.out.println("ERROR: Key '" + key + "' not found!");
+                System.out.print(queryPairs);
+            }
+        }
+
+        public void contains(String val) {
+            String foundValue;
+
+            if (queryPairs.containsKey(key)) {
+                foundValue = queryPairs.get(key);
+                if (foundValue.contains(val)) {
+                    System.out.println("Pass: '" + key + "' contains '" + val + "'");
+                } else {
+                    System.out.println("FAIL: Expected '" + key + "' to contain '" + val + "', was '" + foundValue + "' instead!");
                 }
             } else {
                 System.out.println("ERROR: Key '" + key + "' not found!");
@@ -129,14 +145,26 @@ public class PMCT {
         event = e;
     }
 
+    // call this before executing the killBrowser() command to avoid errors
     public static void stop() {
         proxy.stop();
     }
 
-    public static void writeLog() throws IOException {
+    // used for debugging
+    public static void writeLog(String filename) throws IOException {
         // get the HAR data
         har = proxy.getHar();
 
-        har.writeTo(new File("harlog.txt"));
+        har.writeTo(new File(filename));
+
+        proxy.newHar();
+    }
+
+    public static void writeLog() {
+        try {
+            writeLog("harlog.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

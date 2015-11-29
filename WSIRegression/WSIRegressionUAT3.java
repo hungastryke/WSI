@@ -139,37 +139,42 @@ public class WSIRegressionUAT3 {
         }
         PMCT.expect("v41").is("ACCOUNT: CHECKOUT SIGN IN");
 
-//        // Shipping Address
-//        write("Test Test", into("Full Name"));
-//        write("1234 Test Lane", into("Address"));
-//        write("Testopolis", into("City"));
-//        select("State", "Washington");
-//        write("98004", into("Zip"));
-//        write("800.929.3114", into("Daytime Phone"));
-//        click($("@continue"));
-//
-//        // Delivery and Gift Options
-//        click($("@continue"));
-//
-//        // Billing Address
-//        if (login != "guest") {
-//            click("Use This Address");
-//        }
-//
-//        // Billing Information
-//        select("Card Type", "Visa");
-//        select("Expiration", "01");
-//        select("Expiration Year", "2025");
-//        write("4111111111111111", into("Card Number"));
-//        write("111", into("Security Code"));
-//        write("test@test.com", into("Email"));
-//        write("test@test.com", into("Confirm Email"));
-//        click($("#placeOrder"));
+        // Shipping Address
+        PMCT.watchFor("event2");
+        write("Test Test", into("Full Name"));
+        write("1234 Test Lane", into("Address"));
+        write("Testopolis", into("City"));
+        select("State", "Washington");
+        write("98004", into("Zip"));
+        write("800.929.3114", into("Daytime Phone"));
+        click($("@continue"));
+        PMCT.expect("pageName").is("checkout:shipping");
+
+        // Delivery and Gift Options
+        PMCT.watchFor("event6");
+        click($("@continue"));
+        PMCT.expect("pageName").is("checkout:payment");
+
+        // Billing Address
+        if (login != "guest") {
+            click("Use This Address");
+        }
+
+        // Billing Information
+        PMCT.watchFor("event6");
+        select("Card Type", "Visa");
+        select("Expiration", "01");
+        select("Expiration Year", "2025");
+        write("4111111111111111", into("Card Number"));
+        write("111", into("Security Code"));
+        write("test@test.com", into("Email"));
+        write("test@test.com", into("Confirm Email"));
+        click($("#placeOrder"));
+        PMCT.expect("v41").is("PAYMENT");
     }
 
     public static void main(String[] args) {
-        setDriver(PMCT.start(PMCT.browserType.FIREFOX));
-        PMCT.setReqUrl("metrics.williams-sonoma.com");
+        setDriver(PMCT.start("Firefox", "metrics.williams-sonoma.com"));
 
         // checkForOverlay();
         // pipPageView(domain + "/products/nesmuk-janus-slicer/?pkey=ccutlery-slicers||&cm_src=Quickbuy&sku=9988705&qty=1");

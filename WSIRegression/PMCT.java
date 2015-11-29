@@ -18,20 +18,16 @@ import java.io.IOException;
 import java.util.*;
 
 public class PMCT {
+    // allows us to filter HTTP requests down to the tags we're looking for
     private static String reqUrlFragment;
     private static Har har;
     private static BrowserMobProxy proxy;
     private static String event;
     private static HashMap<String, String> queryPairs;
 
-    public enum browserType {
-        CHROME,
-        FIREFOX,
-        IE
-    }
     public static Expect testCase = new Expect();
 
-    public static WebDriver start(browserType browser) {
+    public static WebDriver start(String browser, String urlFragment) {
         // start the proxy
         proxy = new BrowserMobProxyServer();
         proxy.start(0);
@@ -45,25 +41,23 @@ public class PMCT {
 
         WebDriver driver;
 
-        if (browser == browserType.CHROME) {
+        if (Objects.equals(browser, "Chrome")) {
             driver = new ChromeDriver(capabilities);
-        } else if (browser == browserType.FIREFOX) {
+        } else if (Objects.equals(browser, "Firefox")) {
             driver = new FirefoxDriver(capabilities);
-        } else if (browser == browserType.IE) {
+        } else if (Objects.equals(browser, "IE")) {
             driver = new InternetExplorerDriver(capabilities);
         } else {
             driver = new FirefoxDriver(capabilities);
         }
 
         proxy.newHar();
+        reqUrlFragment = urlFragment;
 
         return driver;
     }
 
-    public static void setReqUrl(String urlFragment) {
-        reqUrlFragment = urlFragment;
-    }
-
+    // used to construct english-like grammar for test cases - example: expect("v1").is("Home Page")
     public static class Expect {
         public String key;
 
@@ -103,10 +97,12 @@ public class PMCT {
     public static Expect expect(String key) {
         // get the HAR data if it hasn't been built by a previous expect call
         if (har == null) {
+            boolean eventFound = false;
             har = proxy.getHar();
 
             List<HarEntry> entryList = har.getLog().getEntries();
 
+            // search for the tag fire HTTP request
             for (HarEntry entry : entryList) {
                 HarRequest req = entry.getRequest();
                 if (req.getUrl().contains(reqUrlFragment)) {
@@ -117,20 +113,20 @@ public class PMCT {
                         queryPairs.put(pair.getName(), pair.getValue());
                     }
 
-                    break;
+                    // make sure this is the tag containing the event we're looking for
+                    // if it isn't, keep looking
+                    Set<String> eventSet = new HashSet<String>(Arrays.asList(queryPairs.get("events").split(",")));
+                    if (eventSet.contains(event)) {
+                        eventFound = true;
+                        break;
+                    }
                 }
             }
 
-            //check if the event we're looking for is in the request, warn if not
-            try {
-                Set<String> eventSet = new HashSet<String>(Arrays.asList(queryPairs.get("events").split(",")));
-
-                if (!eventSet.contains(event)) {
-                    System.out.println("WARNING: event '" + event + "' not found!");
-                }
-            } catch (Exception e) {
-                System.out.println("ERROR: No requests found with url fragment '" + reqUrlFragment + "'!");
-                throw e;
+            if (queryPairs == null) {
+                System.out.println("ERROR: No requests found with url fragment '" + reqUrlFragment + "'");
+            } else if (!eventFound) {
+                System.out.println("WARNING: event '" + event + "' not found!");
             }
         }
 
@@ -138,11 +134,13 @@ public class PMCT {
         return testCase;
     }
 
-    public static void watchFor(String e) {
-        System.out.println("Watching for " + e + "...");
+    // reset stored data so we can begin logging new requests
+    public static void watchFor(String tagEvent) {
+        System.out.println("Watching for " + tagEvent + "...");
         har = null;
         proxy.newHar();
-        event = e;
+        queryPairs = null;
+        event = tagEvent;
     }
 
     // call this before executing the killBrowser() command to avoid errors

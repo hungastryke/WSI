@@ -18,18 +18,14 @@ if ( WSI && WSI.dataLayer ) {
 
         //Event data
         var dataLayerEventData = dataLayerEvent.data || dataLayerEvent,
-            validVideoImpressionEvent = ( typeof dataLayerEventData.type != "undefined" && dataLayerEventData.title !== "undefined" && dataLayerEventData.type === "video" ),
+            validVideoImpressionEvent = ( typeof dataLayerEventData.type !== "undefined" && dataLayerEventData.title !== "undefined" && dataLayerEventData.type === "video" ),
             validPersonalizedContentImpressionEvent = ( typeof dataLayerEventData.programStatus !== "undefined" && dataLayerEventData.programStatus !== "INELIGIBLE" || dataLayerEventData.type === "personalizedContent" );
 
-        //TODO: Remove console log statements before release
-        console.log("Processing Event:");
-        console.log(dataLayerEvent);
         //Check if the event is content impression
         if ( dataLayerEvent.name === "contentImpression" ) {
-            console.log("Content Impression event found");
             //Check if it's a video impression
             if ( validVideoImpressionEvent ) {
-                //Prodcut within the event data
+                //Product within the event data
                 var digitalDataProduct = digitalData.product;
 
                 //Check if product data is defined
@@ -45,7 +41,6 @@ if ( WSI && WSI.dataLayer ) {
             //Check if it's a personalized content impression
             else if ( validPersonalizedContentImpressionEvent ) {
 
-                console.log("Personalized Content Impression event found");
                 //Set content impression variables
                 var campaignStatus = [],
                     eventDataCampaignStatus = dataLayerEventData.campaignStatus,

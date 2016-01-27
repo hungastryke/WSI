@@ -12,7 +12,7 @@
  * @version: 0.1
  * @date: 1/12/16
  **/
-if (a = "view" && utag_data["personalized_content_listener_JS"] != "registered") {
+if (a == "view" && utag_data["personalized_content_listener_JS"] != "registered") {
 	if (WSI && WSI.dataLayer) {
 		WSI.dataLayer.registerCallback(function(oldDigitalData, dataLayerEvent, newDigitalData) {
 			utag_data["personalized_content_listener_JS"] = "registered";

@@ -15,6 +15,7 @@
 if (a = "view" && utag_data["personalized_content_listener_JS"] != "registered") {
 	if (WSI && WSI.dataLayer) {
 		WSI.dataLayer.registerCallback(function(oldDigitalData, dataLayerEvent, newDigitalData) {
+			utag_data["personalized_content_listener_JS"] = "registered";
 			
 			//Event data
 			var dataLayerEventData = dataLayerEvent.data || dataLayerEvent,
@@ -77,12 +78,11 @@ if (a = "view" && utag_data["personalized_content_listener_JS"] != "registered")
 					if ( typeof eventDataTreatment != "undefined" && eventDataTreatment.length > 0) {
 						utag_data["pmc_eVar75"] = eventDataTreatment;
 					}
-					//utag_data["pmc_event71"] = "event71";
+					utag_data["pmc_event71"] = "event71";
 
 					//Fire a link tag
 					utag.link({
-						//pmc_event71 : utag_data["pmc_event71"],
-						pmc_event71 : "event71",
+						pmc_event71 : utag_data["pmc_event71"],
 						pmc_eVar71 : utag_data["pmc_eVar71"],
 						pmc_eVar72 : utag_data["pmc_eVar72"],
 						pmc_eVar73 : utag_data["pmc_eVar73"],
@@ -91,8 +91,6 @@ if (a = "view" && utag_data["personalized_content_listener_JS"] != "registered")
 					});
 				}
 			}
-			
-			utag_data["personalized_content_listener_JS"] = "registered";
 		}, true);
 	}
 }

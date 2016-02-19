@@ -1359,6 +1359,43 @@ pmc.cartEvent = function(a, b, c) {
 	}
 };
 
+pmc.getPropVal = function(int){
+    var count = int + 3,
+    defaultVal = propVal = digitalData.page.pageCategory.primaryCategory,
+        key = 'pmc_prop' + count,
+    propStr,
+    propVal;
+   if( int < 0 ){
+        key = 'pmc_prop2';
+        propVal = defaultVal;
+   } else if( digitalData.page.pageCategory.categories != null ){ 
+      propStr = digitalData.page.pageCategory.primaryCategory + ":" + digitalData.page.pageCategory.categories[int];
+      if(digitalData.page.pageCategory.categories[int] == null){
+    propVal = utag_data['pmc_prop' +  (count - 1)];
+      } else {
+        propVal = propStr;
+      }
+    } else {
+        propVal = defaultVal;
+    }
+    utag_data[key] = propVal;
+};
+
+pmc.getMerchTotal = function(){
+  var count = digitalData.x_cart.orders[0].items.length,
+      orderAmt,
+      quantity,
+      totalPrice = 0,
+      unitPrice;
+  for(i=0;i<count;i++){
+    quantity = digitalData.x_cart.orders[0].items[i].quantity;
+    unitPrice = digitalData.x_cart.orders[0].items[i].price.unitPrice;
+    orderAmt = unitPrice * quantity;
+    totalPrice += orderAmt;
+  }
+  return '$' + totalPrice.toFixed(2);
+};
+
 pmc.pageView = function() {
 
 	// debug mode
